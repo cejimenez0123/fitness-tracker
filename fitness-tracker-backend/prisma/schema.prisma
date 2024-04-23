@@ -28,6 +28,7 @@ model User {
   email String   @unique
   name String
   workouts Workout[]
+  exercises Exercise[]
   created DateTime @default(now())
 }
 
@@ -39,17 +40,19 @@ model Log{
     activities Activity[]
 }
 
-model Excercise {
+model Exercise {
   id  String    @id @default(auto()) @map("_id") @db.ObjectId
   name String
+  user  User      @relation(fields: [userId], references: [id])
+  userId String    @db.ObjectId
   activities Activity[]
   type Type @default(REPS)
 
 }
 model Activity{
     id String    @id @default(auto()) @map("_id") @db.ObjectId
-    excercise Excercise @relation(fields: [excerciseId],references: [id])
-    excerciseId String @db.ObjectId
+    exercise Exercise @relation(fields: [exerciseId],references: [id])
+    exerciseId String @db.ObjectId
     log Log @relation(fields: [logId],references: [id])
     logId String @db.ObjectId
     sets Set[]
