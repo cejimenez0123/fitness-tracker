@@ -27,6 +27,7 @@ model User {
   id String   @id @default(auto()) @map("_id") @db.ObjectId
   email String   @unique
   name String
+  password String
   workouts Workout[]
   exercises Exercise[]
   created DateTime @default(now())

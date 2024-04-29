@@ -9,8 +9,8 @@ const router = express.Router()
 module.exports = function(authMiddleware){
     const ADMIN_UID=""
     router.get("/unprotected", async (req, res)=>{
-const exercises = await  prisma.exercise.findMany({where:{userId: ADMIN_UID}})
-res.json(exercises)
+        const exercises = await  prisma.exercise.findMany({where:{userId: ADMIN_UID}})
+        res.json(exercises)
     })
     router.get("/protected", authMiddleware,async (req, res)=>{
        
@@ -23,17 +23,15 @@ res.json(exercises)
             const exercise = await prisma.exercise.create({
                 data: {
                     name: name,
-                    
                     user:{
                         connect:{
                             id: user.id
                         }
                     },
-               
                 }})
                 res.json(exercise)
         })
-        router.delete("/:id",authMiddleware,async (req,res)=>{
+    router.delete("/:id",authMiddleware,async (req,res)=>{
             await prisma.exercise.delete({
                 where: {
                     id: req.params.id
@@ -41,27 +39,7 @@ res.json(exercises)
               })
             res.status(201).json({message:"Deleted Successfully"})
         })
-        router.get("/" ,authMiddleware,async (req,res)=>{
-          
-            const { name }= req.body
-            const updateFork = await prisma.workout.update({
-                where: {
-              
-                        id: id, 
-                    },
-                data: {
-                    name: name,
-                },
-              })
-            res.json(updateFork)
-        })
-     router.delete('/:id',authMiddleware, async (req, res) => {
-        const id = req.params.id
-        await prisma.workout.delete({where: {
-            id: id,
-          }})
-     })
-       
+
     
     return router
 }

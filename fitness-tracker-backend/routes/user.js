@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const prisma = require("../db")
 
-// module.exports = function (passport){
 const router = express.Router()
 
 
@@ -26,10 +25,12 @@ module.exports = function(authMiddleware){
     router.get("/user",authMiddleware,async (req, res) => {
       res.json({user:req.user})
     })
-    router.post('/register', async (req, res) => {
-        const { email, password } = req.body;
+    router.post("/register", async (req, res) => {
+      console.log(req)
+       
       
         try {
+          const { email,name, password } = req.body;
           // Validate input and ensure uniqueness
           if (!email || !password) {
             return res.status(400).json({ message: 'Missing required fields' });
@@ -45,7 +46,7 @@ module.exports = function(authMiddleware){
       
           // Create new user in Prisma
           const user = await prisma.user.create({
-            data: { email, password: hashedPassword },
+            data: { email,name, password: hashedPassword },
           });
       
           // Optionally generate a JWT token (avoid storing full credentials in token)
