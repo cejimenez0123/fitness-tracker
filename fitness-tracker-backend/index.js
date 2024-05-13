@@ -43,7 +43,7 @@ app.use(passport.session());
 app.use(passport.initialize());
 app.get('/', (req, res, next) => {
     
-        res.status(200).json({message:"Hello World"})
+        res.status(200).json({message:"Hello World!"})
     })
 
 
