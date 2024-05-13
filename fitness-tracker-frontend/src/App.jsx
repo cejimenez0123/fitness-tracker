@@ -5,22 +5,23 @@ import "./App.css";
 import Enviroment from "./core";
 import axios from "axios";
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import { Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import Nav from "./Components/Nav";
+import Home from "./Components/Home";
+import About from "./Components/About";
+import Contact from "./Components/Contact";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route exact path="/" component={hello} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-        </Routes>
-      </div>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Nav />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
