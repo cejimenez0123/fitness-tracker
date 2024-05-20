@@ -17,11 +17,12 @@ module.exports = function(authMiddleware){
             const log = await prisma.log.create({
                 data: {
                     workout:{
-                        connect: workoutId
-                    }
-              
+                        connect:{
+                            id:workoutId
+                        } 
+                    },
                 }})
-                res.json(log)
+                res.status(201).json(log)
         })
     router.get('/',authMiddleware,async (req,res)=>{
 
@@ -29,6 +30,8 @@ module.exports = function(authMiddleware){
             workout:{
                 userId: req.user.id
             }
+        },include:{
+            workout:true
         }})
         res.json(logs)
     })

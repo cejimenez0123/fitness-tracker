@@ -49,12 +49,12 @@ app.get('/', (req, res, next) => {
 
 
 
-app.listen(PORT, function(){
-    console.log(`listening on ${PORT}`)
-})
+var server = app.listen(PORT,function (){
+    console.log(`Listing on ${PORT}`)
+    server.close(function() { console.log('Doh :('); });
+});
 
 module.exports = app
-
 
 
 

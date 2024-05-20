@@ -1,6 +1,7 @@
 const express = require('express');
 const prisma = require("../db");
 
+
 const router = express.Router()
 
 module.exports = function(authMiddleware){
@@ -10,7 +11,7 @@ module.exports = function(authMiddleware){
             const user = req.user
             const newWorkout = await prisma.workout.create({
                 data: {
-                    name: task,
+                    name: name,
                     
                     user:{
                         connect:{
@@ -19,7 +20,17 @@ module.exports = function(authMiddleware){
                     },
                
                 }})
-                res.json(newWorkout)
+                res.json({workout:newWorkout})
+        })
+        router.get("/",authMiddleware, async (req, res) => {
+                let adminExercises = await prisma.workout.findMany({where:{
+                    id: "662fb03a73b0b5f738f92f56"}
+                })
+                let userExer = await prisma.workout.findMany({
+                where:{userId: req.user.id}})
+                let array = [...adminExercises,...userExer]
+                res.json({workouts: array})
+
         })
         router.get('/:id/activity', authMiddleware,async (req,res)=>{
             let activities = await prisma.activity.findMany({where:{
@@ -35,7 +46,7 @@ module.exports = function(authMiddleware){
                     id: req.params.id
                 },
               })
-            res.status(201).json({message:"Deleted Successfully"})
+            res.status(200).json({message:"Deleted Successfully"})
         })
         router.put("/:id" ,authMiddleware,async (req,res)=>{
             const id = req.params.id
@@ -49,13 +60,43 @@ module.exports = function(authMiddleware){
                     name: name,
                 },
               })
-            res.json(updateWorkout)
+            res.json({workout:updateWorkout})
         })
-     router.delete('/:id',authMiddleware, async (req, res) => {
+        router.post('/:workoutId/exercise/:exerciseId',authMiddleware,async (req,res)=>{
+            const {workoutId,exerciseId}= req.params
+
+            let workout = await prisma.workoutExercise.create({data:{
+                workout:{
+                    connect:{
+                        id:workoutId,
+                    }
+                },
+                exercise:{
+                    connect:{
+                        id:exerciseId,
+                }
+            
+                }}
+            })
+
+            res.json({workout})
+        })
+        router.delete('/exercise/:id',authMiddleware,async (req,res)=>{
+
+
+            await prisma.workoutExercise.delete({where:{
+                id: req.params.id
+            }})
+              
+            res.status(200).json({message:"Deleted Successfully"})
+
+        })
+        router.delete('/:id',authMiddleware, async (req, res) => {
         const id = req.params.id
         await prisma.workout.delete({where: {
             id: id,
           }})
+          res.status(200).json({message:"Deleted Successfully"})
      })
        
     

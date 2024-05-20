@@ -1,53 +1,39 @@
 
 const request = require("supertest");
-
-const app = require("../index.js");
-
+const app= require("../index.js");
 
 
-describe("Hello World", () => {
-    test("GET /", (done) => {
-      request(app)
-        .get("/")
+  // the tests will go here
+
+
+  describe("Register User", () => {
+    test("POST /user/register with valid data", async () => {
+      const userData = {
+        email: "atest90@test.com",
+        name: "joe test",
+        password: "password"}
+      const response = await request(app)
+        .post("/user/register")
         .expect("Content-Type", /json/)
-        .expect(200)
-        .expect((res) => {
-          res.body.message = "Hello World!";
-        })
-        .end((err, res) => {
-          if (err) return done(err);
-          return done();
-        });
-    });
-    
-  });
-  
-
-//   describe("Register User", () => {
-//     test("POST /user/register with valid data", async () => {
-//       const userData = {
-//         email: "test1@test.com",
-//         name: "joe test",
-//         password: "password"
-//       };
-  
-//       const response = await request(app)
-//         .post("/user/register")
-//         .send(userData)
-//         .expect("Content-Type", /json/)
-//         .expect(201); // Expect created (201) status code for registration
- //         expect(response.body).toHaveProperty("message");
-//         expect(response.body.message).toBe("User registered successfully");
-//         expect(response.body).toHaveProperty("token"); // Assert presence of user id
-//       // Add more assertions based on your registration response structure
-//     });
-//   })  
-
+        .send(userData)
+        .expect(201);
+      expect(response.body).toHaveProperty("message");
+      expect(response.body.message).toBe("User registered successfully");
+      expect(response.body).toHaveProperty("token");
+      const token = response.body.token;
+      const deleteResponse = await request(app)
+        .delete(`/user/`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200);
+      expect(deleteResponse.body).toHaveProperty("message");
+      expect(deleteResponse.body.message).toBe("User deleted successfully");
+    }); 
+  })
   describe("Log In", () => {
     test("POST /user/login with valid data", async () => {
       const validData = {
-        email: "test@test.com",
-        password: "password"
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD
       };
   
       const response = await request(app)
@@ -60,8 +46,6 @@ describe("Hello World", () => {
     });
   });
 
-  
-  
   
   
   

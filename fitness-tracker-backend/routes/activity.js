@@ -2,15 +2,7 @@ const express = require('express');
 const prisma = require("../db");
 
 const router = express.Router()
-// model Activity{
-//     id String    @id @default(auto()) @map("_id") @db.ObjectId
-//     excercise Exercise @relation(fields: [excerciseId],references: [id])
-//     excerciseId String @db.ObjectId
-//     log Log @relation(fields: [logId],references: [id])
-//     logId String @db.ObjectId
-//     sets Set[]
-//     date DateTime @default(now())
-// }
+
 module.exports = function(authMiddleware){
     const ADMIN_UID=""
 
@@ -29,7 +21,7 @@ module.exports = function(authMiddleware){
                         }
                     }
                 }})
-                res.json(exercise)
+                res.status(201).json(exercise)
         })
     router.get('/:id/log',authMiddleware, async (req, res)=>{
         const exercise = await prisma.activity.findUnique({where:{
@@ -46,9 +38,9 @@ module.exports = function(authMiddleware){
                 where: {
                     id: req.params.id
                 },
-              })
-            res.status(201).json({message:"Deleted Successfully"})
-        })
+            })
+        res.status(201).json({message:"Deleted Successfully"})
+    })
 
     
     return router
