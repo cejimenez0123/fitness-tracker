@@ -25,6 +25,15 @@ module.exports = function(authMiddleware){
     router.get("/user",authMiddleware,async (req, res) => {
       res.json({user:req.user})
     })
+    router.put("/:id",authMiddleware,async (req, res) => {
+
+      const user = await prisma.user.update({where:{
+        id: req.params.id
+      },data:{
+        name: req.body.name
+      }})
+      res.json({user:user})
+    })
     router.post("/register", async (req, res) => {
     
       
@@ -85,7 +94,17 @@ module.exports = function(authMiddleware){
           res.status(500).json({ message: 'Error logging in' });
         }
       });
-    
+    router.get("/:id/logs",authMiddleware,async (req, res) => {
+
+      const logs = await prisma.log.findMany({where:{
+           user:{
+            id:req.user.id
+           }
+        },include:{
+          workout:true
+        }})
+        res.status(200).json({logs: logs});
+    })
     router.post("/logout", async function (req, res, next) {
     
     })

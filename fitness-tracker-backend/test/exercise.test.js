@@ -1,7 +1,7 @@
 
 const request = require("supertest");
 const app= require("../index.js");
-
+//skullcrusher 664dfa51132c52c30aaae32f
 beforeEach(async () => {
     const userData = {
       email: process.env.ADMIN_EMAIL,
@@ -21,8 +21,8 @@ describe("Create/Delete exercise with valid data", () => {
     test("POST Exercise /", async () => {
     
         const validData = {
-            name:"squats",
-            type:"cardio"
+            name:"tricep extension",
+            type:"dumbbell"
         }
      let response = await request(app)
         .post("/exercise/")
@@ -38,9 +38,28 @@ describe("Create/Delete exercise with valid data", () => {
             .expect(200)
         expect(deleteRes.body).toHaveProperty("message")
         expect(deleteRes.body.message).toBe("Deleted Successfully")
-    })    
+    })
+  
+        
   });
+describe("Get Exercise", () => {
+    test("GET Exercise /unprotected", async () => {
+     let response = await request(app)
+        .get("/exercise/unprotected")
+        .expect(200)
+        expect(response.body).toHaveProperty("exercises")
+        expect(response.body.exercises).toBeInstanceOf(Array)
+    })
+    test("GET Exercise /protected", async () => {
+      let response = await request(app)
+         .get("/exercise/protected")
+         .set('Authorization', `Bearer ${token}`)
+         .expect(200)
+         expect(response.body).toHaveProperty("exercises")
+         expect(response.body.exercises).toBeInstanceOf(Array)
+     })
 
+  });
 
   
   

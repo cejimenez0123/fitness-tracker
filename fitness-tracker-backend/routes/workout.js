@@ -11,17 +11,15 @@ module.exports = function(authMiddleware){
             const user = req.user
             const newWorkout = await prisma.workout.create({
                 data: {
-                    name: name,
-                    
+                    name: name, 
                     user:{
-                        connect:{
-                            id: user.id
+                    connect:{
+                        id: user.id
                         }
-                    },
-               
-                }})
-                res.json({workout:newWorkout})
+                    },}
         })
+        res.json({workout:newWorkout})
+    })
         router.get("/",authMiddleware, async (req, res) => {
                 let adminExercises = await prisma.workout.findMany({where:{
                     id: "662fb03a73b0b5f738f92f56"}
@@ -32,12 +30,25 @@ module.exports = function(authMiddleware){
                 res.json({workouts: array})
 
         })
-        router.get('/:id/activity', authMiddleware,async (req,res)=>{
+        router.get("/:id/exercise",authMiddleware, async (req, res) => {
+            let workout = await prisma.workout.findFirst({where:{
+                id: req.params.id},
+                include:{
+                    workoutExercises:true
+                }
+            })
+           
+            res.json({workout: workout})
+
+    })
+    router.get('/:id/activity', authMiddleware,async (req,res)=>{
             let activities = await prisma.activity.findMany({where:{
                 workout:{
                     id: req.params.id
                 }
-            }})
+            },include:{
+                exercise: true
+            }}) 
             res.json(activities);
     })
         router.delete("/:id",authMiddleware,async (req,res)=>{
@@ -77,7 +88,10 @@ module.exports = function(authMiddleware){
                 }
             
                 }}
-            })
+            ,include:{
+                workout:true,
+                exercise:true
+            }})
 
             res.json({workout})
         })

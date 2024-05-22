@@ -10,28 +10,35 @@ const router = express.Router()
 //     count Int
 //   }
 module.exports = function(authMiddleware){
-    const ADMIN_UID=""
-   
+    
     router.post("/",authMiddleware, async (req,res)=>{
         const {activityId,reps} = req.body
            
-        let activity= await     prisma.set.create({data:{activity:{
-                    connect:{
-                        id:activityId
+        let set= await prisma.set.create({data:{
+                    activity:{
+                        connect:{id:activityId}
                     }
-                },reps:reps
+                ,reps:reps
         }})
-        res.status(201).json({activity:activity})
+        res.status(201).json({set:set})
     })
-    router.put("/",authMiddleware, async (req,res)=>{
+    router.put("/:id",authMiddleware, async (req,res)=>{
         const {reps} = req.body
           
-        let set = await prisma.set.update({data:{
+        let set = await prisma.set.update({where:{id: req.params.id},
+            data:{
                 reps:reps
-        }})
-        res.json(set)
+            }
+        })
+        res.status(201).json({set:set})
     })
-   
-    
+    router.delete("/:id",authMiddleware, async (req,res)=>{
+        await prisma.set.delete({
+            where:{
+                id: req.params.id
+            }
+        })
+        res.status(200).json({message:"Deleted Successfully"})
+    })
     return router
 }

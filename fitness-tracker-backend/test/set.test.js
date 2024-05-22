@@ -1,8 +1,6 @@
 const request = require("supertest");
 const app= require("../index.js");
 
-
-
 beforeEach(async () => {
     const userData = {
       email: process.env.ADMIN_EMAIL,
@@ -18,25 +16,21 @@ beforeEach(async () => {
     token = loginResponse.body.token;
   });
 
-describe("Create/Delete Log", () => {
-    test("POST /log with valid data", async () => {
+describe("Create/Delete Set", () => {
+    test("POST /set with valid data", async () => {
         const validData = 
-        {workoutId: "664df976132c52c30aaae31f",
+        {activityId:"664e00e02d0f67c57abce66e",
+        reps:10,
         }
        let res = await request(app)
-            .post("/log")
+            .post("/set")
             .set('Authorization', `Bearer ${token}`)
             .send(validData)
             .expect(201);
             expect(res).toHaveProperty("body")
-            expect(res.body).toHaveProperty("log")
-            const log = res.body.log
-            expect(log).toHaveProperty("id")
-            expect(log).toHaveProperty("workoutId")
-            expect(log).toHaveProperty("date")
-
+            expect(res.body).toHaveProperty("set")
             const deleteRes = await request(app)
-            .delete(`/log/${log.id}`)
+            .delete(`/set/${res.body.set.id}`)
             .set('Authorization', `Bearer ${token}`)
             .expect(200)
                 expect(deleteRes.body).toHaveProperty("message")

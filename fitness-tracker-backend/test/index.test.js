@@ -3,16 +3,13 @@ const request = require("supertest");
 const app= require("../index.js");
 
 
-  // the tests will go here
-
-
-  describe("Register User", () => {
+describe("Register User", () => {
     test("POST /user/register with valid data", async () => {
-      const userData = {
+    const userData = {
         email: "atest90@test.com",
         name: "joe test",
         password: "password"}
-      const response = await request(app)
+    const response = await request(app)
         .post("/user/register")
         .expect("Content-Type", /json/)
         .send(userData)
@@ -20,15 +17,15 @@ const app= require("../index.js");
       expect(response.body).toHaveProperty("message");
       expect(response.body.message).toBe("User registered successfully");
       expect(response.body).toHaveProperty("token");
-      const token = response.body.token;
-      const deleteResponse = await request(app)
-        .delete(`/user/`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-      expect(deleteResponse.body).toHaveProperty("message");
-      expect(deleteResponse.body.message).toBe("User deleted successfully");
-    }); 
-  })
+    const token = response.body.token;
+    const deleteResponse = await request(app)
+      .delete(`/user/`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(deleteResponse.body).toHaveProperty("message");
+    expect(deleteResponse.body.message).toBe("User deleted successfully");
+  }); 
+})
   describe("Log In", () => {
     test("POST /user/login with valid data", async () => {
       const validData = {

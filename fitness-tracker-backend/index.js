@@ -13,6 +13,7 @@ const workoutRoutes = require('./routes/workout.js')
 const logRoutes = require('./routes/log.js')
 const exerciseRoutes = require('./routes/exercise.js')
 const activitiesRoutes = require('./routes/activity.js')
+const setRoutes = require('./routes/set.js')
 const authMiddleware = passport.authenticate('bearer', { session: false });
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +33,7 @@ app.use("/activity",activitiesRoutes(authMiddleware))
 app.use("/workout",workoutRoutes(authMiddleware)); 
 app.use("/log",logRoutes(authMiddleware));
 app.use("/exercise",exerciseRoutes(authMiddleware));
+app.use("/set",setRoutes(authMiddleware));
 app.use(
     session({
     secret: process.env.JWT_SECRET,resave: false,
@@ -50,8 +52,8 @@ app.get('/', (req, res, next) => {
 
 
 var server = app.listen(PORT,function (){
-    console.log(`Listing on ${PORT}`)
-    server.close(function() { console.log('Doh :('); });
+    console.log(`Listening on ${PORT}`)
+    server.close(function() { console.log('Closed Server'); });
 });
 
 module.exports = app

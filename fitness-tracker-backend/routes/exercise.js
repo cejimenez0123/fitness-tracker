@@ -5,14 +5,17 @@ const validateExerciseType = require('../core/validateExerciseType');
 const router = express.Router()
 
 module.exports = function(authMiddleware){
-    const ADMIN_UID=""
+    const ADMIN_UID="662fb03a73b0b5f738f92f56"
     router.get("/unprotected", async (req, res)=>{
-        const exercises = await  prisma.exercise.findMany({where:{userId: ADMIN_UID}})
+        const exercises = await  prisma.exercise.findMany({
+            where:{userId: ADMIN_UID}})
+        
         res.json({exercises:exercises})
     })
     router.get("/protected", authMiddleware,async (req, res)=>{
-   
-    const exercises = await prisma.exercise.findMany({where:{userId: req.user.id}})
+        const exercises = await prisma.exercise.findMany({
+            where:{userId: req.user.id}
+        })
         res.json({exercises:exercises})
     })
     router.post("/",authMiddleware, async (req,res)=>{
@@ -36,8 +39,8 @@ module.exports = function(authMiddleware){
                 where: {
                     id: req.params.id
                 },
-              })
-         res.status(200).json({message:"Deleted Successfully"})
+            })
+        res.status(200).json({message:"Deleted Successfully"})
     })
 
     
