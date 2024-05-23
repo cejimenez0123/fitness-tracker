@@ -46,6 +46,20 @@ module.exports = function(authMiddleware){
         res.json({logs:logs})
     })
     router.delete("/:id",authMiddleware,async (req,res)=>{
+       let activities= await prisma.activity.findMany({where:{
+            log:{
+                id:req.params.id
+            }
+        }})
+        let ids = activities.map((activity)=>activity.id )
+        let promises = ids.map(id=>{
+            return prisma.set.deleteMany({where:{
+                activity:{
+                    id:id
+                }
+            }})
+        })
+        await Promise.all(promises)
         await prisma.log.delete({
             where: {
                 id: req.params.id

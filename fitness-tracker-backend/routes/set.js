@@ -12,22 +12,23 @@ const router = express.Router()
 module.exports = function(authMiddleware){
     
     router.post("/",authMiddleware, async (req,res)=>{
-        const {activityId,reps} = req.body
+        const {activityId,reps,weight} = req.body
            
         let set= await prisma.set.create({data:{
                     activity:{
                         connect:{id:activityId}
                     }
-                ,reps:reps
+                ,reps:reps,weight:weight
         }})
         res.status(201).json({set:set})
     })
     router.put("/:id",authMiddleware, async (req,res)=>{
-        const {reps} = req.body
+        const {reps,weight} = req.body
           
         let set = await prisma.set.update({where:{id: req.params.id},
             data:{
-                reps:reps
+                reps:reps,
+                weight:weight
             }
         })
         res.status(201).json({set:set})

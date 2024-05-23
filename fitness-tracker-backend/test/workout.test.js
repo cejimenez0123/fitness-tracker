@@ -68,7 +68,7 @@ describe("Create Workout", () => {
                 expect(workout).toHaveProperty("name")
                 expect(workout).toHaveProperty("workoutExercises")
                 expect(workout.workoutExercises).toBeInstanceOf(Array)
-                console.log("Were",workout)
+               
     })
 })
 describe("Add Exercise to Workout",()=>{
