@@ -1,14 +1,15 @@
 const express = require('express');
 const prisma = require("../db");
 const validateExerciseType = require('../core/validateExerciseType');
+const validateMuscleType = require('../core/validateMuscleType');
 
 const router = express.Router()
 
 module.exports = function(authMiddleware){
-    const ADMIN_UID="662fb03a73b0b5f738f92f56"
+  
     router.get("/unprotected", async (req, res)=>{
         const exercises = await  prisma.exercise.findMany({
-            where:{userId: ADMIN_UID}})
+            where:{userId: null}})
         
         res.json({exercises:exercises})
     })
@@ -19,9 +20,10 @@ module.exports = function(authMiddleware){
         res.json({exercises:exercises})
     })
     router.post("/",authMiddleware, async (req,res)=>{
-            const {name,type}=req.body
+            const {name,type,muscle}=req.body
             const user = req.user
             const exerciseType = validateExerciseType(type)
+            const muscleType = validateMuscleType(muscle)
             const exercise = await prisma.exercise.create({
                 data: {
                     name: name,
@@ -30,7 +32,20 @@ module.exports = function(authMiddleware){
                             id: user.id
                         }
                     },
+                    muscle: muscleType,
                     type:exerciseType
+                }})
+                res.status(201).json({exercise:exercise})
+        })
+    router.post("/admin",authMiddleware, async (req,res)=>{
+            const {name,type,muscle}=req.body
+            const muscleType = validateMuscleType(muscle)
+            const exerciseType = validateExerciseType(type)
+            const exercise = await prisma.exercise.create({
+                data: {
+                    name: name,
+                    type:exerciseType,
+                    muscle: muscleType
                 }})
                 res.status(201).json({exercise:exercise})
         })

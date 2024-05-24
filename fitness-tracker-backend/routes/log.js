@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 module.exports = function(authMiddleware){
-    const ADMIN_UID=""
+   
     router.post("/",authMiddleware, async (req,res)=>{
             const {workoutId}=req.body
             const log = await prisma.log.create({

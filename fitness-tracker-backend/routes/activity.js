@@ -4,7 +4,7 @@ const prisma = require("../db");
 const router = express.Router()
 
 module.exports = function(authMiddleware){
-    const ADMIN_UID=""
+   
 
     router.post("/",authMiddleware, async (req,res)=>{
             const {exerciseId,logId}=req.body

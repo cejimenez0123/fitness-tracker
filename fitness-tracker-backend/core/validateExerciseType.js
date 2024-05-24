@@ -1,4 +1,4 @@
-const validExerciseTypes = ['BARBELL', 'DUMBBELL', 'MACHINE', 'WEIGHTED', 'ASSISTEDWEIGHT', 'REPS', 'CARDIO', 'DURATION'];
+const validExerciseTypes = ['BARBELL', 'DUMBBELL', 'MACHINE', 'WEIGHTED', 'ASSISTEDWEIGHT', 'CALISTHENICS', 'CARDIO', 'DURATION'];
 
 
 module.exports = function validateExerciseType(type) {

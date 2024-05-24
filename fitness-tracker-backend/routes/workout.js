@@ -5,7 +5,7 @@ const prisma = require("../db");
 const router = express.Router()
 
 module.exports = function(authMiddleware){
-    const ADMIN_UID=""
+
     router.post("/",authMiddleware, async (req,res)=>{
             const {name}=req.body
             const user = req.user
@@ -20,9 +20,18 @@ module.exports = function(authMiddleware){
         })
         res.json({workout:newWorkout})
     })
+    router.post("/admin",authMiddleware, async (req,res)=>{
+        const {name}=req.body
+        const newWorkout = await prisma.workout.create({
+            data: {
+                name: name, 
+                }
+    })
+    res.json({workout:newWorkout})
+})
         router.get("/",authMiddleware, async (req, res) => {
                 let adminExercises = await prisma.workout.findMany({where:{
-                    id: "662fb03a73b0b5f738f92f56"}
+                    id: null}
                 })
                 let userExer = await prisma.workout.findMany({
                 where:{userId: req.user.id}})

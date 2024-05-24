@@ -16,16 +16,18 @@ beforeEach(async () => {
   
     token = loginResponse.body.token;
   });
+
 describe("Create/Delete exercise with valid data", () => {
-   
     test("POST Exercise /", async () => {
-    
         const validData = {
-            name:"tricep extension",
-            type:"dumbbell"
+            name:"lat pulldown",
+            type:"MACHINE",
+            muscle:"BACK"
         }
+
+
      let response = await request(app)
-        .post("/exercise/")
+        .post("/exercise/admin")
         .set('Authorization', `Bearer ${token}`)
         .send(validData)
         .expect(201)
