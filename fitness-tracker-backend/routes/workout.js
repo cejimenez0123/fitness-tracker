@@ -31,7 +31,7 @@ module.exports = function(authMiddleware){
 })
         router.get("/",authMiddleware, async (req, res) => {
                 let adminExercises = await prisma.workout.findMany({where:{
-                    id: null}
+                    userId: null}
                 })
                 let userExer = await prisma.workout.findMany({
                 where:{userId: req.user.id}})
