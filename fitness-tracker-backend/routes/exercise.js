@@ -1,25 +1,29 @@
 const express = require('express');
 const prisma = require("../db");
+const validateExerciseType = require('../core/validateExerciseType');
+const validateMuscleType = require('../core/validateMuscleType');
 
 const router = express.Router()
-// id  String    @id @default(auto()) @map("_id") @db.ObjectId
-//   name String
-//   activities Activity[]
-//   type Type @default(REPS)
+
 module.exports = function(authMiddleware){
-    const ADMIN_UID=""
+  
     router.get("/unprotected", async (req, res)=>{
-        const exercises = await  prisma.exercise.findMany({where:{userId: ADMIN_UID}})
-        res.json(exercises)
+        const exercises = await  prisma.exercise.findMany({
+            where:{userId: null}})
+        
+        res.json({exercises:exercises})
     })
     router.get("/protected", authMiddleware,async (req, res)=>{
-       
-const exercises = await prisma.exercise.findMany({where:{userId: req.user.id}})
-res.json(exercises)
+        const exercises = await prisma.exercise.findMany({
+            where:{userId: req.user.id}
+        })
+        res.json({exercises:exercises})
     })
     router.post("/",authMiddleware, async (req,res)=>{
-            const {name}=req.body
+            const {name,type,muscle}=req.body
             const user = req.user
+            const exerciseType = validateExerciseType(type)
+            const muscleType = validateMuscleType(muscle)
             const exercise = await prisma.exercise.create({
                 data: {
                     name: name,
@@ -28,17 +32,31 @@ res.json(exercises)
                             id: user.id
                         }
                     },
+                    muscle: muscleType,
+                    type:exerciseType
                 }})
-                res.json(exercise)
+                res.status(201).json({exercise:exercise})
+        })
+    router.post("/admin",authMiddleware, async (req,res)=>{
+            const {name,type,muscle}=req.body
+            const muscleType = validateMuscleType(muscle)
+            const exerciseType = validateExerciseType(type)
+            const exercise = await prisma.exercise.create({
+                data: {
+                    name: name,
+                    type:exerciseType,
+                    muscle: muscleType
+                }})
+                res.status(201).json({exercise:exercise})
         })
     router.delete("/:id",authMiddleware,async (req,res)=>{
             await prisma.exercise.delete({
                 where: {
                     id: req.params.id
                 },
-              })
-            res.status(201).json({message:"Deleted Successfully"})
-        })
+            })
+        res.status(200).json({message:"Deleted Successfully"})
+    })
 
     
     return router
