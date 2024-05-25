@@ -1,5 +1,5 @@
 const LocalStrategy = require("passport-local");
-// const prisma = require("../db");
+const prisma = require("../db");
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
@@ -17,9 +17,7 @@ passport.use(new BearerStrategy(async (token, done) => {
       return done(null, false); // Invalid token or user not found
     }
 
-  
 
-    // Pass authenticated user object to next middleware
     done(null, user);
   } catch (error) {
     done(error); // Handle errors gracefully
