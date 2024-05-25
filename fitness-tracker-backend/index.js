@@ -44,6 +44,7 @@ app.use(passport.initialize());
 app.get('/', (req, res, next) => {
     
         res.status(200).json({message:"Hello World"})
+        console.log("welcome");
     })
 
 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import female from "../public/female.png";
 import btn from "../public/btn.json";
 import Lottie from "lottie-react";
 import axios from "axios";
-import Legs from "./component/Legs";
+import Legs from "../src/component/Legs";
 const Homepage = () => {
   const [popup, setPopup] = useState();
   let data;
@@ -42,7 +41,7 @@ const Homepage = () => {
           animationData={btn}
         />
 
-        <img className="w-[83%] flex justify-center " src={female} alt="" />
+        <img className="w-[83%] flex justify-center " src="/female.png" alt="" />
         <Lottie
           onClick={handleUpperClick}
           className="w-[9%] absolute top-[50%] right-[33%] "

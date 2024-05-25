@@ -1,28 +1,50 @@
-import { useState } from 'react'
-import Homepage from './Homepage'
-import Userlogin from './pages/Userlogin'
-import './App.css'
-import UserSignup from './pages/UserSignup'
-import Enviroment from './core'
-import axios from "axios"
-import Displaytemplate from './component/Displaytemplate'
+import Homepage from "./Homepage";
+import { useContext } from "react";
+import "./App.css";
+import Navbar from "./component/Navbar";
+import { Outlet , Navigate} from "react-router-dom";
+import { ProtectedRoutes } from "./component/ProtectedRoutes";
 function App() {
-  
   return (
     <>
-    <div className=''>
+      <div className="">
+        <Navbar />
 
-            <h1 className="text-3xl text-center font-bold underline">
-      Hello world!
-    </h1>
-    <Homepage/>
-    {/* <UserSignup/> */}
-    <Userlogin/>
-      
-     {/* <Displaytemplate/> */}
-    </div>
+     
+      </div>
+    </>
+  );
+}
+
+
+const Requiredauth = () => {
+  const  currentUser  = useContext(ProtectedRoutes);
+  if (!currentUser) return <Navigate to="/login" />;
+  return (
+    <>
+      <div className="">
+        <Navbar />
+
+   
+      </div>
     </>
   )
 }
 
-export default App
+ 
+
+
+export {App,Requiredauth};
+
+
+
+
+// import axios from "axios";
+
+
+
+// axios.post('/', {}, {
+//   headers:{
+//     'Authorization' : ` Bearer ${toten}`
+//   }
+// })

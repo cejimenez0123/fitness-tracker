@@ -1,6 +1,9 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { ProtectedRoutes, ProtectedRouteProvider } from "../component/ProtectedRoutes.jsx";
+
 const Userlogin = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -8,30 +11,27 @@ const Userlogin = () => {
     console.log(e.target.value)
     setPassword(e.target.value)
   }
+  const {updateUser} = useContext(ProtectedRoutes)
+
+  const navigate = useNavigate();
   const handleEmail = (e)=>{ 
     console.log(e.target.value)
     setEmail(e.target.value)
   }
-  const handleRegister= (e)=>{
-    e.preventDefault()
-    axios({
-      method: 'post',
-      url: Enviroment.BASE_URL + "/user/register", 
-      data: {email:email,password:password,name:"Christian"}
-    }).then(res=>{
-      console.log(res.data)
-    })
-  }
+  
   const handleSubmit = (e)=>{
     e.preventDefault()
     axios({
       method: 'post',
-      url: Enviroment.BASE_URL + "/user/login", 
+      url: "http://localhost:3000/user/login", 
       data: {email:email,password:password}
     }).then(res=>{
       localStorage.setItem("token",res.data.token)
-      console.log(res.data)
+      updateUser(res.data)
+      navigate("/home")
     })
+    console.log(localStorage.getItem("token"))
+
   }
   return (
     <div>
