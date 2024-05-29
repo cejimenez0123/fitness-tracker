@@ -1,8 +1,8 @@
 
 
 const request = require("supertest");
-const app= require("../index.js");
-const exercise = require("../routes/exercise.js");
+const {app,server}= require("../index.js");
+
     
   
 
@@ -98,4 +98,9 @@ describe("Add Exercise to Workout",()=>{
              
 
     })
+    
 })
+afterAll(async () => {
+  await new Promise((resolve) => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+  server.close(function() { console.log('Closed Server'); });
+});
