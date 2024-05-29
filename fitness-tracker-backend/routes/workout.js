@@ -58,6 +58,7 @@ module.exports = function(authMiddleware){
             },include:{
                 exercise: true
             }}) 
+            console.log(activities);
             res.json(activities);
     })
         router.delete("/:id",authMiddleware,async (req,res)=>{

@@ -1,9 +1,10 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const prisma = require("../db")
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const prisma = require("../db");
 
-const router = express.Router()
+const router = express.Router();
+
 
 
 module.exports = function(authMiddleware){
@@ -56,7 +57,7 @@ module.exports = function(authMiddleware){
       
           // Create new user in Prisma
           const user = await prisma.user.create({
-            data: { email:email,name:name, password: hashedPassword }
+            data: { email:email,name:name, password: hashedPassword, }
           });
    
           // Optionally generate a JWT token (avoid storing full credentials in token)
@@ -88,8 +89,9 @@ module.exports = function(authMiddleware){
       
           // Generate JWT token with user ID
           const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '23h' }); // Adjust expiration as needed
+          const {password:UserPassword,...userInfo} = user
       
-          res.status(200).json({ token });
+          res.status(200).json({userInfo , token});
         } catch (error) {
           res.status(500).json({ message: 'Error logging in' });
         }
@@ -110,3 +112,4 @@ module.exports = function(authMiddleware){
     })
     return router
 }
+
