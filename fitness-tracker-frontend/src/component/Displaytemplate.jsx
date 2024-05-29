@@ -1,10 +1,27 @@
-import React from "react";
-
+import { set } from "mongoose";
+import React, { useState } from "react";
+import Workout from "./Workout";
 const Displaytemplate = ({ bodypart, setPopup }) => {
+const handleSubmit=()=>{
+  console.log("hi");
+}
+
   const handleClose = () => {
     console.log("close");
     setPopup("");
   };
+  const [workout , setWorkout]= useState({
+    WorkoutName:"",
+    TargetMuscles:"",
+  })
+  const [Exercise , setExercise]= useState({
+
+    ExerciseName:"",
+    Set:"",
+    Reps:"",
+  }
+  )
+
   return (
     <div className="w-[30vw] absolute text-xl top-[30vh] left-[10vw]  p-5 rounded-2xl bg-lime-700">
       <span>
@@ -24,26 +41,7 @@ const Displaytemplate = ({ bodypart, setPopup }) => {
           open modal
         </button>
         <dialog id="my_modal_3" className="modal">
-          <div  className="modal-box">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <label htmlFor=""> Execersize</label>
-
-            <input type="text" />
-            <label htmlFor=""> workout </label>
-            
-            <input type="text" value={"legs"} />
-            <label htmlFor=""> Reps </label>
-            
-            <input type="text"  />
-            <label htmlFor=""> Activities </label>
-            
-            <input type="text"  />
-          </div>
+        <Workout setWorkout={setWorkout} setExercise={setExercise} handleSubmit={handleSubmit}/>
         </dialog>
         <button> History</button>
       </span>

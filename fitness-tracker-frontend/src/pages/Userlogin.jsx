@@ -8,10 +8,9 @@ const Userlogin = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const handlePassword = (e)=>{
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setPassword(e.target.value)
   }
-  const {updateUser} = useContext(ProtectedRoutes)
 
   const navigate = useNavigate();
   const handleEmail = (e)=>{ 
@@ -19,15 +18,16 @@ const Userlogin = () => {
     setEmail(e.target.value)
   }
   
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault()
-    axios({
+   await axios({
       method: 'post',
       url: "http://localhost:3000/user/login", 
       data: {email:email,password:password}
     }).then(res=>{
       localStorage.setItem("token",res.data.token)
-      updateUser(res.data)
+      console.log(res.data.userInfo)
+
       navigate("/home")
     })
     console.log(localStorage.getItem("token"))

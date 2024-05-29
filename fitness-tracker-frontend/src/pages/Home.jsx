@@ -6,14 +6,10 @@ import Legs from "../component/Legs";
 import { ProtectedRoutes } from "../component/ProtectedRoutes";
 import { useLoaderData } from "react-router-dom";
 const Home = () => {
-  const data = useLoaderData();
 
-  const { updateUser, currentUser } = useContext(ProtectedRoutes);
+  const {currentUser } = useContext(ProtectedRoutes);
   const [popup, setPopup] = useState();
-  console.log(
 
-    currentUser
-  )
   
 
 
@@ -36,7 +32,7 @@ const Home = () => {
   return (
     <div >
       <h1 className=" mt-10 ml-10 text-[5rem]">
-        Hello  {currentUser.name} <br /> What is your plan for today
+        Hello {currentUser.name}  <br /> What is your plan for today
       </h1>
       <div className="flex justify-center ">
       <img className="w-[33%] relative left-[30%] " src="/male.png" alt="" />

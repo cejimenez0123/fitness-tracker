@@ -4,23 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch index.js "
-=======
+
     "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1",
-    "start": "node index.js "
->>>>>>> 7ba7bc58609b0ab614800166f6369fd89c812b10
+    "start": "node --watch  index.js "
+
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "@prisma/client": "^5.13.0",
+
+
     "axios": "^1.6.8",
-=======
+
     "@prisma/client": "^5.14.0",
->>>>>>> 7ba7bc58609b0ab614800166f6369fd89c812b10
+
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",

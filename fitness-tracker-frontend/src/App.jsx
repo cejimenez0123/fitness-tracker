@@ -18,7 +18,7 @@ function App() {
 
 
 const Requiredauth = () => {
-  const  currentUser  = useContext(ProtectedRoutes);
+  const  {currentUser}  = useContext(ProtectedRoutes);
   if (!currentUser) return <Navigate to="/login" />;
   return (
     <>

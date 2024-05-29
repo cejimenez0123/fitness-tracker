@@ -21,11 +21,11 @@ const UserSignup = () => {
   }
   const handleSubmit= (e)=>{
     e.preventDefault()
-    console.log(email ,password, name);
+    console.log(email ,password, name,);
     axios({
       method: 'post',
       url: "http://localhost:3000/user/register", 
-      data: {email:email,password:password,name:name, gender:gender}
+      data: {email:email,password:password,name:name,gender}
     }).then(res=>{
       console.log(res.data)
     })

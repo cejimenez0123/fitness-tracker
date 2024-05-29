@@ -5,20 +5,21 @@ import { Navigate } from "react-router-dom";
 export const ProtectedRoutes = createContext();
 
 export const ProtectedRouteProvider = ({ children }) => {
+
   const [currentUser, setCurrentUser] = useState(
-    localStorage.getItem("token")|| " "
+  localStorage.getItem("token")||null
   );
 
-  const updateUser = (data) => {
-    setCurrentUser(data);
-  };
+  // const updateUser = (data) => {
+  //   setCurrentUser(data);
+  // };
 
-  useEffect(() => {
-    localStorage.setItem("token", currentUser);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(currentUser));
+  // }, [currentUser]);
 
   return (
-    <ProtectedRoutes.Provider value={{ currentUser,updateUser }}>
+    <ProtectedRoutes.Provider value={{ currentUser }}>
       {children}
     </ProtectedRoutes.Provider>
   );

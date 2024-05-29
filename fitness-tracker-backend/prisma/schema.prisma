@@ -30,7 +30,6 @@ model User {
   email String   @unique
   name String
   password String
-  gender String
   workouts Workout[]
   exercises Exercise[]
   activities Activity[]

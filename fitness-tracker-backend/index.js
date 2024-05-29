@@ -45,20 +45,19 @@ app.use(passport.session());
 app.use(passport.initialize());
 app.get('/', (req, res, next) => {
     
-<<<<<<< HEAD
+
         res.status(200).json({message:"Hello World"})
         console.log("welcome");
-=======
-        res.status(200).json({message:"Hello World!"})
->>>>>>> 7ba7bc58609b0ab614800166f6369fd89c812b10
+        
     })
-
-
-
-
-var server = app.listen(PORT,function (){
-    console.log(`Listening on ${PORT}`)
-    server.close(function() { console.log('Closed Server'); });
+    
+    
+    
+    
+    var server = app.listen(PORT,function (){
+        console.log(`Listening on ${PORT}`)
+        console.log(process.env.DATABASE_URL)
+    // server.close(function() { console.log('Closed Server'); });
 });
 
 module.exports = app
