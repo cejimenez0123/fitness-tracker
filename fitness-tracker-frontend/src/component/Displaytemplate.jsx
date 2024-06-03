@@ -25,6 +25,7 @@ const Displaytemplate = ({ bodypart, setPopup }) => {
     onSuccess: () => {
       // Invalidate the 'workout' query after mutation succeeds
       queryClient.invalidateQueries("workout");
+
     },
   });
   const exerciseMutation = useMutation({
@@ -34,29 +35,33 @@ const Displaytemplate = ({ bodypart, setPopup }) => {
       queryClient.invalidateQueries("workout");
     },
   });
+  const setsMutation = useMutation({
+    mutationFn:(setData)=>postApi ("set",setData),
+    onSuccess: () => {
+      // Invalidate the 'workout' query after mutation succeeds
+      queryClient.invalidateQueries("workout");
+    },
+  });
 console.log(workout);
 
 console.log(exerciseData)
-// const backendExercise = exerciseData.map((data) =>{ 
-//   return(
 
-//    { name:data.exerciseName.label, type:data.type.label, muscle:data.muscle.map(data=>data.label)}
-//   )
-// })
-// console.log(backendExercise.name);
-// console.log(backendExercise);
   const handleSubmit = async () => {
     console.log(workout);
     await mutation.mutateAsync({name:workout});
     await Promise.all(
     exerciseData.map(async (data) => {
-      console.log(data); // Check the structure of each data object
+    
       console.log(data.exerciseName.label.toUpperCase())
       await exerciseMutation.mutateAsync({
         name: data.exerciseName.label.toUpperCase(),
         type: data.type.label.toUpperCase(),
         muscle: data.muscle.label
       });
+      await setsMutation.mutateAsync({
+        activityId: data.id,
+        reps: data.map((data))
+      })
     })
   )
   };
@@ -69,10 +74,7 @@ console.log(exerciseData)
 
   return (
     <div className="w-[30vw] absolute text-xl top-[30vh] left-[10vw]  p-5 rounded-2xl bg-lime-700">
-      {/* {mutation.isError ? (
-            <div>An error occurred: {mutation.error.message}</div>
-          ):null} */}
-      <span>
+   
         <div className="flex justify-end">
           <button className="text-2xl justify-self-end " onClick={handleClose}>
             x
@@ -105,7 +107,7 @@ console.log(exerciseData)
           {/* </div> */}
         </dialog>
         <button> History</button>
-      </span>
+     
     </div>
   );
 };

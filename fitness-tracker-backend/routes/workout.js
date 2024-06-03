@@ -8,6 +8,8 @@ module.exports = function(authMiddleware){
 
     router.post("/",authMiddleware, async (req,res)=>{
             const {name}=req.body
+        console.log(name);
+
             console.log(req.body.name);
             const user = req.user
             const newWorkout = await prisma.workout.create({

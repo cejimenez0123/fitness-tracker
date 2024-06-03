@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { useState } from "react";
+import setTemplate from "./setTemplate";
 import CreatableSelect from "react-select/creatable";
 const ExerciseTemplate = ({
   exerciseData,
@@ -35,7 +36,14 @@ const ExerciseTemplate = ({
 //   };
 const handleChange = (selectedOption, index, field) => {
     const newData = [...exerciseData];
-    newData[index][field] = selectedOption;
+console.log(newData);
+     if (field === "reps") {
+      console.log([selectedOption]);
+      newData[index][field].push(Number(selectedOption)) ;
+     }else{
+
+       newData[index][field] = selectedOption;
+     }
     setExerciseData(
         
         newData);
@@ -95,46 +103,9 @@ return (
                 isClearable
               />
             </span>
-            <span className=" ml-2">
-              <label htmlFor=""> set</label>
-              <br />
-              <input
-                className="w-[10vw]"
-                name="sets"
-                value={data.sets}
-                onChange={(e) =>
-                  handleChange(e.target.value , i, "sets")
-                }
-                type="number"
-              />
-            </span>
+            
           </div>
-          {data.sets > 0 && (
-            <div className="flex">
-              {[...Array(Number(data.sets))].map((_, index) => (
-                <div key={index}>
-                  <label htmlFor={`rep-${index+1}`}>Rep {index+1}</label>
-                  <br />
-                  <input
-                    id={`rep-${index+1}`}
-                    value={data.reps[index] || ""}
-                    onChange={(e) =>
-                      handleChange(
-                        e.target.value,
-                        i,
-                        "reps",
-                        index
-                      )
-                    }
-                    name={`rep-${index + 1}`}
-                    className="w-10"
-                    type="number"
-                  />
-
-                </div>
-              ))}
-            </div>
-          )}
+          
                 
         </div>
       ))}
