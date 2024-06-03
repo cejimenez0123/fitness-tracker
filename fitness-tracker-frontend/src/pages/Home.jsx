@@ -30,12 +30,14 @@ const Home = () => {
     console.log("arms");
   };
   return (
-    <div >
-      <h1 className=" mt-10 ml-10 text-[5rem]">
+    <div className="flex flex-row" >
+      <div className="w-3/4">
+      <h1 className=" mt-10 ml-10 text-4xl">
         Hello {currentUser.name}  <br /> What is your plan for today
       </h1>
-      <div className="flex justify-center ">
-      <img className="w-[33%] relative left-[30%] " src="/male.png" alt="" />
+      </div>
+      <div className=" w-2/5   ">
+      <img className=" relative w-8/9  " src="/male.png" alt="" />
 
         <Lottie
           onClick={handleArmsClick}

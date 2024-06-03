@@ -48,9 +48,10 @@ const UserSignup = () => {
     return inputValue.trim() !== "";
   };
   return (
-  
-    <div className='flex justify-center items-center  content-center '>
-      <form className='bg-slate-900 w-[30%] h-[62.5rem] p-7 grid content-center ' onSubmit={handleSubmit} >
+  <div className='flex flex-row'>
+ 
+    <div className='flex  w-[46%] bg-[#f4f3f2]   '>
+      <form className=' mx-auto w-3/5 space-y-6 h-1/2 grid content-center ' onSubmit={handleSubmit} >
       <div className="relative ">
                   <input
                     id="name"
@@ -122,34 +123,41 @@ const UserSignup = () => {
      
 <span>
 
-        <label htmlFor="">
+        <label className="text-xl w-1/2  label text-[#060B0E]"htmlFor="">
 
-
+        Male
         <input
+        className='checkbox'
           type="radio"
           name="options"
           value="Male"
           checked={gender === 'Male'}
           onChange={handleOptionChange}/>
-          male
+       
         </label>
-          <label>
+          <label className='text-xl w-1/2 label text-[#060B0E]'>
+          Female
           <input
+            className='checkbox'
             type="radio"
             name="options"
             value="Female"
             checked={gender === 'Female'}
             onChange={handleOptionChange}
           />
-          Female
+       
           </label>
 </span>
 
-        <button className="btn btn-info" type='submit'>Submit</button>
+        <button className="btn btn-info bg-[#060B0E] text-[#f4f3f2]" type='submit'>Submit</button>
         
       </form>
-      <img className='w-[40%]' src={gym} alt="image of a dumbell
-      " />
+  
+      
+    </div>
+    <div className='flex-1 w-[44%]'>
+    <img className=" " src={gym} alt="image of a dumbell" />
+      </div>
     </div>
   )
 }
