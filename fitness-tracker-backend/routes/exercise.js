@@ -21,6 +21,7 @@ module.exports = function(authMiddleware){
     })
     router.post("/",authMiddleware, async (req,res)=>{
             const {name,type,muscle}=req.body
+            console.log(name,type,muscle)
             const user = req.user
             const exerciseType = validateExerciseType(type)
             const muscleType = validateMuscleType(muscle)

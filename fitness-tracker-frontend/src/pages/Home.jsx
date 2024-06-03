@@ -1,20 +1,22 @@
-import React, { useContext,useEffect, useState } from "react";
+import React, {  useState } from "react";
 import btn from "../../public/btn.json";
 import Lottie from "lottie-react";
-import axios from "axios";
+import {useApi} from "../component/fetch";
 import Legs from "../component/Legs";
-import { ProtectedRoutes } from "../component/ProtectedRoutes";
-import { useLoaderData } from "react-router-dom";
+
 const Home = () => {
 
-  const {currentUser } = useContext(ProtectedRoutes);
+  const { isLoading, data, isError, isFetching } = useApi("user/user");
+
+ 
+  // console.log(data)
   const [popup, setPopup] = useState();
 
   
 
 
   const handleUpperClick = () => {
-    console.log("legs");
+    // console.log("legs");
    setPopup(
 
      <Legs setPopup={setPopup} />
@@ -29,10 +31,22 @@ const Home = () => {
   const handleLegsClick = () => {
     console.log("arms");
   };
+  if(isLoading){
+    return(
+  
+      <div>Loading... </div>
+    )
+  }
+  if(isError){
+    return(
+  
+      <div>an error has occured {isError}</div>
+    )
+  }
   return (
     <div >
       <h1 className=" mt-10 ml-10 text-[5rem]">
-        Hello {currentUser.name}  <br /> What is your plan for today
+        Hello {data.user.name}  <br /> What is your plan for today
       </h1>
       <div className="flex justify-center ">
       <img className="w-[33%] relative left-[30%] " src="/male.png" alt="" />
