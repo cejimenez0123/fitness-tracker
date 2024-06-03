@@ -2,7 +2,8 @@ const validExerciseTypes = ['BARBELL', 'DUMBBELL', 'MACHINE', 'WEIGHTED', 'ASSIS
 
 
 module.exports = function validateExerciseType(type) {
-    if (!validExerciseTypes.includes(type.toUpperCase())) {
+  console.log(type);
+    if (!type===type.toUpperCase()) {
       throw new Error('Invalid Exercise type');
     }
     return type.toUpperCase();

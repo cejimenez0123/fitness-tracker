@@ -25,7 +25,7 @@ const UserSignup = () => {
     axios({
       method: 'post',
       url: "http://localhost:3000/user/register", 
-      data: {email:email,password:password,name:name,gender}
+      data: {email:email,password:password,name:name,gender:gender}
     }).then(res=>{
       console.log(res.data)
     })

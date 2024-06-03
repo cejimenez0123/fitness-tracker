@@ -10,7 +10,7 @@ const validExerciseTypes = ["CORE",
 
 
 module.exports = function validateMuscleType(type) {
-    if (!validExerciseTypes.includes(type.toUpperCase())) {
+    if (!type === type.toUpperCase()) {
       throw new Error('Invalid Muscle type');
     }
     return type.toUpperCase();
