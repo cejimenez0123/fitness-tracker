@@ -8,6 +8,9 @@ module.exports = function(authMiddleware){
 
     router.post("/",authMiddleware, async (req,res)=>{
             const {name}=req.body
+        console.log(name);
+
+            console.log(req.body.name);
             const user = req.user
             const newWorkout = await prisma.workout.create({
                 data: {
@@ -30,9 +33,7 @@ module.exports = function(authMiddleware){
     res.json({workout:newWorkout})
 })
         router.get("/",authMiddleware, async (req, res) => {
-                let adminExercises = await prisma.workout.findMany({where:{
-                    userId: null}
-                })
+                let adminExercises = await prisma.workout.findMany()
                 let userExer = await prisma.workout.findMany({
                 where:{userId: req.user.id}})
                 let array = [...adminExercises,...userExer]

@@ -1,4 +1,3 @@
-import Homepage from "./Homepage";
 import { useContext } from "react";
 import "./App.css";
 import Navbar from "./component/Navbar";

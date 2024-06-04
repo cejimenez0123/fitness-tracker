@@ -39,7 +39,7 @@ module.exports = function(authMiddleware){
     
       
         try {
-          const { email,name, password } = req.body;
+          const { email,name, password,gender } = req.body;
         
           // Validate input and ensure uniqueness
           if (!email || !password) {
@@ -57,7 +57,7 @@ module.exports = function(authMiddleware){
       
           // Create new user in Prisma
           const user = await prisma.user.create({
-            data: { email:email,name:name, password: hashedPassword, }
+            data: { email:email,name:name, password: hashedPassword, gender:gender}
           });
    
           // Optionally generate a JWT token (avoid storing full credentials in token)
