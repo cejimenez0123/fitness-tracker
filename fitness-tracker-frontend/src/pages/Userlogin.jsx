@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { ProtectedRoutes, ProtectedRouteProvider } from "../component/ProtectedRoutes.jsx";
 import gym from "../../public/gym.jpg"
+import Enviroment from '../core.jsx';
 const Userlogin = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -22,7 +23,7 @@ const Userlogin = () => {
     e.preventDefault()
    await axios({
       method: 'post',
-      url: "http://localhost:3000/user/login", 
+      url: Enviroment.BASE_URL+"/user/login", 
       data: {email:email,password:password}
     }).then(res=>{
       localStorage.setItem("token",res.data.token)
