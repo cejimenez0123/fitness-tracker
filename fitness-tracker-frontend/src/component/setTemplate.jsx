@@ -1,48 +1,123 @@
-import React from 'react'
+import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const setTemplate = () => {
+const setTemplate = ({
+  workout,
+  exerciseData,
+
+  setExerciseData,
+  handleSubmit,
+}) => {
+  const handleChange = (e, exerciseIndex, setIndex, field) => {
+    const { name, value } = e.target;
+    const updatedExerciseData = [...exerciseData];
+    if (field === "exerciseName" || field === "muscle" || field === "type") {
+      updatedExerciseData[exerciseIndex][name] = value;
+    } else {
+      updatedExerciseData[exerciseIndex].sets[setIndex][name] = value;
+    }
+    setExerciseData(updatedExerciseData);
+  };
+
+  const addSet = (e, exerciseIndex) => {
+    e.preventDefault();
+    const updatedExerciseData = [...exerciseData];
+    updatedExerciseData[exerciseIndex].sets.push({
+      id: uuidv4(),
+      reps: 0,
+      weight: 0,
+    });
+    setExerciseData(updatedExerciseData);
+  };
+
+  const deleteSet = (exerciseIndex, setIndex) => {
+    const updatedExerciseData = [...exerciseData];
+    updatedExerciseData[exerciseIndex].sets.splice(setIndex, 1);
+    setExerciseData(updatedExerciseData);
+  };
+
   return (
     <div>
-        {/* <span className=" ml-2">
-              <label htmlFor=""> set</label>
-              <br />
-              <input
-                className="w-[10vw]"
-                name="sets"
-                value={data.sets}
-                onChange={(e) =>
-                  handleChange(e.target.value , i, "sets")
-                }
-                type="number"
-              />
-            </span> */}
-      {/* {data.sets > 0 && (
-            <div className="flex">
-              {[...Array(Number(data.sets))].map((_, index) => (
-                <div key={index}>
-                  <label htmlFor={`rep-${index+1}`}>Rep {index+1}</label>
-                  <br />
-                  <input
-                    id={`rep-${index+1}`}
-                    value={data.reps[index] }
-                    onChange={(e) =>
-                      handleChange(
-                        e.target.value,
-                        i,
-                        "reps",
-                      )
-                    }
-                    name={`rep-${index + 1}`}
-                    className="w-10"
-                    type="number"
-                  />
+      <div className="modal-box w-11/12 max-w-5xl">
+        <h4> {workout}</h4>
+        <div className="modal-action">
+          <form method="dialog">
+            {exerciseData.map((exercise, exerciseIndex) => (
+              <div key={exercise.id}>
+                <p>{exercise.exerciseName.label}</p>
+                <table>
+                  <thead>
+                    <tr>
 
-                </div>
-              ))}
-            </div>
-          )} */}
+                    <th>set</th>
+                    <th>Reps</th>
+                    <th>lbs</th>
+                    </tr>
+                  </thead>
+                  {exercise.sets.map((set, setIndex) => (
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input
+                            type="number"
+                            value={setIndex}
+                            disabled
+                            placeholder="Reps"
+                            className="input input-bordered w-full max-w-xs"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="number"
+                            value={set.reps}
+                            onChange={(e) =>
+                              handleChange(e, exerciseIndex, setIndex, "reps")
+                            }
+                            placeholder="Reps"
+                            className="input input-bordered w-full max-w-xs"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="number"
+                            value={set.weight}
+                            onChange={(e) =>
+                              handleChange(e, exerciseIndex, setIndex, "weight")
+                            }
+                            placeholder="Weight"
+                            className="input input-bordered w-full max-w-xs"
+                          />
+                        </td>
+                      </tr>
+
+                 
+                        {exercise.sets.length > 1&&
+                        
+                      <button
+                          className="btn"
+                          onClick={() => deleteSet(exerciseIndex, setIndex)}
+                        >
+                          -
+                        </button>
+                      }
+                
+                    </tbody>
+                  ))}
+                </table>
+                <button
+                  className="btn"
+                  onClick={(e) => addSet(e, exerciseIndex)}
+                >
+                  Add Set
+                </button>
+              </div>
+            ))}
+            <button className="btn ">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default setTemplate
+export default setTemplate;
