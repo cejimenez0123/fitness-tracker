@@ -29,6 +29,7 @@ model User {
   id String   @id @default(auto()) @map("_id") @db.ObjectId
   email String   @unique
   name String
+  gender String
   password String
   workouts Workout[]
   exercises Exercise[]
@@ -63,7 +64,6 @@ model Exercise {
   muscle Muscle @default(CARDIO)
   workoutExercises WorkoutExercise[]
   type Type @default(CALISTHENICS)
-
 }
 model Activity{
     id String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -79,9 +79,10 @@ model Activity{
 model Set{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   activity Activity @relation(fields: [activityId],references: [id])
+
   activityId String @db.ObjectId
-  weight Int?
-  reps Int
+  weight Int[]
+  reps Int[]
 }
 
 enum Type {
