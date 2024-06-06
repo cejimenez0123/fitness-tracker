@@ -8,10 +8,10 @@ const router = express.Router()
 module.exports = function(authMiddleware){
   
     router.get("/unprotected", async (req, res)=>{
-        const exercises = await  prisma.exercise.findMany({
-            where:{userId: null}})
+        const exercises = await  prisma.exercise.findMany()
         
         res.json({exercises:exercises})
+        console.log(exercises);
     })
     router.get("/protected", authMiddleware,async (req, res)=>{
         const exercises = await prisma.exercise.findMany({
@@ -21,6 +21,7 @@ module.exports = function(authMiddleware){
     })
     router.post("/",authMiddleware, async (req,res)=>{
             const {name,type,muscle}=req.body
+            console.log(name,type,muscle)
             const user = req.user
             const exerciseType = validateExerciseType(type)
             const muscleType = validateMuscleType(muscle)
