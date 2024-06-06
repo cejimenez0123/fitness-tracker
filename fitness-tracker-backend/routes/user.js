@@ -106,6 +106,37 @@ module.exports = function(authMiddleware){
         }})
         res.status(200).json({logs: logs});
     })
+    router.delete("/",authMiddleware,async function(req,res){
+      let id = req.user.id
+     let activities = await prisma.activity.findMany({where:{userId:id}})
+    await Promise.all(activities.map(async act=>{
+        await prisma.set.deleteMany({where:{activityId:act.id}})
+        await prisma.activity.delete({where:{id:act.id}})
+        return {message:"Deleted Successfully"}
+     }))
+      let logs = await prisma.log.findMany({where:{userId:id}})
+      logs.map(async log=>{
+          await prisma.activity.deleteMany({where:{logId:log.id}})
+         await prisma.log.delete({where:{id:log.d}})
+      })
+      await prisma.log.deleteMany({where:{userId:id}})
+      let exercises = await prisma.exercise.findMany({where:{userId:id}})
+      await Promise.all(exercises.map(async exer=>{
+        await prisma.workoutExercise.deleteMany({where:{
+          exerciseId: exer.id
+        }})
+        await prisma.activity.deleteMany({where:{
+          exerciseId: exer.id
+      }})
+      await prisma.exercise.delete({
+          where: {
+              id: exer.id
+          },
+      })
+        return {message:"Deleted Successfully"}
+      }))
+      res.status(200).json({message:"Deleted Successfully"})
+    })
     router.post("/logout", async function (req, res, next) {
     
     })

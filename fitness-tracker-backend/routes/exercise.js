@@ -52,6 +52,12 @@ module.exports = function(authMiddleware){
                 res.status(201).json({exercise:exercise})
         })
     router.delete("/:id",authMiddleware,async (req,res)=>{
+            await prisma.workoutExercise.deleteMany({where:{
+                exerciseId: req.params.id
+            }})
+            await prisma.activity.deleteMany({where:{
+                exerciseId: req.params.id
+            }})
             await prisma.exercise.delete({
                 where: {
                     id: req.params.id
