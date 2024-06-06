@@ -34,6 +34,7 @@ describe("Create Workout", () => {
         .expect("Content-Type", /json/)
         .expect(200); 
         expect(response.body).toHaveProperty("workout")  
+        expect(response.body.workout).toHaveProperty("id")
         const deleteResponse = await request(app)
           .delete(`/workout/${response.body.workout.id}`)
           .set('Authorization', `Bearer ${token}`)
@@ -56,7 +57,7 @@ describe("Create Workout", () => {
   })
   describe("Get Workout exercise", () => {
     test("GET /workout/:id/exercise", async() => {
-        let workoutId = "6650ecf508a49792e80be0a8"
+        let workoutId = "6650eca508a49792e80be096"
         let response = await request(app)
                 .get(`/workout/${workoutId}/exercise`)
                 .set("Authorization",'Bearer ' + token)
@@ -75,8 +76,8 @@ describe("Add Exercise to Workout",()=>{
     test("POST /:workoutId/exercise/:exerciseId with valid data",async ()=>{
 
             const validData = {
-                workoutId: "6650ece308a49792e80be09f",
-                exerciseId:"6650ec4008a49792e80be06f"
+                workoutId: "6650eca508a49792e80be096",
+                exerciseId:"6650ebbb08a49792e80be054"
             }
             let response = await request(app)
             .post(`/workout/${validData.workoutId}/exercise/${validData.exerciseId}`)

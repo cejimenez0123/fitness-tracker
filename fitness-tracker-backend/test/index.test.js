@@ -8,6 +8,7 @@ describe("Register User", () => {
     const userData = {
         email: "atest90@test.com",
         name: "joe test",
+        gender:"male",
         password: "password"}
     const response = await request(app)
         .post("/user/register")

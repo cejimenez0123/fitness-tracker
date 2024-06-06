@@ -27,7 +27,7 @@ describe("Create/Delete exercise with valid data", () => {
 
 
      let response = await request(app)
-        .post("/exercise/admin")
+        .post("/exercise/")
         .set('Authorization', `Bearer ${token}`)
         .send(validData)
         .expect(201)
