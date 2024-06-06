@@ -1,6 +1,6 @@
 
 const request = require("supertest");
-const app= require("../index.js");
+const {app,server}= require("../index.js");
 
 
 describe("Register User", () => {
@@ -46,4 +46,8 @@ describe("Register User", () => {
 
   
   
-  
+
+  afterAll(async () => {
+    await new Promise((resolve) => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+    server.close(function() { console.log('Closed Server'); });
+  });

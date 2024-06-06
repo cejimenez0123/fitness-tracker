@@ -89,9 +89,8 @@ module.exports = function(authMiddleware){
       
           // Generate JWT token with user ID
           const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '23h' }); // Adjust expiration as needed
-          const {password:UserPassword,...userInfo} = user
       
-          res.status(200).json({userInfo , token});
+          res.status(200).json({ token});
         } catch (error) {
           res.status(500).json({ message: 'Error logging in' });
         }

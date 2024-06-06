@@ -1,7 +1,7 @@
 
 const request = require("supertest");
-const app= require("../index.js");
-//skullcrusher 664dfa51132c52c30aaae32f
+const {app,server}= require("../index.js");
+
 beforeEach(async () => {
     const userData = {
       email: process.env.ADMIN_EMAIL,
@@ -61,6 +61,11 @@ describe("Get Exercise", () => {
          expect(response.body.exercises).toBeInstanceOf(Array)
      })
 
+  });
+
+  afterAll(async () => {
+    await new Promise((resolve) => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+    server.close(function() { console.log('Closed Server'); });
   });
 
   

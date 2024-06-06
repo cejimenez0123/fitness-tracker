@@ -56,11 +56,9 @@ app.get('/', (req, res, next) => {
     
     var server = app.listen(PORT,function (){
         console.log(`Listening on ${PORT}`)
-   
-    // server.close(function() { console.log('Closed Server'); });
 });
 
-module.exports = app
+module.exports = {app,server}
 
 
 
