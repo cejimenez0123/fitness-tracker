@@ -82,8 +82,8 @@ model Set{
   activity Activity @relation(fields: [activityId],references: [id])
 
   activityId String @db.ObjectId
-  weight Int[]
-  reps Int[]
+  weight Int
+  reps Int
 }
 
 enum Type {

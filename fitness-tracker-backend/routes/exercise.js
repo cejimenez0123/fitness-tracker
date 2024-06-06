@@ -37,6 +37,7 @@ module.exports = function(authMiddleware){
                     type:exerciseType
                 }})
                 res.status(201).json({exercise:exercise})
+                console.log(res);
         })
     router.post("/admin",authMiddleware, async (req,res)=>{
             const {name,type,muscle}=req.body

@@ -29,7 +29,7 @@ const Workout = ({
     label: data.name,
    
   }));
-  console.log(data);
+ 
 const handleChange=(selectedOption)=>{
   console.log(selectedOption.label);
   workout!== ""? setErr(""): setErr(" name cant be empty")
@@ -56,7 +56,7 @@ setWorkout(selectedOption.label)
               onChange={(selectedOption)=>handleChange(selectedOption)}
               name="WorkoutName"
               options={workoutOptions}
-              
+              className="text-black"
             />
             {err}
           </div>
