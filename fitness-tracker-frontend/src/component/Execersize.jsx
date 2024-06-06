@@ -3,7 +3,18 @@ import { useEffect, useState } from "react";
 import { useApi } from "./fetch";
 import ExerciseTemplate from "./ExerciseTemplate";
 import Select from "react-select";
-const Execersize = ({ setExerciseData, exerciseData, handleSubmit }) => {
+import { v4 as uuidv4 } from "uuid";
+
+import SetTemplate from "./SetTemplate";
+const Execersize = ({
+  setExerciseData,
+  workout,
+  
+  makeExercise,
+  
+  exerciseData,
+  handleSubmit,
+}) => {
   const [isSearchable, setIsSearchable] = useState(true);
   const { isLoading, data, isError, isFetching } = useApi(
     "exercise/unprotected"
@@ -18,35 +29,37 @@ const Execersize = ({ setExerciseData, exerciseData, handleSubmit }) => {
   const exerciseOptions = data.exercises.map((data) => ({
     value: data.name,
     label: data.name,
-    name:"exerciseName"
+    name: "exerciseName",
   }));
   const muscleOptions = data.exercises.map((data) => ({
     value: data.muscle,
     label: data.muscle,
-    name:"muscle"
-
+    name: "muscle",
   }));
   const typeOptions = data.exercises.map((data) => ({
     value: data.type,
     label: data.type,
-    name:"type"
-
+    name: "type",
   }));
-  const add=(e)=>{
-    e.preventDefault()
+  const add = (e) => {
+    e.preventDefault();
     console.log("ready ");
-    const data= [...exerciseData,
-      {
-        exerciseName:"",
-        muscle:[],
-        type:"",
-        sets:2,
-        reps:[],
-      }
-    ]
-    setExerciseData(data)
-  }
-
+    const data = [
+      ...exerciseData,
+      {id: uuidv4(),
+      exerciseName: "",
+      muscle: "",
+      type: "",
+      sets: [
+        {
+          id: uuidv4(),
+          reps: 0,
+          weight: 0
+        }
+      ]}
+    ];
+    setExerciseData(data);
+  };
 
   return (
     <div>
@@ -60,15 +73,28 @@ const Execersize = ({ setExerciseData, exerciseData, handleSubmit }) => {
             Add exercise
           </button>
 
-          <ExerciseTemplate exerciseData={exerciseData}
-           exerciseOptions={exerciseOptions}
-           muscleOptions={muscleOptions}
-           typeOptions={typeOptions}
-           setExerciseData={setExerciseData}
-          //  handleChange={handleChange}
-           />
-          <button className="btn"> Submit </button>
+          <ExerciseTemplate
+            exerciseData={exerciseData}
+            exerciseOptions={exerciseOptions}
+            muscleOptions={muscleOptions}
+            typeOptions={typeOptions}
+            setExerciseData={setExerciseData}
+            //  handleChange={handleChange}
+          />
         </form>
+        <button onClick={makeExercise} className="btn">
+          
+          Create excersice
+        </button>
+        <dialog id="my_modal_5" className="modal">
+          <SetTemplate
+            workout={workout}
+            
+            handleSubmit={handleSubmit}
+            exerciseData={exerciseData}
+            setExerciseData={setExerciseData}
+          />
+        </dialog>
       </div>
     </div>
   );

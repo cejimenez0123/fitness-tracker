@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { useState } from "react";
-import setTemplate from "./setTemplate";
+import setTemplate from "./SetTemplate";
 import CreatableSelect from "react-select/creatable";
 const ExerciseTemplate = ({
   exerciseData,
@@ -14,44 +14,23 @@ const ExerciseTemplate = ({
   const [isRtl, setIsRtl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-// const handleChange = (selectedOption,e, i) => {
-//     console.log("p", e.target);
-//     console.log("p", selectedOption);
-//     console.log("p", selectedOption.name);
-//     let  name, value  ;
-//     if (selectedOption ) {
-//         name = selectedOption.name;
-//         value = selectedOption.label;
-//       }
-//       // Handling regular input elements
-//       else {
-//         name = e.target.name;
-//         value = e.target.value;
-//       }
-   
-//     let onchangeVal = [...exerciseData];
-//     onchangeVal[i][name] = value;
-//     setExerciseData(onchangeVal);
-//     console.log(exerciseData);
-//   };
+
 const handleChange = (selectedOption, index, field) => {
     const newData = [...exerciseData];
 console.log(newData);
-     if (field === "reps") {
-      console.log([selectedOption]);
-      newData[index][field].push(Number(selectedOption)) ;
-     }else{
+    
 
        newData[index][field] = selectedOption;
-     }
+     
     setExerciseData(
         
         newData);
     console.log(exerciseData);
 
   };
-  const handleDelete=(dataId)=>{
-    event.preventDefault()
+  const handleDelete=(e,dataId,i)=>{
+    console.log();
+    e.preventDefault();
     const updatedExercises = exerciseData.filter((exercise) => exercise.id !== dataId);
        console.log(updatedExercises);
        
@@ -61,9 +40,10 @@ return (
     <>
        {exerciseData.map((data, i) => (
         <div key={i} className="border-4 p-4 mt-10  rounded-lg ">
+         
             {exerciseData.length >1&&
             
-            <button onClick={()=>handleDelete(data.id)} className=" relative w-[12%] left-[19vw] btn-outline btn-error btn rounded-full text-white">-</button>
+            <button onClick={(e)=>handleDelete(e,data.id ,i)} className=" relative w-[12%] left-[19vw] btn-outline btn-error btn rounded-full text-white">-</button>
             
         }
             <div>
@@ -77,7 +57,7 @@ return (
               handleChange(selectedOption, i, "exerciseName")
             }
             options={exerciseOptions}
-            isClearable
+         
           />
           <label htmlFor="">Muscles</label>
           <Select
@@ -88,9 +68,9 @@ return (
               handleChange(selectedOption, i, "muscle")
             }
             options={muscleOptions}
-            isClearable
+           
           />
-          <div className="flex w-full ">
+          <div className=" ">
             <span>
               <label htmlFor=""> Type of exercise</label>
               <Select
@@ -100,7 +80,7 @@ return (
                   handleChange(selectedOption, i, "type")
                 }
                 options={typeOptions}
-                isClearable
+                
               />
             </span>
             
