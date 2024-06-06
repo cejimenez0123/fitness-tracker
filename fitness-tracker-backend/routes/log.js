@@ -35,14 +35,12 @@ module.exports = function(authMiddleware){
     })
     router.get('/',authMiddleware,async (req,res)=>{
 
-        const logs = await prisma.log.findMany({where:{ 
-            workout:{
-                userId: req.user.id
-            }
-            },include:{
-                workout:true
-            }
-        })
+        const logs = await prisma.log.findMany({where:{
+            userId: req.user.id,
+         },include:{
+            workout:true
+         }}
+    )
         res.json({logs:logs})
     })
     router.delete("/:id",authMiddleware,async (req,res)=>{

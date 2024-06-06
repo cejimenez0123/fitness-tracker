@@ -50,17 +50,16 @@ app.get('/', (req, res, next) => {
         console.log("welcome");
         
     })
-    
-    
-    
-    
-    var server = app.listen(PORT,function (){
-        console.log(`Listening on ${PORT}`)
-        console.log(process.env.DATABASE_URL)
+
+
+
+
+var server = app.listen(PORT,function (){
+    console.log(`Listening on ${PORT}`)
     // server.close(function() { console.log('Closed Server'); });
 });
 
-module.exports = app
+module.exports = {app,server}
 
 
 
