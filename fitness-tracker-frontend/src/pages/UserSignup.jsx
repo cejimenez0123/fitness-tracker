@@ -25,7 +25,7 @@ const UserSignup = () => {
     console.log(email ,password, name,gender);
     axios({
       method: 'post',
-      url: Enviroment.BASE_URL+"/user/register", 
+      url: "http://localhost:3000"+"/user/register", 
       data: {email:email,password:password,name:name,gender:gender}
     }).then(res=>{
       if(res.data.token!==undefined){

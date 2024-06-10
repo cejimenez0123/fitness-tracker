@@ -69,14 +69,15 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   
 
   const handleSubmit = async () => {
+    console.log("hi");
     await Promise.all(
       exerciseData.map(async (data) => {
         await setsMutation.mutateAsync({
           activityId: activityId,
-          reps: data.sets.map(repsData=>repsData.reps),
-          weight: data.sets.map(weightData=>weightData.weight),
-
+          reps:Number( data.sets.map(repsData=>repsData.reps)),
+          weight: Number(data.sets.map(weightData=>weightData.weight)),
         });
+        console.log(data.sets.map(repsData=>repsData.reps));
       })
     );
   };
