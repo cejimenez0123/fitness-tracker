@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { useState } from "react";
-import setTemplate from "./SetTemplate";
+import setTemplate from "./setTemplate";
 import CreatableSelect from "react-select/creatable";
 const ExerciseTemplate = ({
   exerciseData,

@@ -6,7 +6,7 @@ import { ProtectedRoutes } from "./component/ProtectedRoutes";
 function App() {
   return (
     <>
-      <div className="">
+      <div className="flex flex-col">
         <Navbar />
 
      
