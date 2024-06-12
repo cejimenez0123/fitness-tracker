@@ -4,12 +4,7 @@ export default {
 "./src/**/*.{js,ts,jsx,tsx}"
 ],
   theme: {
-<<<<<<< HEAD
-    extend: { colors:{
-      back:"#f4f3f2",
-      fore:"#48676C"
-    }},
-=======
+
     extend: {
       colors: {
         'charcoal': '#364156',
@@ -18,7 +13,7 @@ export default {
         'persianRed': '#BB4430',
       },
     },
->>>>>>> 3e17f42d98437f2dc4626c293d5bd43c19d3ca3a
+
   },
   plugins: [require('daisyui')],
 }
