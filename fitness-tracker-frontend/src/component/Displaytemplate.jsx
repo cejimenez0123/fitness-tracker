@@ -100,23 +100,26 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   };
 
   return (
-    <div className="w-[30vw] absolute text-xl top-[30vh] left-[10vw]  p-5 rounded-2xl bg-persianRed ">
+    <div className="w-[30vw] bg-[#f4f3f2]    absolute text-xl top-[20em] h-1/3 left-[10vw]  p-5 rounded-2xl bg-persianRed ">
       <div className="flex justify-end">
         <button className="text-2xl justify-self-end " onClick={handleClose}>
           x
         </button>
       </div>
       <h1 className="text-white">{motivation}</h1>
+      <div className="mt-8">
       <button
-        className="btn mr-5"
+        className="btn mr-5 mt-4 bg-PrussianBlue"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Make Plan
       </button>
+      
       <dialog
         id="my_modal_3"
         className="modal
         +
+       mt-8
         "
       >
         {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
@@ -135,6 +138,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         {" "}
         History
       </Link>
+    </div>
     </div>
   );
 };

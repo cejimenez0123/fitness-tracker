@@ -117,9 +117,9 @@ function modal(){
     )
   }
   return (
-    <div className="h-screen bg-charcoal" >
-      <h1 className=" text-white mt-10 ml-10 text-[5rem]">
-        Hello {data.user.name} <br /> What is your plan for today?
+    <div className="h-screen bg-[#f4f3f2]   " >
+      <h1 className=" text-charcoal mt-10 ml-10 text-[5rem]">
+        Hello {data.user.name.split(" ")[0]} <br /> What is your plan for today?
       </h1>
       {modal()}
      

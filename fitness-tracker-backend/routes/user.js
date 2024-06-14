@@ -95,7 +95,7 @@ module.exports = function(authMiddleware){
           res.status(500).json({ message: 'Error logging in' });
         }
       });
-    router.get("/:id/logs",authMiddleware,async (req, res) => {
+    router.get("/logs",authMiddleware,async (req, res) => {
 
       const logs = await prisma.log.findMany({where:{
            user:{
