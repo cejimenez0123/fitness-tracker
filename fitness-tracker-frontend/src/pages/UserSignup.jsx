@@ -61,7 +61,7 @@ const UserSignup = () => {
                     id="name"
                     type="name"
                     name="name"
-                    className="border-b bg-transparent w-96 py-1 focus:outline-none focus:border-fore focus:border-b-2 transition-colors peer"
+                    className="border-b border-PrussianBlue bg-transparent w-96 py-1 focus:outline-none focus:border-fore focus:border-b-2 transition-colors peer"
                     onChange={(e) => handleName(e)}
                     value={name}
                     required
@@ -82,7 +82,7 @@ const UserSignup = () => {
                     id="email"
                     type="email"
                     name="email"
-                    className="border-b bg-transparent w-96 py-1 focus:outline-none focus:border-fore focus:border-b-2 transition-colors peer"
+                    className="border-b border-PrussianBlue bg-transparent w-96 py-1 focus:outline-none focus:border-fore focus:border-b-2 transition-colors peer"
                     autoComplete="off"
                     onChange={(e)=>handleEmail(e)}
                     value={email}
@@ -104,7 +104,7 @@ const UserSignup = () => {
                     id="password"
                     type="password"
                     name="password"
-                    className="border-b bg-transparent w-96 py-1 focus:outline-none focus:border-fore focus:border-b-2 transition-colors peer"
+                    className="border-b border-PrussianBlue bg-transparent w-96 py-1 focus:outline-none focus:border-fore focus:border-b-2 transition-colors peer"
                     autoComplete="off"
                     onChange={(e)=>handlePassword(e)}
                     value={password}
@@ -112,7 +112,7 @@ const UserSignup = () => {
                   />
                   <label
                     htmlFor="name"
-                    className={`absolute left-0  text-gray-600 cursor-text transition-all ${
+                    className={`absolute left-0   text-gray-600 cursor-text transition-all ${
                       isInputFilled(password)
                         ? "bottom-[1.6rem] text-xs text-fore"
                         : "peer-focus:text-xs peer-focus:-top-4 top-1 peer-focus:text-fore"
@@ -131,7 +131,7 @@ const UserSignup = () => {
 
         Male
         <input
-        className='checkbox border border-solid border-fore'
+        className='checkbox border border-solid border-PrussianBlue'
           type="radio"
           name="options"
           value="Male"
@@ -153,7 +153,7 @@ const UserSignup = () => {
           </label>
 </span>
 
-        <button className="btn btn-info bg-[#060B0E] text-[#f4f3f2]" type='submit'>Submit</button>
+        <button className="btn btn-info bg-PrussianBlue text-[#f4f3f2]" type='submit'>Submit</button>
         
       </form>
   

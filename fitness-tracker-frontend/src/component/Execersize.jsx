@@ -9,9 +9,7 @@ import SetTemplate from "./setTemplate";
 const Execersize = ({
   setExerciseData,
   workout,
-  
   makeExercise,
-  
   exerciseData,
   handleSubmit,
 }) => {
