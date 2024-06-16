@@ -6,7 +6,11 @@ export default {
   theme: {
 
     extend: {
+      screens: {
+        ml:"900px"
+      },
       colors: {
+        'back':"#f4f3f2",
         'charcoal': '#364156',
         'richBlack': '#11151C',
         'PrussianBlue': '#212D40',
