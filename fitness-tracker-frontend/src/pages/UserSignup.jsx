@@ -54,8 +54,9 @@ const UserSignup = () => {
   return (
   <div className='flex flex-row'>
  
-    <div className='flex  w-[46%] bg-[#f4f3f2]   '>
-      <form className=' mx-auto w-3/5 space-y-6 h-1/2 grid content-center ' onSubmit={handleSubmit} >
+    <div className='flex  w-screen pt-16 ml:w-[46%] h-screen
+     bg-[#f4f3f2]   '>
+      <form className=' mx-auto w-2/3 w-fit  space-y-6 h-1/2 grid content-center ' onSubmit={handleSubmit} >
       <div className="relative ">
                   <input
                     id="name"
@@ -125,7 +126,7 @@ const UserSignup = () => {
     
 
      
-<span>
+{/* <span>
 
         <label className="text-xl w-1/2  label text-[#060B0E]"htmlFor="">
 
@@ -151,7 +152,7 @@ const UserSignup = () => {
           />
        
           </label>
-</span>
+</span> */}
 
         <button className="btn btn-info bg-PrussianBlue text-[#f4f3f2]" type='submit'>Submit</button>
         
@@ -160,7 +161,7 @@ const UserSignup = () => {
       
     </div>
     <div className='flex-1 w-[44%]'>
-    <img className=" " src={gym} alt="image of a dumbell" />
+    <img className=" hidden ml:block" src={gym} alt="image of a dumbell" />
       </div>
     </div>
   )
