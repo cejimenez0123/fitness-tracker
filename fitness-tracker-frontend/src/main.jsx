@@ -18,18 +18,20 @@ const queryClient= new QueryClient()
 
 const router = createBrowserRouter([
   {
+    path:'/signin',
+        element: <UserSignup/>
+  },
+  {
+    path:'/login',
+        element: <Userlogin/>
+  },
+  {
     path:'/',
     element: <App/>,
     children:[
 
-      {
-        path:'/login',
-            element: <Userlogin/>
-      },
-      {
-        path:'/signin',
-            element: <UserSignup/>
-      }
+     
+    
     ]
    
   
