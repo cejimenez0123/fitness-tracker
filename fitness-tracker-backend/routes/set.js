@@ -12,22 +12,15 @@ const router = express.Router()
 module.exports = function(authMiddleware){
     
     router.post("/",authMiddleware, async (req,res)=>{
-        const {activityId,reps,weights} = req.body
-           
-        const sets = await Promise.all(reps.map(async (rep, index) => {
-            // Create a new set entry for each rep and weight combination
-            const newSet = await prisma.set.create({
-                data: {
-                    activity: {
-                        connect: { id: activityId }
-                    },
-                    reps: rep,
-                    weight: weights[index]
-                }
-            });
-            return newSet;
-        }));
-        res.status(201).json({sets})
+        const {activityId,reps,weight} = req.body
+
+        let set= await prisma.set.create({data:{
+                    activity:{
+                        connect:{id:activityId}
+                    }
+                ,reps:reps,weight:weight
+        }})
+        res.status(201).json({set:set})
     })
     router.put("/:id",authMiddleware, async (req,res)=>{
         const {reps,weight} = req.body

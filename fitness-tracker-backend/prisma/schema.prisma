@@ -64,7 +64,6 @@ model Exercise {
   muscle Muscle @default(CARDIO)
   workoutExercises WorkoutExercise[]
   type Type @default(CALISTHENICS)
-
 }
 model Activity{
     id String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -82,8 +81,8 @@ model Set{
   activity Activity @relation(fields: [activityId],references: [id])
 
   activityId String @db.ObjectId
-  weight Int[]
-  reps Int[]
+  weight Int
+  reps Int
 }
 
 enum Type {

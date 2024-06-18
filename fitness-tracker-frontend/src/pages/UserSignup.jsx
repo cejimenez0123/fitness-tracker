@@ -1,3 +1,4 @@
+
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -32,6 +33,7 @@ const UserSignup = () => {
       console.log(res.data);
     });
   };
+
   // const handleSubmit = (e)=>{
   //   e.preventDefault()
   //   axios({
@@ -50,6 +52,7 @@ const UserSignup = () => {
     return inputValue.trim() !== "";
   };
   return (
+
     <div className="flex md:flex-col justify-center h-screen w-screen  ">
       <span className="flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen relative ">
         <form
@@ -117,6 +120,8 @@ const UserSignup = () => {
               className="grow"
               value={password}
             />
+
+
           </label>
 
           <span className="flex justify-center gap-2 ">
@@ -163,6 +168,8 @@ const UserSignup = () => {
           alt="welcome to this bitch "
         />
       </span>
+
+        
     </div>
   );
 };

@@ -21,7 +21,7 @@ module.exports = function(authMiddleware){
                         }
                     },}
         })
-        res.json({workout:newWorkout})
+        res.status(201).json({workout:newWorkout})
     })
     router.post("/admin",authMiddleware, async (req,res)=>{
         const {name}=req.body

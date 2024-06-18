@@ -2,7 +2,9 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+
 import { Link } from 'react-router-dom'
+
 
 const Userlogin = () => {
   const [email,setEmail]=useState("")
@@ -22,7 +24,7 @@ const Userlogin = () => {
     e.preventDefault()
    await axios({
       method: 'post',
-      url: "http://localhost:3000/user/login", 
+      url: Enviroment.BASE_URL+"/user/login", 
       data: {email:email,password:password}
     }).then(res=>{
       localStorage.setItem("token",res.data.token)
@@ -34,6 +36,7 @@ const Userlogin = () => {
 
   }
   return (
+
     <div className='flex md:flex-col justify-center h-screen w-screen '>
       <span className='flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen text-2xl relative'>
 
@@ -67,6 +70,7 @@ const Userlogin = () => {
       <img           className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  object-cover / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
  src="/LoginImage.jpg" alt="welcome to this bitch " />
       </span>
+
     </div>
   )
 }

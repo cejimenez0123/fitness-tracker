@@ -1,4 +1,4 @@
-import { set } from "mongoose";
+
 import React, { useState } from "react";
 import Workout from "./Workout";
 import { postApi } from "./fetch";
@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 const Displaytemplate = ({ motivation, setPopup }) => {
   const queryClient = useQueryClient();
   const [workout, setWorkout] = useState();
+  const [logid, setLogid] = useState();
+  const [activityId, setActivityid] = useState();
+  
   const [exerciseData, setExerciseData] = useState([
     {
       id: uuidv4(),
@@ -27,35 +30,59 @@ const Displaytemplate = ({ motivation, setPopup }) => {
 
   const mutation = useMutation({
     mutationFn: (workoutData) => postApi("workout", workoutData),
-    onSuccess: () => {
+    onSuccess: async (data) => {
+      try {
+        console.log(data.workout.id);
+        const logResponse = await postApi("log", { workoutId: data.workout.id });
+        console.log(logResponse);
+        setLogid(logResponse.log.id); 
+        console.log(logResponse.log.id);
+      } catch (error) {
+        console.error("Error creating log:", error);
+      }
+  
       // Invalidate the 'workout' query after mutation succeeds
       queryClient.invalidateQueries("workout");
     },
   });
   const exerciseMutation = useMutation({
     mutationFn: (exerciseData) => postApi("exercise", exerciseData),
-    onSuccess: () => {
+    onSuccess:async (data) => {
       // Invalidate the 'workout' query after mutation succeeds
-      queryClient.invalidateQueries("workout");
-    },
+    console.log(data.exercise.id)
+    const activityResponse = await postApi("activity", { logId: logid ,exerciseId:data.exercise.id});
+      console.log(activityResponse.activity.id);
+      setActivityid(activityResponse.activity.id)
+      queryClient.invalidateQueries("exercise")
+    }
   });
+  console.log(activityId);
+
   const setsMutation = useMutation({
     mutationFn: (setData) => postApi("set", setData),
     onSuccess: () => {
       // Invalidate the 'workout' query after mutation succeeds
+      
       queryClient.invalidateQueries("workout");
     },
   });
-  console.log(workout);
-
-  console.log(exerciseData);
+  
 
   const handleSubmit = async () => {
-    console.log(workout);
+    await Promise.all(
+      exerciseData.map(async (data) => {
+        await setsMutation.mutateAsync({
+          activityId: activityId,
+          reps: data.sets.map(repsData=>repsData.reps),
+          weight: data.sets.map(weightData=>weightData.weight),
+
+        });
+      })
+    );
   };
 
   const handleClose = () => {
-    console.log("close");
+  
     setPopup("");
   };
   const makeExercise = async () => {
@@ -63,7 +90,6 @@ const Displaytemplate = ({ motivation, setPopup }) => {
     await mutation.mutateAsync({ name: workout });
     await Promise.all(
       exerciseData.map(async (data) => {
-        console.log(data.exerciseName.label());
         await exerciseMutation.mutateAsync({
           name: data.exerciseName.label.toUpperCase(),
           type: data.type.label.toUpperCase(),
@@ -74,13 +100,13 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   };
 
   return (
-    <div className="w-[30vw] absolute text-xl top-[30vh] left-[10vw]  p-5 rounded-2xl bg-lime-700">
+    <div className="w-[30vw] absolute text-xl top-[30vh] left-[10vw]  p-5 rounded-2xl bg-persianRed ">
       <div className="flex justify-end">
         <button className="text-2xl justify-self-end " onClick={handleClose}>
           x
         </button>
       </div>
-      <h1>{motivation}</h1>
+      <h1 className="text-white">{motivation}</h1>
       <button
         className="btn mr-5"
         onClick={() => document.getElementById("my_modal_3").showModal()}
