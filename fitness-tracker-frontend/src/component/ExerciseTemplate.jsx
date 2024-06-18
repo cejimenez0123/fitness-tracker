@@ -40,7 +40,7 @@ return (
     <>
        {exerciseData.map((data, i) => (
         <div key={i} className="border-4 p-4 mt-10  rounded-lg ">
-         { console.log(data.id)}
+         
             {exerciseData.length >1&&
             
             <button onClick={(e)=>handleDelete(e,data.id ,i)} className=" relative w-[12%] left-[19vw] btn-outline btn-error btn rounded-full text-white">-</button>
@@ -57,7 +57,7 @@ return (
               handleChange(selectedOption, i, "exerciseName")
             }
             options={exerciseOptions}
-            isClearable
+         
           />
           <label htmlFor="">Muscles</label>
           <Select
@@ -68,7 +68,7 @@ return (
               handleChange(selectedOption, i, "muscle")
             }
             options={muscleOptions}
-            isClearable
+           
           />
           <div className=" ">
             <span>
@@ -80,7 +80,7 @@ return (
                   handleChange(selectedOption, i, "type")
                 }
                 options={typeOptions}
-                isClearable
+                
               />
             </span>
             

@@ -89,9 +89,8 @@ module.exports = function(authMiddleware){
       
           // Generate JWT token with user ID
           const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '23h' }); // Adjust expiration as needed
-          const {password:UserPassword,...userInfo} = user
       
-          res.status(200).json({userInfo , token});
+          res.status(200).json({ token});
         } catch (error) {
           res.status(500).json({ message: 'Error logging in' });
         }
@@ -106,6 +105,37 @@ module.exports = function(authMiddleware){
           workout:true
         }})
         res.status(200).json({logs: logs});
+    })
+    router.delete("/",authMiddleware,async function(req,res){
+      let id = req.user.id
+     let activities = await prisma.activity.findMany({where:{userId:id}})
+    await Promise.all(activities.map(async act=>{
+        await prisma.set.deleteMany({where:{activityId:act.id}})
+        await prisma.activity.delete({where:{id:act.id}})
+        return {message:"Deleted Successfully"}
+     }))
+      let logs = await prisma.log.findMany({where:{userId:id}})
+      logs.map(async log=>{
+          await prisma.activity.deleteMany({where:{logId:log.id}})
+         await prisma.log.delete({where:{id:log.d}})
+      })
+      await prisma.log.deleteMany({where:{userId:id}})
+      let exercises = await prisma.exercise.findMany({where:{userId:id}})
+      await Promise.all(exercises.map(async exer=>{
+        await prisma.workoutExercise.deleteMany({where:{
+          exerciseId: exer.id
+        }})
+        await prisma.activity.deleteMany({where:{
+          exerciseId: exer.id
+      }})
+      await prisma.exercise.delete({
+          where: {
+              id: exer.id
+          },
+      })
+        return {message:"Deleted Successfully"}
+      }))
+      res.status(200).json({message:"Deleted Successfully"})
     })
     router.post("/logout", async function (req, res, next) {
     

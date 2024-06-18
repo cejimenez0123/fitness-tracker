@@ -10,7 +10,10 @@ const Home = () => {
 
  
   // console.log(data)
-  const [popup, setPopup] = useState();
+  const [popup, setPopup] = useState( <Displaytemplate
+    motivation={" life is too short to skip Leg day! What are your plans for your legs"}
+
+    />);
 
   
 function modal(){
@@ -74,7 +77,7 @@ function modal(){
    setPopup(
 
      <Displaytemplate
-     motivation={" life is too short to skip Leg day! What are your plans for your legs"}
+     motivation={" Open. Sweat. Triumph. This Chest Holds Your Power. Embrace the Challenge, Push Limits, Find Your Strength Within"}
 
       setPopup={setPopup}/>
    )
@@ -86,7 +89,7 @@ function modal(){
     setPopup(
 
       <Displaytemplate 
-      motivation=" life is too short to skip Leg day! What are your plans for your legs"
+      motivation="Gains are sweeter when shared with friends. Arm day is the perfect time to celebrate our collective progress. "
       
       setPopup={setPopup}/>
     )
@@ -114,9 +117,9 @@ function modal(){
     )
   }
   return (
-    <div >
-      <h1 className=" mt-10 ml-10 text-[5rem]">
-        Hello {data.user.name} <br /> What is your plan for today
+    <div className="h-screen bg-charcoal" >
+      <h1 className=" text-white mt-10 ml-10 text-[5rem]">
+        Hello {data.user.name} <br /> What is your plan for today?
       </h1>
       {modal()}
      

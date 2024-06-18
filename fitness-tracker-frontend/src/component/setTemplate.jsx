@@ -9,15 +9,12 @@ const setTemplate = ({
   handleSubmit,
 }) => {
   const handleChange = (e, exerciseIndex, setIndex, field) => {
-    const { name, value } = e.target;
     const updatedExerciseData = [...exerciseData];
-    if (field === "exerciseName" || field === "muscle" || field === "type") {
-      updatedExerciseData[exerciseIndex][name] = value;
-    } else {
-      updatedExerciseData[exerciseIndex].sets[setIndex][name] = value;
-    }
+    updatedExerciseData[exerciseIndex].sets[setIndex][field] = e.target.value;
     setExerciseData(updatedExerciseData);
+    
   };
+console.log(exerciseData);
 
   const addSet = (e, exerciseIndex) => {
     e.preventDefault();
