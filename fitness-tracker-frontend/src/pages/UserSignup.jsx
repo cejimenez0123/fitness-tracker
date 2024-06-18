@@ -117,6 +117,8 @@ const UserSignup = () => {
               className="grow"
               value={password}
             />
+
+
           </label>
 
           <span className="flex justify-center gap-2 ">
@@ -163,6 +165,8 @@ const UserSignup = () => {
           alt="welcome to this bitch "
         />
       </span>
+
+        
     </div>
   );
 };
