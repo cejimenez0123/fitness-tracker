@@ -2,7 +2,6 @@ import React, {  useState } from "react";
 import btn from "../../public/btn.json";
 import Lottie from "lottie-react";
 import {useApi} from "../component/fetch";
-import Legs from "../component/Legs";
 import Displaytemplate from "../component/Displaytemplate";
 
 const Home = () => {
@@ -15,33 +14,7 @@ const Home = () => {
 
   
 function modal(){
-  if (data.user.gender=="male"){
-    return(
-
-    <div className="flex justify-center ">
-    <img className="w-[33%] relative left-[30%] " src="/male.png" alt="" />
-
-      <Lottie
-        onClick={handleArmsClick}
-        className="w-[3%] absolute  top-[30%] right-[28%]"
-        animationData={btn}
-      />
-
-      <Lottie
-        onClick={handleUpperClick}
-        className="w-[3%] absolute top-[47%] right-[14%] "
-        animationData={btn}
-      />
-
-      <Lottie
-        onClick={handleLegsClick}
-        className="w-[3%] absolute top-[23%] right-[20%]"
-        animationData={btn}
-      />
-      {/* <Legs /> */}
-    </div>
-    )
-  }else if (data.user.gender=="Female"){
+ if (data.user.gender=="Female"){
     return(
 
     <div className="flex justify-center ">
@@ -67,6 +40,32 @@ function modal(){
       {/* <Legs /> */}
     </div>
     )
+  }else{
+    return(
+
+      <div className="flex justify-center ">
+      <img className="w-[33%] relative left-[30%] " src="/male.png" alt="" />
+  
+        <Lottie
+          onClick={handleArmsClick}
+          className="w-[3%] absolute  top-[30%] right-[28%]"
+          animationData={btn}
+        />
+  
+        <Lottie
+          onClick={handleUpperClick}
+          className="w-[3%] absolute top-[47%] right-[14%] "
+          animationData={btn}
+        />
+  
+        <Lottie
+          onClick={handleLegsClick}
+          className="w-[3%] absolute top-[23%] right-[20%]"
+          animationData={btn}
+        />
+        {/* <Legs /> */}
+      </div>
+      )
   }
 }
 
@@ -74,18 +73,33 @@ function modal(){
     // console.log("legs");
    setPopup(
 
-    //  <Legs setPopup={setPopup} />
-     <Displaytemplate setPopup={setPopup}/>
+     <Displaytemplate
+     motivation={" life is too short to skip Leg day! What are your plans for your legs"}
+
+      setPopup={setPopup}/>
    )
     
     
     
   };
   const handleArmsClick = () => {
-    <Displaytemplate setPopup={setPopup}/>
+    setPopup(
+
+      <Displaytemplate 
+      motivation=" life is too short to skip Leg day! What are your plans for your legs"
+      
+      setPopup={setPopup}/>
+    )
+     
   };
   const handleLegsClick = () => {
-    <Displaytemplate setPopup={setPopup}/>
+    setPopup(
+
+      <Displaytemplate 
+      motivation=" life is too short to skip Leg day! What are your plans for your legs"
+       setPopup={setPopup}/>
+    )
+     
   };
   if(isLoading){
     return(
@@ -102,7 +116,7 @@ function modal(){
   return (
     <div >
       <h1 className=" mt-10 ml-10 text-[5rem]">
-        Hello {data.user.name}{data.user.gender}  <br /> What is your plan for today
+        Hello {data.user.name} <br /> What is your plan for today
       </h1>
       {modal()}
      
