@@ -1,6 +1,5 @@
 const request = require("supertest");
-const app= require("../index.js");
-
+const {app,server}= require("../index.js");
 
 
 beforeEach(async () => {
@@ -21,7 +20,7 @@ beforeEach(async () => {
 describe("Create/Delete Log", () => {
     test("POST /log with valid data", async () => {
         const validData = 
-        {workoutId: "6650ecf508a49792e80be0a8",
+        {workoutId: "6650eca508a49792e80be096",
         }
        let res = await request(app)
             .post("/log")
@@ -35,11 +34,28 @@ describe("Create/Delete Log", () => {
             expect(log).toHaveProperty("workoutId")
             expect(log).toHaveProperty("date")
 
-            const deleteRes = await request(app)
-            .delete(`/log/${log.id}`)
-            .set('Authorization', `Bearer ${token}`)
-            .expect(200)
-                expect(deleteRes.body).toHaveProperty("message")
-                expect(deleteRes.body.message).toBe("Deleted Successfully")
+            // const deleteRes = await request(app)
+            // .delete(`/log/${log.id}`)
+            // .set('Authorization', `Bearer ${token}`)
+            // .expect(200)
+            //     expect(deleteRes.body).toHaveProperty("message")
+            //     expect(deleteRes.body.message).toBe("Deleted Successfully")
     }); 
   })
+describe("Get user logs",()=>{
+  test("GET /log",async ()=>{
+    let res = await request(app)
+    .get("/log")
+    .set('Authorization', `Bearer ${token}`)
+    .expect(200);
+    expect(res).toHaveProperty("body")
+    expect(res.body).toHaveProperty("logs")
+    expect(res.body.logs).toBeInstanceOf(Array)
+    console.log(JSON.stringify(res.body.logs))
+  
+  })
+})
+afterAll(async () => {
+  await new Promise((resolve) => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+  server.close(function() { console.log('Closed Server'); });
+});

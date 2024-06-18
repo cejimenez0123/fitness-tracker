@@ -9,6 +9,8 @@ const Workout = ({
   setExerciseData,
   workout,
   exerciseData,
+  
+  makeExercise,
   setWorkout,
   handleSubmit,
 }) => {
@@ -27,6 +29,7 @@ const Workout = ({
     label: data.name,
    
   }));
+ 
 const handleChange=(selectedOption)=>{
   console.log(selectedOption.label);
   workout!== ""? setErr(""): setErr(" name cant be empty")
@@ -53,20 +56,22 @@ setWorkout(selectedOption.label)
               onChange={(selectedOption)=>handleChange(selectedOption)}
               name="WorkoutName"
               options={workoutOptions}
-              
+              className="text-black"
             />
             {err}
           </div>
         </form>
 
         <button className="btn mt-2 p" onClick={() => Next()}>
-          Next
+          Create Workout
         </button>
         <dialog id="my_modal_4" className="modal">
           <Execersize
+          makeExercise={makeExercise}
             handleSubmit={handleSubmit}
             exerciseData={exerciseData}
             setExerciseData={setExerciseData}
+            workout={workout}
           />
         </dialog>
       </div>
