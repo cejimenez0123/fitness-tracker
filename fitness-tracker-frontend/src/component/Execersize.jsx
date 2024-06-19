@@ -63,7 +63,7 @@ const Execersize = ({
 
   return (
     <div>
-      <div className="modal-box w-[30vw] h-[40vh] ">
+      <div className="modal-box md:w-[30vw] md:h-[40vh] // w-[95vw] ">
         <form onSubmit={handleSubmit} method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
