@@ -4,8 +4,6 @@ import { useApi } from "./fetch";
 import ExerciseTemplate from "./ExerciseTemplate";
 import Select from "react-select";
 import { v4 as uuidv4 } from "uuid";
-
-import SetTemplate from "./setTemplate";
 const Execersize = ({
   setExerciseData,
   workout,
