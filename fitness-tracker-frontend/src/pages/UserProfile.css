@@ -1,15 +1,13 @@
 .user-profile {
-  border: 2px solid red;
-  padding: 20px;
-  width: 80%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-and-tip {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -17,65 +15,59 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: auto;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .profile-pic img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .name,
 .goal {
-  font-size: 18px;
-  margin: 5px 0;
+  margin-bottom: 10px;
 }
 
 .health-tip {
-  font-size: 16px;
-  font-style: italic;
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin-left: auto;
+  align-self: flex-start;
 }
 
-.workout-and-charts {
-  display: flex;
-  justify-content: space-between;
+.mood-chart {
+  width: 100%;
+  height: 200px;
+  background-color: #f0f0f0;
+  margin-bottom: 20px;
 }
 
 .workout-calendar {
-  width: 60%;
+  width: 100%;
 }
 
 .workout-logs {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between;
 }
 
 .workout-log {
-  border: 1px solid #ccc;
+  width: calc(100% / 7 - 10px);
+  background-color: #e8e8e8;
   padding: 10px;
-  width: 100px;
   text-align: center;
-}
-
-.charts {
-  width: 35%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.mood-chart,
-.weight-chart {
-  margin-bottom: 20px;
-}
-
-.chart-container ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.chart-container ul li {
-  margin: 5px 0;
+  margin-bottom: 10px;
 }

@@ -5,13 +5,13 @@ import ExerciseTemplate from "./ExerciseTemplate";
 import Select from "react-select";
 import { v4 as uuidv4 } from "uuid";
 
-import SetTemplate from "./SetTemplate";
+import SetTemplate from "./setTemplate";
 const Execersize = ({
   setExerciseData,
   workout,
-  
+
   makeExercise,
-  
+
   exerciseData,
   handleSubmit,
 }) => {
@@ -46,17 +46,19 @@ const Execersize = ({
     console.log("ready ");
     const data = [
       ...exerciseData,
-      {id: uuidv4(),
-      exerciseName: "",
-      muscle: "",
-      type: "",
-      sets: [
-        {
-          id: uuidv4(),
-          reps: 0,
-          weight: 0
-        }
-      ]}
+      {
+        id: uuidv4(),
+        exerciseName: "",
+        muscle: "",
+        type: "",
+        sets: [
+          {
+            id: uuidv4(),
+            reps: 0,
+            weight: 0,
+          },
+        ],
+      },
     ];
     setExerciseData(data);
   };
@@ -83,13 +85,11 @@ const Execersize = ({
           />
         </form>
         <button onClick={makeExercise} className="btn">
-          
           Create excersice
         </button>
         <dialog id="my_modal_5" className="modal">
           <SetTemplate
             workout={workout}
-            
             handleSubmit={handleSubmit}
             exerciseData={exerciseData}
             setExerciseData={setExerciseData}
