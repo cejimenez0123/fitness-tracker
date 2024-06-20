@@ -102,31 +102,29 @@ const UserProfile = () => {
           <p>"Health Tip: Drink Water"</p>
         </div>
       </div>
-      <div className="workout-and-charts">
-        <div className="charts">
-          <div className="mood-chart">
-            <h2>Mood Chart</h2>
-            <div className="chart-container">
-              <ul>
-                {moodData.map((data, index) => (
-                  <li key={index}>
-                    {data.date}: {data.mood}
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <div className="charts-container">
+        <div className="chart">
+          <h2>Mood Chart</h2>
+          <div className="chart-container">
+            <ul>
+              {moodData.map((data, index) => (
+                <li key={index}>
+                  {data.date}: {data.mood}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="weight-chart">
-            <h2>Weight Chart</h2>
-            <div className="chart-container">
-              <ul>
-                {weights.map((data, index) => (
-                  <li key={index}>
-                    {data.date}: {data.weight} kg
-                  </li>
-                ))}
-              </ul>
-            </div>
+        </div>
+        <div className="chart">
+          <h2>Weight Chart</h2>
+          <div className="chart-container">
+            <ul>
+              {weights.map((data, index) => (
+                <li key={index}>
+                  {data.date}: {data.weight} kg
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
