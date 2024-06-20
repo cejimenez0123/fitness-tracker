@@ -2,10 +2,9 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
 import { Link } from 'react-router-dom'
-
-
+import gym from "../../public/gym.jpg"
+import Enviroment from '../core.jsx';
 const Userlogin = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -13,6 +12,7 @@ const Userlogin = () => {
     // console.log(e.target.value)
     setPassword(e.target.value)
   }
+  
 
   const navigate = useNavigate();
   const handleEmail = (e)=>{ 
@@ -67,7 +67,7 @@ const Userlogin = () => {
           </div>
       </form>
       <img           className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  object-cover / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
- src="/LoginImage.jpg" alt="welcome to this bitch " />
+ src="/LoginImage.jpg" alt="welcome to this gym " />
       </span>
     </div>
   )
