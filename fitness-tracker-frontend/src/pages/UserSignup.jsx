@@ -50,7 +50,7 @@ const UserSignup = () => {
     return inputValue.trim() !== "";
   };
   return (
-    <div className="flex md:flex-col justify-center h-screen w-screen  ">
+    <div className="flex md:flex-col justify-center h-full w-screen  ">
       <span className="flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen relative ">
         <form
           className="bg-slate-900 p-10 rounded-l-3xl md:w-[45%]  md:h-[100.8%] flex flex-col md:rounded-r-none justify-center gap-3 md:static md:z-0 / z-10
@@ -160,9 +160,9 @@ const UserSignup = () => {
           </div>
         </form>
         <img
-          className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
+          className="md:w-[43%]  md:h-[100%]  rounded-r-3xl md:static /   h-screen absolute w-screen  / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
           src={gym}
-          alt="welcome to this bitch "
+          alt="welcome to this gym"
         />
       </span>
 

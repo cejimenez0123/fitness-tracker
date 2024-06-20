@@ -36,7 +36,7 @@ const Userlogin = () => {
 
   }
   return (
-    <div className='flex md:flex-col justify-center h-screen w-screen '>
+    <div className='flex md:flex-col justify-center h-full w-screen '>
       <span className='flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen text-2xl relative'>
 
      <form className='bg-slate-900 p-10 rounded-l-3xl md:w-[45%]  md:h-[100.8%] flex flex-col md:rounded-r-none justify-center md:gap-3 md:static md:z-0 / gap-5 z-10
@@ -67,7 +67,7 @@ const Userlogin = () => {
           </div>
       </form>
       <img           className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  object-cover / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
- src="/LoginImage.jpg" alt="welcome to this bitch " />
+ src="/LoginImage.jpg" alt="welcome to this gym " />
       </span>
     </div>
   )

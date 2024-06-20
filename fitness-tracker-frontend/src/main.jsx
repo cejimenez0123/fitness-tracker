@@ -17,25 +17,18 @@ import History from "./pages/History.jsx";
 const queryClient= new QueryClient()
 
 const router = createBrowserRouter([
-  {
+  {path:'/',
+    element: <App/>,
+    children:[{
     path:'/signin',
         element: <UserSignup/>
   },
   {
     path:'/login',
         element: <Userlogin/>
-  },
-  {
-    path:'/',
-    element: <App/>,
-    children:[
-
-     
-    
-    ]
-   
-  
-},
+  }
+    ]}
+   ,
   {
     path:'/',
     element: <Requiredauth/>,
