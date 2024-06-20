@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { ProtectedRoutes, ProtectedRouteProvider } from "../component/ProtectedRoutes.jsx";
 import gym from "../../public/gym.jpg"
 import Enviroment from '../core.jsx';
@@ -47,19 +48,19 @@ const Userlogin = () => {
         Email
       </label>
         <input type="text"
-        className='border-b  text-fore bg-transparent w-96 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
+        className='border-b  text-fore bg-transparent w-96 py-1 focus:outline-none focus:border-PrussianBlue focus:border-b-2 transition-colors peer'
          value={email} placeholder='Enter your email' name="Email"
           onChange={(e)=>handleEmail(e)}/>
            <label htmlFor="">
         Password
       </label>
         <input type="text" 
-        className='border-b bg-transparent w-96 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
+        className='border-b bg-transparent w-96 py-1 focus:outline-none focus:border-PrussianBlue focus:border-b-2 transition-colors peer'
         value={password}placeholder="Password" onChange={(e)=>handlePassword(e)}
         name="password"/>
         <button className="btn bg-PrussianBlue text-back  " type='submit'>
           Submit</button>
-        <p>dont have an account signup</p>
+        <p>dont have an account <Link to={"/signin"}>signup</Link></p>
       </form>
       </div>
       <div className='flex-1   hidden ml:block'>

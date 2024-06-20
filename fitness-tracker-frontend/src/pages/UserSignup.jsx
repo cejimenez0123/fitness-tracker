@@ -56,7 +56,9 @@ const UserSignup = () => {
  
     <div className='flex  w-screen pt-16 ml:w-[46%] h-screen
      bg-[#f4f3f2]   '>
-      <form className=' mx-auto w-2/3 w-fit  space-y-6 h-1/2 grid content-center ' onSubmit={handleSubmit} >
+      <div className='w-fit mx-auto text-center '>
+       <h1 className='mt-16 mx-auto text-3xl text-teal-950'>Sign Up </h1>
+      <form className=' mx-auto w-fit  space-y-6 h-1/2 grid content-center ' onSubmit={handleSubmit} >
       <div className="relative ">
                   <input
                     id="name"
@@ -159,6 +161,7 @@ const UserSignup = () => {
       </form>
   
       
+    </div>
     </div>
     <div className='flex-1 w-[44%]'>
     <img className=" hidden ml:block" src={gym} alt="image of a dumbell" />
