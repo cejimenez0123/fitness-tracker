@@ -38,35 +38,35 @@ const Userlogin = () => {
   return (
     <div className='flex h-screen bg-back ml:flex-row flex-col '>
     
-      <div className='flex-1 ml:w-[46%] h-full w-screen bg-back text-center'>
-      <h1 className='mt-16 text-3xl text-teal-950'>Log in </h1>
-      
-      <p className='text-teal-950'>welcome back please enter your details </p>
-     <form className="w-fit space-y-4 pb-24  text-teal-950 m-auto form-control"onSubmit={(e)=>handleSubmit(e)} >
-     <label htmlFor="">
-        Email
-      </label>
-        <input type="text"
-        className='border-b  text-fore bg-transparent w-96 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
-         value={email} placeholder='Enter your email' name="Email"
-          onChange={(e)=>handleEmail(e)}/>
-           <label htmlFor="">
-        Password
-      </label>
-        <input type="text" 
-        className='border-b bg-transparent w-96 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
-        value={password}placeholder="Password" onChange={(e)=>handlePassword(e)}
-        name="password"/>
-        <button className="btn bg-PrussianBlue text-back  " type='submit'>
-          Submit</button>
-        <p>dont have an account signup</p>
-      </form>
-      </div>
-      <div className='flex-1   hidden ml:block'>
-        <img className="h-full w-full" src={gym}/>
-      </div>
+    <div className='flex-1 ml:w-[46%] h-full w-screen bg-back text-center'>
+    <h1 className='mt-16 text-3xl text-teal-950'>Log in </h1>
+    
+    <p className='text-teal-950'>welcome back please enter your details </p>
+   <form className="w-fit space-y-4 pb-24  text-teal-950 m-auto form-control"onSubmit={(e)=>handleSubmit(e)} >
+   <label htmlFor="">
+      Email
+    </label>
+      <input type="text"
+      className='border-b  text-fore bg-transparent w-96 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
+       value={email} placeholder='Enter your email' name="Email"
+        onChange={(e)=>handleEmail(e)}/>
+         <label htmlFor="">
+      Password
+    </label>
+      <input type="text" 
+      className='border-b bg-transparent w-96 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
+      value={password}placeholder="Password" onChange={(e)=>handlePassword(e)}
+      name="password"/>
+      <button className="btn bg-PrussianBlue text-back  " type='submit'>
+        Submit</button>
+      <p>dont have an account signup</p>
+    </form>
     </div>
-  )
+    <div className='flex-1   hidden ml:block'>
+      <img className="h-full w-full" src={gym}/>
+    </div>
+  </div>
+)
 }
 
 export default Userlogin

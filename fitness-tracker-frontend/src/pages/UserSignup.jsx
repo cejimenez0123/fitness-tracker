@@ -123,36 +123,6 @@ const UserSignup = () => {
                   </label>
                 </div>
   
-    
-
-     
-{/* <span>
-
-        <label className="text-xl w-1/2  label text-[#060B0E]"htmlFor="">
-
-        Male
-        <input
-        className='checkbox border border-solid border-PrussianBlue'
-          type="radio"
-          name="options"
-          value="Male"
-          checked={gender === 'Male'}
-          onChange={handleOptionChange}/>
-       
-        </label>
-          <label className='text-xl w-1/2 label text-[#060B0E]'>
-          Female
-          <input
-            className='checkbox border border-solid border-fore'
-            type="radio"
-            name="options"
-            value="Female"
-            checked={gender === 'Female'}
-            onChange={handleOptionChange}
-          />
-       
-          </label>
-</span> */}
 
         <button className="btn btn-info bg-PrussianBlue text-[#f4f3f2]" type='submit'>Submit</button>
         
