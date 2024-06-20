@@ -117,8 +117,6 @@ const UserSignup = () => {
               className="grow"
               value={password}
             />
-
-
           </label>
 
           <span className="flex justify-center gap-2 ">
@@ -130,7 +128,7 @@ const UserSignup = () => {
                 checked={gender === "Male"}
                 onChange={handleOptionChange}
                 className="radio"
-              defaultChecked
+                defaultChecked
               />
               Male
             </label>
@@ -141,7 +139,6 @@ const UserSignup = () => {
                 value="Female"
                 checked={gender === "Female"}
                 onChange={handleOptionChange}
-                
                 className="radio"
               />
               Female
@@ -166,8 +163,6 @@ const UserSignup = () => {
           alt="welcome to this bitch "
         />
       </span>
-
-        
     </div>
   );
 };

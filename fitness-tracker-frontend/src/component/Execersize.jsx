@@ -42,17 +42,19 @@ const Execersize = ({
     console.log("ready ");
     const data = [
       ...exerciseData,
-      {id: uuidv4(),
-      exerciseName: "",
-      muscle: "",
-      type: "",
-      sets: [
-        {
-          id: uuidv4(),
-          reps: 0,
-          weight: 0
-        }
-      ]}
+      {
+        id: uuidv4(),
+        exerciseName: "",
+        muscle: "",
+        type: "",
+        sets: [
+          {
+            id: uuidv4(),
+            reps: 0,
+            weight: 0,
+          },
+        ],
+      },
     ];
     setExerciseData(data);
   };
@@ -62,32 +64,36 @@ const Execersize = ({
       <div className="modal-box md:w-[30vw] md:h-[40vh] // w-[95vw] ">
         <form onSubmit={handleSubmit} method="dialog">
           <div className="flex flex-row justify-between">
-          <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
-            ✕
-          </button>
-          <button onClick={add} className="btn mr-8 text-white w-48 relative  top-4  ">
-            Add exercise
-          </button>
+            <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
+              ✕
+            </button>
+            <button
+              onClick={add}
+              className="btn mr-8 text-white w-48 relative  top-4  "
+            >
+              Add exercise
+            </button>
           </div>
-        <div className="mx-4 my-8">
-          <ExerciseTemplate
-            exerciseData={exerciseData}
-            exerciseOptions={exerciseOptions}
-            muscleOptions={muscleOptions}
-            typeOptions={typeOptions}
-            setExerciseData={setExerciseData}
-            //  handleChange={handleChange}
-          />
+          <div className="mx-4 my-8">
+            <ExerciseTemplate
+              exerciseData={exerciseData}
+              exerciseOptions={exerciseOptions}
+              muscleOptions={muscleOptions}
+              typeOptions={typeOptions}
+              setExerciseData={setExerciseData}
+              //  handleChange={handleChange}
+            />
           </div>
         </form>
-        <button onClick={makeExercise} className="btn text-white bg-PrussianBlue ml-8">
-          
+        <button
+          onClick={makeExercise}
+          className="btn text-white bg-PrussianBlue ml-8"
+        >
           Create excersice
         </button>
         <dialog id="my_modal_5" className="modal">
           <SetTemplate
             workout={workout}
-            
             handleSubmit={handleSubmit}
             exerciseData={exerciseData}
             setExerciseData={setExerciseData}

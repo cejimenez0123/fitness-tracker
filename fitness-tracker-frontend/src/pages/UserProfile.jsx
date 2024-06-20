@@ -13,20 +13,28 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (data) {
-      setUserData(data); // Assuming data contains full user details including fullName
+      setUserData(data);
       fetchWorkouts();
-      generateFakeWeightData(); // Generate fake weight data
-      generateFakeMoodData(); // Generate fake mood data
+      generateFakeWeightData();
+      generateFakeMoodData();
     }
   }, [data]);
 
   const fetchWorkouts = async () => {
     try {
-      const logsResponse = await axios.get("http://localhost:8000/user/logs");
-      const logs = logsResponse.data;
+      const logsResponse = await axios.get("http://localhost:3000/log", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
+      const logs = logsResponse.data.logs;
       const workoutPromises = logs.map((log) =>
-        axios.get(`http://localhost:8000/log/${log.id}/workout`)
+        axios.get(`http://localhost:3000/log/${log.id}/workout`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
       );
       const workoutResponses = await Promise.all(workoutPromises);
       const workoutsData = workoutResponses.map((response) => response.data);
@@ -47,7 +55,7 @@ const UserProfile = () => {
       date.setDate(date.getDate() + index);
       return {
         date: date.toLocaleDateString(),
-        weight: (Math.random() * (100 - 50) + 50).toFixed(1), // Random weight between 50 and 100
+        weight: (Math.random() * (100 - 50) + 50).toFixed(1),
       };
     });
 
@@ -85,31 +93,16 @@ const UserProfile = () => {
           <div className="profile-pic">
             <img src="/profile-pic.jpg" alt="Profile" />
           </div>
-          <div className="name">
-            Name: {userData ? userData.fullName : "Loading..."}
+          <div className="profile-info">
+            <div className="name">Name: {data.user.name}</div>
+            <div className="goal">Goal: Confidence</div>
           </div>
-          <div className="goal">Goal: Confidence</div>
         </div>
         <div className="health-tip">
           <p>"Health Tip: Drink Water"</p>
         </div>
       </div>
       <div className="workout-and-charts">
-        <div className="workout-calendar">
-          <h2>Past Workout Calendar:</h2>
-          <div className="workout-logs">
-            {workouts.length > 0 ? (
-              workouts.map((workout, index) => (
-                <div key={index} className="workout-log">
-                  <p>{workout.date}</p>
-                  <p>{workout.description}</p>
-                </div>
-              ))
-            ) : (
-              <p>No workouts available</p>
-            )}
-          </div>
-        </div>
         <div className="charts">
           <div className="mood-chart">
             <h2>Mood Chart</h2>
