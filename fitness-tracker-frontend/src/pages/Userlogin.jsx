@@ -29,7 +29,8 @@ const Userlogin = () => {
     }).then(res=>{
       localStorage.setItem("token",res.data.token)
       console.log(res.data.userInfo)
-
+ 
+      
       navigate("/home")
     })
     console.log(localStorage.getItem("token"))
