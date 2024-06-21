@@ -10,10 +10,7 @@ import {
   ProtectedRoutes,
   ProtectedRouteProvider,
 } from "./component/ProtectedRoutes.jsx";
-import {
-  ProtectedRoutes,
-  ProtectedRouteProvider,
-} from "./component/ProtectedRoutes.jsx";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserSignup from "./pages/UserSignup.jsx";
 import History from "./pages/History.jsx";

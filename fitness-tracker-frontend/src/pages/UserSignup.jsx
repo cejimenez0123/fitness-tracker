@@ -144,6 +144,7 @@ const UserSignup = () => {
                 value="Female"
                 checked={gender === "Female"}
                 onChange={handleOptionChange}
+                className="radio"
               />
             </label>
           </span>
