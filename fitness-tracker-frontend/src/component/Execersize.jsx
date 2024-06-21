@@ -2,16 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useApi } from "./fetch";
 import ExerciseTemplate from "./ExerciseTemplate";
-import Select from "react-select";
-import { v4 as uuidv4 } from "uuid";
 
-import SetTemplate from "./SetTemplate";
+import { v4 as uuidv4 } from "uuid";
 const Execersize = ({
   setExerciseData,
   workout,
-  
   makeExercise,
-  
   exerciseData,
   handleSubmit,
 }) => {
