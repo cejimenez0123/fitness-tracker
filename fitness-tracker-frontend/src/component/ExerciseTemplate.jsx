@@ -1,7 +1,6 @@
 import React from "react";
 import Select from "react-select";
 import { useState } from "react";
-import setTemplate from "./setTemplate";
 import CreatableSelect from "react-select/creatable";
 const ExerciseTemplate = ({
   exerciseData,
@@ -36,7 +35,7 @@ const ExerciseTemplate = ({
   return (
     <>
       {exerciseData.map((data, i) => (
-        <div key={i} className="border-4 p-4 mt-10  rounded-lg ">
+        <div key={i} className=" p-4 mt-10  ">
           {exerciseData.length > 1 && (
             <button
               onClick={(e) => handleDelete(e, data.id, i)}
@@ -47,7 +46,10 @@ const ExerciseTemplate = ({
           )}
           <div></div>
 
-          <label htmlFor=""> Exercise</label>
+          <label className="text-charcoal " htmlFor="">
+            {" "}
+            Exercise
+          </label>
           <CreatableSelect
             name="exerciseName"
             value={data.exerciseName}
@@ -56,7 +58,9 @@ const ExerciseTemplate = ({
             }
             options={exerciseOptions}
           />
-          <label htmlFor="">Muscles</label>
+          <label className="text-charcoal " htmlFor="">
+            Muscles
+          </label>
           <Select
             name="muscle"
             value={data.muscle}
@@ -65,7 +69,7 @@ const ExerciseTemplate = ({
             }
             options={muscleOptions}
           />
-          <div className=" ">
+          <div className="text-charcoal ">
             <span>
               <label htmlFor=""> Type of exercise</label>
               <Select

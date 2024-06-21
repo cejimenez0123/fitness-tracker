@@ -38,7 +38,7 @@ const Userlogin = () => {
   };
   return (
     <div className="flex flex-row">
-      <div className="flex-1 w-[46%] bg-back text-center">
+      <div className="flex-1 w-[46%] bg-[#f4f3f2]  text-center">
         <h1 className="mt-16 text-3xl text-teal-950">Log in </h1>
 
         <p className="text-teal-950">welcome back please enter your details </p>

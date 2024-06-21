@@ -19,22 +19,14 @@ const Navbar = () => {
   };
 
   return (
-    <div style={navbarStyle}>
-      <Link to="/home" style={linkStyle}>
-        Home
-      </Link>
-      <Link to="/signin" style={linkStyle}>
-        Signup
-      </Link>
-      <Link to="/login" style={linkStyle}>
-        Login
-      </Link>
-      <Link to="/" style={linkStyle}>
-        Landing
-      </Link>
-      <Link to="/userProfile" style={linkStyle}>
-        UserProfile
-      </Link>
+    <div>
+      <Link to="/signin"> Signup</Link>
+      <Link to="/home"> Home</Link>
+      <Link to="/login"> Login</Link>
+      <Link to="/about"> About</Link>
+      <Link to="/"> Landing</Link>
+
+      <Outlet />
     </div>
   );
 };

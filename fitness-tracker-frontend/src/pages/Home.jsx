@@ -115,7 +115,7 @@ const Home = () => {
 
   return (
     <div className="h-screen bg-charcoal">
-      <h1 className=" text-white mt-10 ml-10 text-[5rem]">
+      <h1 className=" text-white  pt-16 ml-10  text-2xl ml:text-7xl">
         Hello {data.user.name} <br /> What is your plan for today?
       </h1>
       {modal()}
