@@ -32,7 +32,7 @@ function App() {
       <Link to="/home"> Home</Link>
       </li>
       <li> <Link to="/login"> Login</Link></li>
-      <li> <Link to="/login"> Landing</Link></li>
+      <li> <Link to="/"> Landing</Link></li>
       <li><Link to="/about"> About Me</Link></li>
     </ul>
   </div>
@@ -65,6 +65,9 @@ const Requiredauth = () => {
       </li>
       <li>
       <Link to="/"> Landing</Link>
+      </li>
+      <li>
+      <Link to="/about">About Me</Link>
       </li>
       </ul>
     </div>
