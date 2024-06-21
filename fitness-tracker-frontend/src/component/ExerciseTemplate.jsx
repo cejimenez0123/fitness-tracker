@@ -38,7 +38,7 @@ console.log(newData);
 return (
     <>
        {exerciseData.map((data, i) => (
-        <div key={i} className="border-4 p-4 mt-10  rounded-lg ">
+        <div key={i} className=" p-4 mt-10  ">
          
             {exerciseData.length >1&&
             
@@ -48,7 +48,7 @@ return (
             <div>
             </div>
           
-          <label htmlFor=""> Exercise</label>
+          <label className="text-charcoal " htmlFor=""> Exercise</label>
           <CreatableSelect
             name="exerciseName"
             value={data.exerciseName}
@@ -58,7 +58,7 @@ return (
             options={exerciseOptions}
          
           />
-          <label htmlFor="">Muscles</label>
+          <label  className="text-charcoal " htmlFor="">Muscles</label>
           <Select
             
             name="muscle"
@@ -69,7 +69,7 @@ return (
             options={muscleOptions}
            
           />
-          <div className=" ">
+          <div className="text-charcoal ">
             <span>
               <label htmlFor=""> Type of exercise</label>
               <Select

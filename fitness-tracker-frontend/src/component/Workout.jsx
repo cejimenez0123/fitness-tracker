@@ -43,20 +43,20 @@ setWorkout(selectedOption.label)
   };
   
   return (
-    <div>
-      <div className="modal-box w-[30vw] h-[20vh]">
+    <div >
+      <div className="modal-box rounded-lg bg-[#f4f3f2]  w-[30em]  h-[20em]">
         <form method="dialog ">
           {/* if there is a button in form, it will close the modal */}
           <button className="btn btn-sm btn-circle mt-3 mr-4 btn-ghost absolute right-2 top-2">
             ✕
           </button>
           <div className="mt-14">
-            <label htmlFor="">Workout name</label>
+            <label htmlFor="" className="text-charcoal text-xl  font-bold">Workout name</label>
             <CreatableSelect
               onChange={(selectedOption)=>handleChange(selectedOption)}
               name="WorkoutName"
               options={workoutOptions}
-              className="text-black"
+              className="text-black mt-4"
             />
             {err}
           </div>

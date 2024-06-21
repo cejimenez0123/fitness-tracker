@@ -4,7 +4,7 @@ import {App ,Requiredauth} from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from './pages/Home.jsx'
-
+import About from "./pages/About.jsx";
 import Userlogin from "./pages/Userlogin.jsx"
 import { ProtectedRoutes, ProtectedRouteProvider } from "./component/ProtectedRoutes.jsx";
 import {
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:'/signin',
             element: <UserSignup/>
+      }
+ ,
+      {path:'/about',
+        element:<About/>
       }
     ]
 },
@@ -65,7 +69,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
 <QueryClientProvider client={queryClient}>
-
     <ProtectedRouteProvider>
 
     <RouterProvider router={router} />
