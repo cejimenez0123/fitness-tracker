@@ -138,7 +138,6 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         History
       </Link>
     </div>
-    </div>
   );
 };
 

@@ -5,7 +5,7 @@ function About(){
 
 
 
-    return(<div className=" h-screen pt-16 bg-[#f4f3f2]">
+    return(<div className=" h-full pt-16 bg-[#f4f3f2]">
         <div className="mx-16">
        <div className="text-charcoal"> 
        <h1 className="text-2xl ">Hello there! Welcome to our Fitness Tracker
@@ -29,19 +29,21 @@ we crafted a solution that seamlessly integrates technology with wellness.
 <div className="text-charcoal mt-8">
 Join us as we continue to push the boundaries of innovation, one project at a time. Together, we're not just building software – we're building a better future, one line of code at a time.
 </div>      
-<div className="mx-auto w-fit space-x-16 mt-16 flex flex-row">
-            <div className="text-center text-charcoal">
+<div className="mx-auto  w-fit  mt-16
+justify-center items-center
+flex content-center flex-col ml:flex-row ">
+            <div className="text-center w-fit pb-8 mx-16 text-charcoal ">
             <div className="bg-PrussianBlue  w-48 h-48 rounded-full">
 
             </div>
             Christian
             </div>
-            <div className="text-center text-charcoal">
+            <div className="text-center w-fit pb-8 mx-16  text-charcoal ">
             <div className="bg-PrussianBlue  w-48 h-48 rounded-full">
             </div >
             Kenny
             </div>  
-            <div className="text-center text-charcoal">   
+            <div className="text-center w-fit pb-8 mx-16  text-charcoal">   
             <div className="bg-PrussianBlue w-48 h-48 rounded-full">
             </div>
 
