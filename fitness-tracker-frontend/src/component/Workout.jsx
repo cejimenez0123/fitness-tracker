@@ -51,12 +51,12 @@ setWorkout(selectedOption.label)
             ✕
           </button>
           <div className="mt-14">
-            <label htmlFor="">Workout name</label>
+            <label htmlFor="" className="text-charcoal text-xl  font-bold">Workout name</label>
             <CreatableSelect
               onChange={(selectedOption)=>handleChange(selectedOption)}
               name="WorkoutName"
               options={workoutOptions}
-              className="text-black"
+              className="text-black mt-4"
             />
             {err}
           </div>

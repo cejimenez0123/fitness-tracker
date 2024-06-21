@@ -111,15 +111,17 @@ const Displaytemplate = ({ motivation, setPopup }) => {
       <div>
 
       <button
-        className="btn mr-5"
+        className="btn mr-5 mt-4 bg-PrussianBlue"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Make Plan
       </button>
+      
       <dialog
         id="my_modal_3"
         className="modal
         +
+       mt-8
         "
       >
         {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
@@ -134,7 +136,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         />
         {/* </div> */}
       </dialog>
-      <Link to="/history" className="hover:underline bold text-xl">
+      <Link to="/history" className="hover:underline bold text-white text-xl">
         {" "}
         History
       </Link>

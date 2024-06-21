@@ -28,7 +28,7 @@ module.exports = function(authMiddleware){
                 logId: req.params.id
             },
             include: {
-               exercise: true
+              exercise:true
               },
             })
             res.json({workout: workout})
