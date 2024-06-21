@@ -20,7 +20,7 @@ function modal(){
  if (data.user.gender=="Female"){
     return(
 
-    <div className="flex justify-center ">
+    <div className="flex justify-center hidden  ml:block">
     <img className="w-[25%] relative left-[30%] " src="/female.png" alt="" />
 
       <Lottie
@@ -46,7 +46,7 @@ function modal(){
   }else{
     return(
 
-      <div className="flex justify-center ">
+      <div className="flex justify-center hidden  ml:block">
       <img className="w-[33%] relative left-[30%] " src="/male.png" alt="" />
   
         <Lottie
@@ -117,9 +117,9 @@ function modal(){
     )
   }
   return (
-    <div className="h-screen bg-[#f4f3f2]   " >
-      <h1 className=" text-charcoal mt-10 ml-10 text-[5rem]">
-        Hello {data.user.name.split(" ")[0]} <br /> What is your plan for today?
+    <div className="h-screen bg-charcoal" >
+      <h1 className=" text-white  pt-16 ml-10  text-2xl ml:text-7xl">
+        Hello {data.user.name} <br /> What is your plan for today?
       </h1>
       {modal()}
      
