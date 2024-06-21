@@ -6,7 +6,7 @@ import { ProtectedRoutes } from "./component/ProtectedRoutes";
 function App() {
   return (
     <>
-      <div className="">
+      <div className="h-screen">
         <Navbar />
 
      
@@ -21,7 +21,7 @@ const Requiredauth = () => {
   if (!currentUser) return <Navigate to="/login" />;
   return (
     <>
-      <div className="">
+      <div className="h-screen">
         <Navbar />
 
    

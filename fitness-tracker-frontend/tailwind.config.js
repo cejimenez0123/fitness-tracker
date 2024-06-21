@@ -5,6 +5,9 @@ export default {
 ],
   theme: {
     extend: {
+      fontFamily: {
+        'merriweather-sans': ['Merriweather Sans', 'sans-serif'],
+      },
       colors: {
         'charcoal': '#364156',
         'richBlack': '#11151C',

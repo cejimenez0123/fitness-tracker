@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Workout from "./Workout";
 import { postApi } from "./fetch";
@@ -11,7 +10,8 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   const [workout, setWorkout] = useState();
   const [logid, setLogid] = useState();
   const [activityId, setActivityid] = useState();
-  
+  const [exerciseId, setExerciseId] = useState([]);
+
   const [exerciseData, setExerciseData] = useState([
     {
       id: uuidv4(),
@@ -33,28 +33,41 @@ const Displaytemplate = ({ motivation, setPopup }) => {
     onSuccess: async (data) => {
       try {
         console.log(data.workout.id);
-        const logResponse = await postApi("log", { workoutId: data.workout.id });
+        const logResponse = await postApi("log", {
+          workoutId: data.workout.id,
+        });
         console.log(logResponse);
-        setLogid(logResponse.log.id); 
+        setLogid(logResponse.log.id);
         console.log(logResponse.log.id);
       } catch (error) {
         console.error("Error creating log:", error);
       }
-  
+
       // Invalidate the 'workout' query after mutation succeeds
       queryClient.invalidateQueries("workout");
     },
   });
   const exerciseMutation = useMutation({
     mutationFn: (exerciseData) => postApi("exercise", exerciseData),
-    onSuccess:async (data) => {
-      // Invalidate the 'workout' query after mutation succeeds
-    console.log(data.exercise.id)
-    const activityResponse = await postApi("activity", { logId: logid ,exerciseId:data.exercise.id});
-      console.log(activityResponse.activity.id);
-      setActivityid(activityResponse.activity.id)
-      queryClient.invalidateQueries("exercise")
-    }
+    onSuccess: async (data) => {
+      const exerciseids=[]
+      console.log(data); 
+      // Iterate through each exercise object in the data array
+      await Promise.all(data.exercise.map(async (exercise) => {
+        console.log(exercise);
+        exerciseids.push(exercise.id);
+        }));
+        console.log(exerciseId);
+        const activityResponse = await postApi("activity", {
+          exerciseIds:exerciseids,
+          logId: logid,
+          });
+          console.log(activityResponse);
+          setActivityid(activityResponse.activity.id);
+          
+      // After creating activities for all exercises, invalidate the 'exercise' query
+      queryClient.invalidateQueries("exercise");
+    },
   });
   console.log(activityId);
 
@@ -62,11 +75,10 @@ const Displaytemplate = ({ motivation, setPopup }) => {
     mutationFn: (setData) => postApi("set", setData),
     onSuccess: () => {
       // Invalidate the 'workout' query after mutation succeeds
+
       
-      queryClient.invalidateQueries("workout");
     },
   });
-  
 
   const handleSubmit = async () => {
     console.log("hi");
@@ -74,42 +86,47 @@ const Displaytemplate = ({ motivation, setPopup }) => {
       exerciseData.map(async (data) => {
         await setsMutation.mutateAsync({
           activityId: activityId,
-          reps:Number( data.sets.map(repsData=>repsData.reps)),
-          weight: Number(data.sets.map(weightData=>weightData.weight)),
+          reps: Number(data.sets.map((repsData) => repsData.reps)),
+          weight: Number(data.sets.map((weightData) => weightData.weight)),
         });
-        console.log(data.sets.map(repsData=>repsData.reps));
+        console.log(data.sets.map((repsData) => repsData.reps));
       })
     );
   };
 
   const handleClose = () => {
-  
     setPopup("");
   };
   const makeExercise = async () => {
     document.getElementById("my_modal_5").showModal();
+  
+    const exercises = []; 
     await mutation.mutateAsync({ name: workout });
+  
     await Promise.all(
       exerciseData.map(async (data) => {
-        await exerciseMutation.mutateAsync({
+        const exercise = {
           name: data.exerciseName.label.toUpperCase(),
           type: data.type.label.toUpperCase(),
           muscle: data.muscle.label,
-        });
+        };
+        exercises.push(exercise);
+        console.log(exercise); 
       })
     );
+  
+    // After processing all exercises, perform the mutation with the array
+    await exerciseMutation.mutateAsync({ exercise: exercises });
   };
 
   return (
-    <div className="md:w-[30vw] absolute text-xl md:top-[30vh] md:left-[10vw]  md:p-5 rounded-2xl bg-persianRed // w-[90vw] flex flex-col bottom-20 right-3 gap-6 p-3">
+    <div className="md:w-[30vw] text-[#262626] absolute text-xl md:top-[30vh] md:left-[10vw]  p-5 rounded-2xl bg-[#E2BDF2] // w-[90vw] bottom-[0vh] left-[5vw] ">
       <div className="flex justify-end">
-        <button onClick={handleClose} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >
+        <button className="text-2xl justify-self-end " onClick={handleClose}>
           x
         </button>
       </div>
-      <h1 className="text-white">{motivation}</h1>
-      <div>
-
+      <h1 className="">{motivation}</h1>
       <button
         className="btn mr-5"
         onClick={() => document.getElementById("my_modal_3").showModal()}
@@ -138,7 +155,6 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         {" "}
         History
       </Link>
-      </div>
     </div>
   );
 };

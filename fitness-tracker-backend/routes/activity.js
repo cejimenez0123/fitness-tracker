@@ -6,31 +6,39 @@ const router = express.Router()
 module.exports = function(authMiddleware){
    
 
-    router.post("/",authMiddleware, async (req,res)=>{
-            const {exerciseId,logId}=req.body
+    router.post("/", authMiddleware, async (req, res) => {
+        const { exerciseIds, logId } = req.body; 
+        console.log(exerciseIds, logId);
+    
+        const activities = await Promise.all(exerciseIds.map(async (exerciseId) => {
             const activity = await prisma.activity.create({
                 data: {
-                    exercise:{
-                        connect:{
+                    exercise: {
+                        connect: {
                             id: exerciseId
                         }
                     },
-                    log:{
-                        connect:{
+                    log: {
+                        connect: {
                             id: logId
                         }
                     },
-                    user:{
+                    user: {
                         connect: {
                             id: req.user.id
                         }
                     }
-                },include:{
-                    exercise:true,
+                },
+                include: {
+                    exercise: true,
                     log: true
-                }})
-            res.status(201).json({activity:activity})
-        })
+                }
+            });
+            return activity;
+        }));
+    
+        res.status(201).json({ activities: activities });
+    });
 
     router.get("/:id/set",authMiddleware,async (req,res)=>{
        const sets = await prisma.set.findMany({where:{

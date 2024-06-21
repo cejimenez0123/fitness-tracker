@@ -33,16 +33,26 @@ module.exports = function(authMiddleware){
             })
             res.json({workout: workout})
     })
-    router.get('/',authMiddleware,async (req,res)=>{
-
-        const logs = await prisma.log.findMany({where:{
-            userId: req.user.id,
-         },include:{
-            workout:true
-         }}
-    )
-        res.json({logs:logs})
-    })
+    router.get('/', authMiddleware, async (req, res) => {
+        try {
+            const logs = await prisma.log.findMany({
+                where: { userId: req.user.id },
+                include: {
+                    workout: true,
+                    activities: {
+                        include: {
+                            exercise: true
+                        }
+                    }
+                }
+            });
+    
+            res.json({ logs });
+        } catch (error) {
+            console.error('Error fetching logs:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
     router.delete("/:id",authMiddleware,async (req,res)=>{
        let activities= await prisma.activity.findMany({where:{
             log:{
