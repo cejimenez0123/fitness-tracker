@@ -4,7 +4,6 @@ export default {
 "./src/**/*.{js,ts,jsx,tsx}"
 ],
   theme: {
-
     extend: {
       screens:{
         ml:"950px"
@@ -18,9 +17,10 @@ export default {
         'richBlack': '#11151C',
         'PrussianBlue': '#212D40',
         'persianRed': '#BB4430',
+        back:"#f4f3f2",
+        fore:"#48676C"
       },
     },
-
   },
   plugins: [require('daisyui')],
 }

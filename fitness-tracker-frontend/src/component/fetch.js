@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useQuery } from "@tanstack/react-query";
 import Enviroment from "../core";
-const Base_Url = Enviroment.BASE_URL
+const Base_Url = "http://localhost:3000"
 
 // getting Data
 export  function useApi(Endpoint) {

@@ -58,8 +58,8 @@ const Execersize = ({
   };
 
   return (
-    <div className=" px-4 py-4">
-      <div className=" lg:w-[40rem] lg:h-[35rem] rounded-lg bg-[#f4f3f2] ">
+    <div>
+      <div className="modal-box md:w-[30vw] md:h-[40vh] // w-[95vw] ">
         <form onSubmit={handleSubmit} method="dialog">
           <div className="flex flex-row justify-between">
           <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
