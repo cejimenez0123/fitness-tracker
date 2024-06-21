@@ -2,11 +2,7 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-<<<<<<< HEAD
 import { ProtectedRoutes, ProtectedRouteProvider } from "../component/ProtectedRoutes.jsx";
-=======
-import { Link } from 'react-router-dom'
->>>>>>> 4cc5bfab2bebb39c48da2da66c0d7db14d0d559a
 import gym from "../../public/gym.jpg"
 import Enviroment from '../core.jsx';
 const Userlogin = () => {
