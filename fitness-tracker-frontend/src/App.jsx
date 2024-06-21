@@ -6,10 +6,10 @@ import { ProtectedRoutes } from "./component/ProtectedRoutes";
 function App() {
   return (
     <>
-      <div className="flex flex-col">
+      <div className="bg-back h-screen">
         <Navbar />
-
-     
+          
+       
       </div>
     </>
   );
