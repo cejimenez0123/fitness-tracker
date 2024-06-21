@@ -6,10 +6,10 @@ import { ProtectedRoutes } from "./component/ProtectedRoutes";
 function App() {
   return (
     <>
-      <div className="">
+      <div className="bg-back h-screen">
         <Navbar />
-
-     
+          
+       
       </div>
     </>
   );

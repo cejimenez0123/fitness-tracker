@@ -1,3 +1,21 @@
-body{
-    background-color: rgb(49, 47, 47);
-}
+.parallax-container {
+    height: 500px; /* Adjust height as needed */
+    overflow: hidden;
+  }
+  
+  .parallax-background {
+    background-image: url("image1.jpg");
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .parallax-content {
+    /* Your content styles here */
+  }
+  
+  .parallax-foreground {
+    position: absolute;
+    top: -100px; /* Adjust offset as needed */
+    width: 100%;
+  }

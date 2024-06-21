@@ -32,6 +32,7 @@ describe("Create/Delete activity with valid data", () => {
                 expect(activity).toHaveProperty("id")
                 expect(activity).toHaveProperty("exerciseId")
                 expect(activity).toHaveProperty("logId")
+
         const deleteRes = await request(app)
                 .delete(`/activity/${activity.id}`)
                 .set('Authorization', `Bearer ${token}`)
