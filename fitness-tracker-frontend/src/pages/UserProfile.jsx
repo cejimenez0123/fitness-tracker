@@ -2,6 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useApi } from "../component/fetch";
 import "./UserProfile.css";
+import {
+  PieChart,
+  Pie,
+  Sector,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
+
+const pieData = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
+];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -55,7 +72,7 @@ const UserProfile = () => {
       date.setDate(date.getDate() + index);
       return {
         date: date.toLocaleDateString(),
-        weight: (Math.random() * (100 - 50) + 50).toFixed(1),
+        weight: parseFloat((Math.random() * (100 - 50) + 50).toFixed(1)),
       };
     });
 
@@ -106,25 +123,55 @@ const UserProfile = () => {
         <div className="chart">
           <h2>Mood Chart</h2>
           <div className="chart-container">
-            <ul>
-              {moodData.map((data, index) => (
-                <li key={index}>
-                  {data.date}: {data.mood}
-                </li>
-              ))}
-            </ul>
+            <PieChart width={300} height={200}>
+              <Pie
+                label
+                data={pieData}
+                cx={150}
+                cy={100}
+                innerRadius={60}
+                outerRadius={80}
+                fill="#8884d8"
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {pieData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
           </div>
         </div>
         <div className="chart">
           <h2>Weight Chart</h2>
           <div className="chart-container">
-            <ul>
-              {weights.map((data, index) => (
-                <li key={index}>
-                  {data.date}: {data.weight} kg
-                </li>
-              ))}
-            </ul>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={weights}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="weight"
+                  stroke="#8884d8"
+                  strokeDasharray="5 5"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
