@@ -29,14 +29,15 @@ const Userlogin = () => {
     }).then(res=>{
       localStorage.setItem("token",res.data.token)
       console.log(res.data.userInfo)
-
+ 
+      
       navigate("/home")
     })
     console.log(localStorage.getItem("token"))
 
   }
   return (
-    <div className='flex bg- md:flex-col justify-center h-screen w-screen '>
+    <div className='flex md:flex-col justify-center h-screen w-screen '>
       <span className='flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen text-2xl relative'>
 
      <form className='bg-slate-900 p-10 rounded-l-3xl md:w-[45%]  md:h-[100.8%] flex flex-col md:rounded-r-none justify-center md:gap-3 md:static md:z-0 / gap-5 z-10
