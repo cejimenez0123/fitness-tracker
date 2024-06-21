@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useApi } from "./fetch";
 import ExerciseTemplate from "./ExerciseTemplate";
-import Select from "react-select";
-import SetTemplate from "./SetTemplate";
+
 import { v4 as uuidv4 } from "uuid";
 const Execersize = ({
   setExerciseData,
@@ -59,17 +58,18 @@ const Execersize = ({
   };
 
   return (
-    <div>
-      <div className="modal-box w-[30vw] h-[40vh] ">
+    <div className=" px-4 py-4">
+      <div className=" lg:w-[40rem] lg:h-[35rem] rounded-lg bg-[#f4f3f2] ">
         <form onSubmit={handleSubmit} method="dialog">
-          {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <div className="flex flex-row justify-between">
+          <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
             ✕
           </button>
-          <button onClick={add} className="btn relative left-[70%] top-4  ">
+          <button onClick={add} className="btn mr-8 text-white w-48 relative  top-4  ">
             Add exercise
           </button>
-
+          </div>
+        <div className="mx-4 my-8">
           <ExerciseTemplate
             exerciseData={exerciseData}
             exerciseOptions={exerciseOptions}
@@ -78,8 +78,9 @@ const Execersize = ({
             setExerciseData={setExerciseData}
             //  handleChange={handleChange}
           />
+          </div>
         </form>
-        <button onClick={makeExercise} className="btn">
+        <button onClick={makeExercise} className="btn text-white bg-PrussianBlue ml-8">
           
           Create excersice
         </button>

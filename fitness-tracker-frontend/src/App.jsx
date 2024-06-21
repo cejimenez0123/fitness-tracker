@@ -33,15 +33,12 @@ function App() {
       </li>
       <li> <Link to="/login"> Login</Link></li>
       <li> <Link to="/login"> Landing</Link></li>
+      <li><Link to="/about"> About Me</Link></li>
     </ul>
   </div>
 
 </div>
-        {/* <Navbar /> */}
-        {/* <Link to="/signin"> signup</Link>
-      <Link to="/home"> home</Link>
-      <Link to="/login"> login</Link>
-      <Link to="/"> Landing</Link> */}
+
 
       <Outlet/>
      
@@ -85,8 +82,7 @@ const Requiredauth = () => {
   </div>
  
 </div>
-      {/* <Link to="/home"> home</Link>
-      <Link to="/"> Landing</Link> */}
+    
 
       <Outlet/>
 
