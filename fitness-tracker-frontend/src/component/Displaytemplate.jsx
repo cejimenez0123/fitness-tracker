@@ -73,13 +73,15 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   });
 
   const handleSubmit = async () => {
+    console.log("hi");
     await Promise.all(
       exerciseData.map(async (data) => {
         await setsMutation.mutateAsync({
           activityId: activityId,
-          reps: data.sets.map((repsData) => repsData.reps),
-          weight: data.sets.map((weightData) => weightData.weight),
+          reps: Number(data.sets.map((repsData) => repsData.reps)),
+          weight: Number(data.sets.map((weightData) => weightData.weight)),
         });
+        console.log(data.sets.map((repsData) => repsData.reps));
       })
     );
   };
@@ -102,43 +104,48 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   };
 
   return (
-    <div className="ml:w-[30vw] mx-8 mt-8 absolute text-xl ml:top-[30vh] ml:left-[10vw]  p-5 rounded-2xl bg-persianRed ">
+    <div className="md:w-[30vw] absolute text-xl md:top-[30vh] md:left-[10vw]  md:p-5 rounded-2xl bg-persianRed // w-[90vw] flex flex-col bottom-20 right-3 gap-6 p-3">
       <div className="flex justify-end">
-        <button className="text-2xl justify-self-end " onClick={handleClose}>
+        <button
+          onClick={handleClose}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+        >
           x
         </button>
       </div>
-      <h1 className="text-white mb-8">{motivation}</h1>
-      <button
-        className="btn mr-5 mt-4 bg-PrussianBlue"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-      >
-        Make Plan
-      </button>
-      
-      <dialog
-        id="my_modal_3"
-        className="modal
+      <h1 className="text-white">{motivation}</h1>
+      <div>
+        <button
+          className="btn mr-5 mt-4 bg-PrussianBlue"
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+        >
+          Make Plan
+        </button>
+
+        <dialog
+          id="my_modal_3"
+          className="modal
         +
        mt-8
         "
-      >
-        {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
+        >
+          {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
 
-        <Workout
-          workout={workout}
-          setWorkout={setWorkout}
-          setExerciseData={setExerciseData}
-          exerciseData={exerciseData}
-          handleSubmit={handleSubmit}
-          makeExercise={makeExercise}
-        />
-        {/* </div> */}
-      </dialog>
-      <Link to="/history" className="hover:underline bold text-white text-xl">
-        {" "}
-        History
-      </Link>
+          <Workout
+            workout={workout}
+            setWorkout={setWorkout}
+            setExerciseData={setExerciseData}
+            exerciseData={exerciseData}
+            handleSubmit={handleSubmit}
+            makeExercise={makeExercise}
+          />
+          {/* </div> */}
+        </dialog>
+        <Link to="/history" className="hover:underline bold text-white text-xl">
+          {" "}
+          History
+        </Link>
+      </div>
     </div>
   );
 };

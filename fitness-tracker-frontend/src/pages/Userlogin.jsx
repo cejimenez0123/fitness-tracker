@@ -23,11 +23,11 @@ const Userlogin = () => {
     e.preventDefault();
     await axios({
       method: "post",
-      url: Enviroment.BASE_URL + "/user/login",
+      url: " http://localhost:3000" + "/user/login",
       data: { email: email, password: password },
     }).then((res) => {
       localStorage.setItem("token", res.data.token);
-      console.log(res.data.userInfo);
+      // console.log(res.data.userInfo)
 
       navigate("/home");
     });

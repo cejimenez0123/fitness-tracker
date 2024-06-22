@@ -7,19 +7,12 @@ import Displaytemplate from "../component/Displaytemplate";
 const Home = () => {
   const { isLoading, data, isError, isFetching } = useApi("user/user");
 
-  // console.log(data)
-  const [popup, setPopup] = useState(
-    <Displaytemplate
-      motivation={
-        " life is too short to skip Leg day! What are your plans for your legs"
-      }
-    />
-  );
+  const [popup, setPopup] = useState();
 
   function modal() {
     if (data.user.gender == "Female") {
       return (
-        <div className="flex justify-center ">
+        <div className="flex  justify-center ">
           <img
             className="w-[25%] relative left-[30%] "
             src="/female.png"
@@ -48,28 +41,28 @@ const Home = () => {
       );
     } else {
       return (
-        <div className="flex justify-center ">
+        <div className="md:flex md:justify-center  ">
           <img
-            className="w-[33%] relative left-[30%] "
+            className="md:w-[33%] md:relative md:left-[30%]   "
             src="/male.png"
             alt=""
           />
 
           <Lottie
             onClick={handleArmsClick}
-            className="w-[3%] absolute  top-[30%] right-[28%]"
+            className="md:w-[3%] absolute  md:top-[30%] md:right-[28%] / w-[12%] top-[49%] left-[17%]"
             animationData={btn}
           />
 
           <Lottie
             onClick={handleUpperClick}
-            className="w-[3%] absolute top-[47%] right-[14%] "
+            className="md:w-[3%] absolute md:top-[47%] md:right-[14%] /   w-[12%] top-[45%] left-[49%] "
             animationData={btn}
           />
 
           <Lottie
             onClick={handleLegsClick}
-            className="w-[3%] absolute top-[23%] right-[20%]"
+            className="md:w-[3%] absolute md:top-[23%] md:right-[20%] /   w-[12%] top-[60%] right-[33%]"
             animationData={btn}
           />
           {/* <Legs /> */}
@@ -79,7 +72,6 @@ const Home = () => {
   }
 
   const handleUpperClick = () => {
-    // console.log("legs");
     setPopup(
       <Displaytemplate
         motivation={
@@ -114,8 +106,8 @@ const Home = () => {
   }
 
   return (
-    <div className="h-screen bg-charcoal">
-      <h1 className=" text-white  pt-16 ml-10  text-2xl ml:text-7xl">
+    <div className="h-[96.6vh] w-screen flex flex-col justify-center items-center bg-charcoal">
+      <h1 className=" text-white mt-4 ml-10 md:text-[5rem] / text-[2rem] mb-7">
         Hello {data.user.name} <br /> What is your plan for today?
       </h1>
       {modal()}
