@@ -28,10 +28,7 @@ function App() {
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
       <li><Link to="/signin"> Sign Up</Link></li>
-      <li>
-      <Link to="/home"> Home</Link>
-      </li>
-      <li> <Link to="/login"> Login</Link></li>
+      <li> <Link to="/login"> Log In</Link></li>
       <li> <Link to="/"> Landing</Link></li>
       <li><Link to="/about"> About Me</Link></li>
     </ul>

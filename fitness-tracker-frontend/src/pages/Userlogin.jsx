@@ -67,7 +67,7 @@ const Userlogin = () => {
           </div>
       </form>
       <img           className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  object-cover / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
- src="/LoginImage.jpg" alt="welcome to this bitch " />
+ src="/LoginImage.jpg" alt="welcome to this gym" />
       </span>
     </div>
   )

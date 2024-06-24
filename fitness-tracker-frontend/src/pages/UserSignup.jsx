@@ -1,8 +1,9 @@
-import React from 'react'
-import axios from 'axios';
-import { useState } from 'react'
-import gym from "../../public/gym.jpg"
-import Enviroment from '../core';
+import React from "react";
+import axios from "axios";
+import { useState } from "react";
+
+import gym from "../../public/gym.jpg";
+import { Link } from "react-router-dom";
 const UserSignup = () => {
   const [gender, setGender] = useState("male");
   const [email,setEmail]=useState("")
@@ -52,6 +53,7 @@ const UserSignup = () => {
     return inputValue.trim() !== "";
   };
   return (
+    <div>
     <div className="flex md:flex-col justify-center h-screen w-screen  ">
       <span className="flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen relative ">
         <form
@@ -143,7 +145,6 @@ const UserSignup = () => {
                 value="Female"
                 checked={gender === "Female"}
                 onChange={handleOptionChange}
-                
                 className="radio"
               />
               Female
@@ -165,7 +166,7 @@ const UserSignup = () => {
         <img
           className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
           src={gym}
-          alt="welcome to this bitch "
+          alt="welcome to this gym "
         />
       </span>
 
@@ -174,7 +175,7 @@ const UserSignup = () => {
     <div className='flex-1 w-[44%]'>
     <img className=" hidden ml:block" src={gym} alt="image of a dumbell" />
       </div>
-    </div>
+      </div>
   )
 }
 
