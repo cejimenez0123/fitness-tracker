@@ -32,6 +32,7 @@ module.exports = function(authMiddleware){
                 include: {
                     exercise: true,
                     log: true
+              
                 }
             });
             return activity;

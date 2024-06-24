@@ -44,26 +44,26 @@ const Home = () => {
       return (
         <div className="flex mt-10 justify-center  ">
           <img
-            className="md:w-[33%] md:relative md:left-[30%] // w-[70%]  "
+            className="lg:w-[37%] lg:-top-10 // md:w-[40%] md:relative md:left-[30%] // w-[70%]  "
             src="/male.png"
             alt=""
           />
 
           <Lottie
             onClick={handleArmsClick}
-            className="md:w-[3%] absolute  md:top-[30%] md:right-[28%] / w-[10%] top-[60%] left-[27%]"
+            className="md:w-[5%] absolute  md:top-[34%] md:left-[67%] / w-[10%] top-[60%] left-[27%]"
             animationData={btn}
           />
 
           <Lottie
             onClick={handleUpperClick}
-            className="md:w-[3%] absolute md:top-[47%] md:right-[14%] /   w-[10%] top-[56%] left-[49%] "
+            className="md:w-[5%] absolute md:top-[30%] md:left-[80%] /   w-[10%] top-[56%] left-[49%] "
             animationData={btn}
           />
 
           <Lottie
             onClick={handleLegsClick}
-            className="md:w-[3%] absolute md:top-[23%] md:right-[20%] /   w-[10%] top-[73%] right-[36%]"
+            className="md:w-[5%] absolute md:top-[46%] md:right-[13%] /   w-[10%] top-[73%] right-[36%]"
             animationData={btn}
           />
           {/* <Legs /> */}
@@ -110,7 +110,7 @@ const Home = () => {
         Hello {data.user.name} <br /> What is your plan for today?
       </h1>
       <div
-        className="bg-[#51505a] p-4 ml-4 rounded-lg w-[90vw] flex flex-col justify-center "
+        className="md:w-[90vw]  md:ml-10 md:absolute bottom-[10vh] // bg-[#51505a] p-4 ml-4 rounded-lg w-[90vw] flex flex-col justify-center "
 
 
       >

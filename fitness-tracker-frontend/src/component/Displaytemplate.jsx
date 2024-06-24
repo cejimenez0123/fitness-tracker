@@ -81,7 +81,6 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   });
 
   const handleSubmit = async () => {
-    console.log("hi");
     await Promise.all(
       exerciseData.map(async (data) => {
         await setsMutation.mutateAsync({
@@ -120,15 +119,15 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   };
 
   return (
-    <div className="md:w-[30vw] text-[#262626] absolute text-xl md:top-[30vh] md:left-[10vw]  p-5 rounded-2xl bg-[#E2BDF2] // w-[90vw] bottom-[0vh] left-[5vw] ">
+    <div className="md:w-[50vw] md:h-[20vh] text-[#262626] absolute text-xl md:top-[30vh] md:left-[6vw]  p-5 rounded-2xl bg-[#E2BDF2] // w-[90vw] bottom-[0vh] left-[5vw] ">
       <div className="flex justify-end">
-        <button className="text-2xl justify-self-end " onClick={handleClose}>
+        <button className="md:text-[2rem] // text-2xl justify-self-end " onClick={handleClose}>
           x
         </button>
       </div>
       <h1 className="">{motivation}</h1>
       <button
-        className="btn mr-5"
+        className="btn mt-2 mr-5"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Make Plan

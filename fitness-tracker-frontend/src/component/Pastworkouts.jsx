@@ -72,18 +72,18 @@ console.log(logsData);
     <div className="flex  justify-center items-center ">
       <button
           onClick={prevSlide}
-          className="bg-[#A79BF2]  text-[#262626] px-4 py-2 mr-2 rounded"
+          className=" md:h-20 // bg-[#A79BF2]  text-[#262626] px-4 py-2 mr-2 rounded"
         >
           &lt;
         </button>
-      <div className=" text-[#262626] carousel w-[15rem] carousel-end rounded-box">
+      <div className="md:w-[30rem] // text-[#262626] carousel w-[15rem] carousel-end rounded-box">
         {workouts.map((workout, index) => {
           return (
             <>
-              <div className=" bg-[#E2BDF2] rounded-full  ml-2 p-5 carousel-item w-4 h-4">
+              <div className="md:w-10 md:h-10 // bg-[#E2BDF2] rounded-full  ml-2 p-5 carousel-item w-4 h-4">
                 <button
                   onClick={() => handlebtn(workout)}
-                  className=" w-2"
+                  className=" md:w-10 // w-2"
                 >
                   {formatDate.format(new Date(workout.date))}
                 </button>
