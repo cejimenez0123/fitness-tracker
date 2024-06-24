@@ -11,6 +11,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   const [logid, setLogid] = useState();
   const [activityId, setActivityid] = useState();
 
+
   const [exerciseData, setExerciseData] = useState([
     {
       id: uuidv4(),
@@ -35,12 +36,17 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         const logResponse = await postApi("log", {
           workoutId: data.workout.id,
         });
+        const logResponse = await postApi("log", {
+          workoutId: data.workout.id,
+        });
         console.log(logResponse);
+        setLogid(logResponse.log.id);
         setLogid(logResponse.log.id);
         console.log(logResponse.log.id);
       } catch (error) {
         console.error("Error creating log:", error);
       }
+
 
       // Invalidate the 'workout' query after mutation succeeds
       queryClient.invalidateQueries("workout");
@@ -49,13 +55,22 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   const exerciseMutation = useMutation({
     mutationFn: (exerciseData) => postApi("exercise", exerciseData),
     onSuccess: async (data) => {
+    onSuccess: async (data) => {
       // Invalidate the 'workout' query after mutation succeeds
       console.log(data.exercise.id);
       const activityResponse = await postApi("activity", {
         logId: logid,
         exerciseId: data.exercise.id,
       });
+      console.log(data.exercise.id);
+      const activityResponse = await postApi("activity", {
+        logId: logid,
+        exerciseId: data.exercise.id,
+      });
       console.log(activityResponse.activity.id);
+      setActivityid(activityResponse.activity.id);
+      queryClient.invalidateQueries("exercise");
+    },
       setActivityid(activityResponse.activity.id);
       queryClient.invalidateQueries("exercise");
     },
@@ -66,6 +81,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
     mutationFn: (setData) => postApi("set", setData),
     onSuccess: () => {
       // Invalidate the 'workout' query after mutation succeeds
+
 
       queryClient.invalidateQueries("workout");
     },
@@ -79,7 +95,10 @@ const Displaytemplate = ({ motivation, setPopup }) => {
           activityId: activityId,
           reps: Number(data.sets.map((repsData) => repsData.reps)),
           weight: Number(data.sets.map((weightData) => weightData.weight)),
+          reps: Number(data.sets.map((repsData) => repsData.reps)),
+          weight: Number(data.sets.map((weightData) => weightData.weight)),
         });
+        console.log(data.sets.map((repsData) => repsData.reps));
         console.log(data.sets.map((repsData) => repsData.reps));
       })
     );
@@ -109,6 +128,10 @@ const Displaytemplate = ({ motivation, setPopup }) => {
           onClick={handleClose}
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
         >
+        <button
+          onClick={handleClose}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+        >
           x
         </button>
       </div>
@@ -124,12 +147,38 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         <dialog
           id="my_modal_3"
           className="modal
+        <button
+          className="btn mr-5 mt-4 bg-PrussianBlue"
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+        >
+          Make Plan
+        </button>
+
+        <dialog
+          id="my_modal_3"
+          className="modal
         +
        mt-8
         "
         >
           {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
+        >
+          {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
 
+          <Workout
+            workout={workout}
+            setWorkout={setWorkout}
+            setExerciseData={setExerciseData}
+            exerciseData={exerciseData}
+            handleSubmit={handleSubmit}
+            makeExercise={makeExercise}
+          />
+          {/* </div> */}
+        </dialog>
+        <Link to="/history" className="hover:underline bold text-white text-xl">
+          {" "}
+          History
+        </Link>
           <Workout
             workout={workout}
             setWorkout={setWorkout}

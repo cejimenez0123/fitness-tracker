@@ -89,6 +89,7 @@ const Home = () => {
       />
     );
   };
+
   const handleLegsClick = () => {
     setPopup(
       <Displaytemplate
@@ -103,6 +104,7 @@ const Home = () => {
   if (isError) {
     return <div>an error has occured {isError}</div>;
   }
+
   return (
     <div className="h-[96.6vh] w-screen flex flex-col justify-center items-center bg-charcoal">
       <h1 className=" text-white mt-4 ml-10 md:text-[5rem] / text-[2rem] mb-7">

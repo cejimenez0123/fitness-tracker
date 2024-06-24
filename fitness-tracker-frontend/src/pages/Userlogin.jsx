@@ -1,49 +1,44 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
-import { Link } from "react-router-dom";
 
 const Userlogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handlePassword = (e) => {
-    // console.log(e.target.value)
-    setPassword(e.target.value);
-  };
 
   const navigate = useNavigate();
+
   const handleEmail = (e) => {
-    console.log(e.target.value);
     setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios({
       method: "post",
-      url: "http://localhost:3000" + "/user/login",
-      data: { email: email, password: password },
+      url: "http://localhost:3000/user/login",
+      data: { email, password },
     }).then((res) => {
       localStorage.setItem("token", res.data.token);
-      console.log(res.data.userInfo);
-
       navigate("/home");
     });
-    console.log(localStorage.getItem("token"));
   };
+
   return (
-    <div className="flex md:flex-col justify-center h-screen w-screen ">
-      <span className="flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen text-2xl relative">
+    <div className="flex md:flex-col justify-center h-screen w-screen">
+      <span className="flex text-center items-center justify-center md:flex-row md:static flex-col-reverse w-screen text-2xl relative">
         <form
-          className="bg-slate-900 p-10 rounded-l-3xl md:w-[45%]  md:h-[100.8%] flex flex-col md:rounded-r-none justify-center md:gap-3 md:static md:z-0 / gap-5 z-10
-           w-[100vw]  absolute bottom-0 h-1/2 rounded-r-3xl / 2xl:w-[28%] 2xl:h-[80%]"
-          onSubmit={(e) => handleSubmit(e)}
+          className="bg-slate-900 p-10 rounded-l-3xl md:w-[45%] md:h-[100.8%] flex flex-col md:rounded-r-none justify-center md:gap-3 md:static md:z-0 gap-5 z-10 w-[100vw] absolute bottom-0 h-1/2 rounded-r-3xl 2xl:w-[28%] 2xl:h-[80%]"
+          onSubmit={handleSubmit}
         >
-          <h1>Log in </h1>
-          <p>welcome back please enter your details </p>
-          <label className="input  input-bordered flex items-center gap-2">
+          <h1>Log in</h1>
+          <p>Welcome back! Please enter your details</p>
+          <label className="input input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -56,13 +51,13 @@ const Userlogin = () => {
             <input
               type="text"
               value={email}
-              className=" grow "
+              className="grow"
               placeholder="Enter your Email"
-              onChange={(e) => handleEmail(e)}
+              onChange={handleEmail}
             />
           </label>
 
-          <label className="input  input-bordered flex items-center gap-2">
+          <label className="input input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -79,7 +74,7 @@ const Userlogin = () => {
               type="password"
               className="grow"
               value={password}
-              onChange={(e) => handlePassword(e)}
+              onChange={handlePassword}
             />
           </label>
 
@@ -87,9 +82,10 @@ const Userlogin = () => {
             Submit
           </button>
           <div className="flex gap-3 mt-6 flex-col justify-center items-center">
-            <p>Dont have an account?</p>
+            <p>Don't have an account?</p>
+
             <Link
-              className=" btn btn-outline  btn-accent md:w-[10vw] h-[3vh]  p-1 flex flex-row justify-center / w-40 mt-4"
+              className="btn btn-outline btn-accent md:w-[10vw] h-[3vh] p-1 flex flex-row justify-center w-40 mt-4"
               to={"/signin"}
             >
               Signup
@@ -97,9 +93,9 @@ const Userlogin = () => {
           </div>
         </form>
         <img
-          className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  object-cover / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
+          className="md:w-[43%] md:h-[100.8%] rounded-r-3xl md:static h-screen absolute w-screen object-cover 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
           src="/LoginImage.jpg"
-          alt="welcome to this gym"
+          alt="Welcome to this gym"
         />
       </span>
     </div>
