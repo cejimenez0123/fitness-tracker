@@ -6,10 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Userlogin from "./pages/Userlogin.jsx";
-import {
-  ProtectedRoutes,
-  ProtectedRouteProvider,
-} from "./component/ProtectedRoutes.jsx";
+
 import {
   ProtectedRoutes,
   ProtectedRouteProvider,
@@ -54,10 +51,7 @@ const router = createBrowserRouter([
         path: "/userProfile",
         element: <UserProfile />,
       },
-      {
-        path: "/Userprofile",
-        element: <Userlogin />,
-      },
+
       {
         path: "/History",
         element: <History />,

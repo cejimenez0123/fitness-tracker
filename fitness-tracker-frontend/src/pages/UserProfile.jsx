@@ -2,22 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useApi } from "../component/fetch";
 import "./UserProfile.css";
-import {
-  PieChart,
-  Pie,
-  Sector,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
-const pieData = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const UserProfile = () => {
@@ -81,17 +68,18 @@ const UserProfile = () => {
 
   const generateFakeMoodData = () => {
     // Generate fake mood data for the past week
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 6);
+    const moods = ["exhaustion", "happiness", "stress", "calm"];
+    const moodCounts = { exhaustion: 0, happiness: 0, stress: 0, calm: 0 };
 
-    const fakeMoodData = Array.from({ length: 7 }, (_, index) => {
-      const date = new Date(startDate);
-      date.setDate(date.getDate() + index);
-      return {
-        date: date.toLocaleDateString(),
-        mood: Math.floor(Math.random() * 10 + 1), // Random mood value between 1 and 10
-      };
-    });
+    for (let i = 0; i < 7; i++) {
+      const randomMood = moods[Math.floor(Math.random() * moods.length)];
+      moodCounts[randomMood]++;
+    }
+
+    const fakeMoodData = Object.keys(moodCounts).map((mood) => ({
+      name: mood,
+      value: moodCounts[mood],
+    }));
 
     setMoodData(fakeMoodData);
   };
@@ -126,7 +114,7 @@ const UserProfile = () => {
             <PieChart width={300} height={200}>
               <Pie
                 label
-                data={pieData}
+                data={moodData}
                 cx={150}
                 cy={100}
                 innerRadius={60}
@@ -135,7 +123,7 @@ const UserProfile = () => {
                 paddingAngle={5}
                 dataKey="value"
               >
-                {pieData.map((entry, index) => (
+                {moodData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
@@ -147,7 +135,7 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="chart">
-          <h2>Weight Chart</h2>
+          <h2>Weight Graph</h2>
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={300}>
               <LineChart
