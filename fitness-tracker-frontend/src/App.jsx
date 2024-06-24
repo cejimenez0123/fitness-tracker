@@ -28,11 +28,3 @@ const Requiredauth = () => {
 };
 
 export { App, Requiredauth };
-
-// import axios from "axios";
-
-// axios.post('/', {}, {
-//   headers:{
-//     'Authorization' : ` Bearer ${toten}`
-//   }
-// })
