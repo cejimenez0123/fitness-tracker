@@ -43,8 +43,8 @@ setWorkout(selectedOption.label)
   };
   
   return (
-    <div >
-      <div className="modal-box rounded-lg bg-[#f4f3f2]  w-[30em]  h-[20em]">
+    <div>
+      <div className="modal-box md:w-[30vw] md:h-[20vh] // w-[95vw] ">
         <form method="dialog ">
           {/* if there is a button in form, it will close the modal */}
           <button className="btn btn-sm btn-circle mt-3 mr-4 btn-ghost absolute right-2 top-2">

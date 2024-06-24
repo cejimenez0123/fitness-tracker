@@ -38,7 +38,7 @@ console.log(exerciseData);
       <div className="modal-box w-11/12 max-w-5xl">
         <h4> {workout}</h4>
         <div className="modal-action">
-          <form method="dialog">
+          <form onSubmit={handleSubmit}>
             {exerciseData.map((exercise, exerciseIndex) => (
               <div key={exercise.id}>
                 <p>{exercise.exerciseName.label}</p>
@@ -57,7 +57,7 @@ console.log(exerciseData);
                         <td>
                           <input
                             type="number"
-                            value={setIndex}
+                            value={setIndex +1}
                             disabled
                             placeholder="Reps"
                             className="input input-bordered w-full max-w-xs"
