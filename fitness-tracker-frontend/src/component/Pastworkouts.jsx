@@ -76,7 +76,7 @@ console.log(logsData);
         >
           &lt;
         </button>
-      <div className="md:w-[30rem] // text-[#262626] carousel w-[15rem] carousel-end rounded-box">
+      <div className="md:w-[30rem] //  text-[#262626] carousel w-[15rem] carousel-end rounded-box">
         {workouts.map((workout, index) => {
           return (
             <>

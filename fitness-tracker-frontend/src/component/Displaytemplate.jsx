@@ -119,7 +119,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   };
 
   return (
-    <div className="md:w-[50vw] md:h-[20vh] text-[#262626] absolute text-xl md:top-[30vh] md:left-[6vw]  p-5 rounded-2xl bg-[#E2BDF2] // w-[90vw] bottom-[0vh] left-[5vw] ">
+    <div className="md:w-[50vw] md:h-[20vh] text-[#262626] absolute text-xl md:top-[30vh] md:left-[6vw]  p-5 rounded-2xl bg-[#32d4dc] // w-[90vw] bottom-[0vh] left-[5vw] ">
       <div className="flex justify-end">
         <button className="md:text-[2rem] // text-2xl justify-self-end " onClick={handleClose}>
           x
