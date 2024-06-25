@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { App, Requiredauth } from "./App.jsx";
-import { App, Requiredauth } from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home.jsx";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Userlogin from "./pages/Userlogin.jsx";
@@ -26,9 +24,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-    path: "/",
-    element: <App />,
-    children: [
       {
         path: "/",
         element: <Landing />,
@@ -46,11 +41,7 @@ const router = createBrowserRouter([
         element: <UserSignup />,
       },
       { path: "/about", element: <About /> },
-    ],
-  },
-        path: "/signin",
-        element: <UserSignup />,
-      },
+
       { path: "/about", element: <About /> },
     ],
   },
@@ -58,12 +49,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Requiredauth />,
     children: [
-    path: "/",
-    element: <Requiredauth />,
-    children: [
       {
-        path: "/home",
-        element: <Home />,
         path: "/home",
         element: <Home />,
       },
@@ -75,11 +61,7 @@ const router = createBrowserRouter([
       {
         path: "/History",
         element: <History />,
-        path: "/History",
-        element: <History />,
       },
-    ],
-  },
     ],
   },
 ]);

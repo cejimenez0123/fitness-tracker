@@ -1,15 +1,12 @@
 import { useContext } from "react";
 import "./App.css";
 import Navbar from "./component/Navbar";
-import { Outlet, Navigate } from "react-router-dom";
 
 import { Outlet, Navigate, Link } from "react-router-dom";
 import { ProtectedRoutes } from "./component/ProtectedRoutes";
 function App() {
   return (
-    <>
-      <div className="bg-back h-screen">
-        <Navbar />
+    <div className="bg-back h-screen">
       <div className="">
         <div class="navbar bg-base-100">
           <div class="navbar-start">
@@ -74,12 +71,11 @@ function App() {
 
         <Outlet />
       </div>
-    </>
+    </div>
   );
 }
 
 const Requiredauth = () => {
-  const { currentUser } = useContext(ProtectedRoutes);
   const { currentUser } = useContext(ProtectedRoutes);
   if (!currentUser) return <Navigate to="/login" />;
   return (
@@ -115,6 +111,9 @@ const Requiredauth = () => {
                   <Link to="/"> Landing</Link>
                 </li>
                 <li>
+                  <Link to="/userProfile"> Profile</Link>
+                </li>
+                <li>
                   <Link to="/about">About Me</Link>
                 </li>
               </ul>
@@ -127,6 +126,9 @@ const Requiredauth = () => {
                 <Link to="/home"> Home</Link>
               </li>
               <li>
+                <Link to="/userProfile"> Profile</Link>
+              </li>
+              <li>
                 <Link to="/"> Landing</Link>
               </li>
             </ul>
@@ -136,11 +138,6 @@ const Requiredauth = () => {
         <Outlet />
       </div>
     </>
-  );
-};
-
-export { App, Requiredauth };
-
   );
 };
 
