@@ -3,6 +3,8 @@ import btn from "../../public/btn.json";
 import Lottie from "lottie-react";
 import { useApi } from "../component/fetch";
 import Displaytemplate from "../component/Displaytemplate";
+import Enviroment from "../core";
+
 import Pastworkouts from "../component/Pastworkouts";
 
 const Home = () => {

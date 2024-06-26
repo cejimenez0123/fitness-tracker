@@ -63,7 +63,7 @@ function App() {
               </li>
               <li>
                 {" "}
-                <Link to="/userProfile"> User Profile</Link>
+                <Link to="/Userprofile"> User Profile</Link>
               </li>
               <li>
                 <Link to="/about"> About Me</Link>

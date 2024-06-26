@@ -5,12 +5,13 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { v4 as uuidv4 } from "uuid";
 import "./Displaytemplate.css";
 import { Link } from "react-router-dom";
+
 const Displaytemplate = ({ motivation, setPopup }) => {
   const queryClient = useQueryClient();
-  const [workout, setWorkout] = useState();
-  const [logid, setLogid] = useState();
-  // const [activityId, setActivityid] = useState([]);
+  const [workout, setWorkout] = useState("");
+  const [logid, setLogid] = useState("");
   const [exerciseId, setExerciseId] = useState([]);
+  const [alertVisible, setAlertVisible] = useState(false);
 
   const [exerciseData, setExerciseData] = useState([
     {
@@ -32,61 +33,50 @@ const Displaytemplate = ({ motivation, setPopup }) => {
     mutationFn: (workoutData) => postApi("workout", workoutData),
     onSuccess: async (data) => {
       try {
-        console.log(data.workout.id);
         const logResponse = await postApi("log", {
           workoutId: data.workout.id,
         });
-        console.log(logResponse);
         setLogid(logResponse.log.id);
-        console.log(logResponse.log.id);
       } catch (error) {
         console.error("Error creating log:", error);
       }
 
-
-      // Invalidate the 'workout' query after mutation succeeds
       queryClient.invalidateQueries("workout");
     },
   });
-  const activityId =[]
+
+  const activityId = [];
   const exerciseMutation = useMutation({
     mutationFn: (exerciseData) => postApi("exercise", exerciseData),
     onSuccess: async (data) => {
-      const exerciseids=[]
-      console.log(data); 
-      // Iterate through each exercise object in the data array
-      await Promise.all(data.exercise.map(async (exercise) => {
-        console.log(exercise);
-        exerciseids.push(exercise.id);
-        }));
-        console.log(exerciseId);
-        const activityResponse = await postApi("activity", {
-          exerciseIds:exerciseids,
-          logId: logid,
-          });
-          console.log(activityResponse);
-          activityResponse.activities.map((data)=>
-          activityId.push(data.id)
-          )
-          console.log(activityId);
-          // setActivityid(activityResponse.activity.id);
-          
-      // After creating activities for all exercises, invalidate the 'exercise' query
+      const exerciseids = [];
+      await Promise.all(
+        data.exercise.map(async (exercise) => {
+          exerciseids.push(exercise.id);
+        })
+      );
+
+      const activityResponse = await postApi("activity", {
+        exerciseIds: exerciseids,
+        logId: logid,
+      });
+
+      activityResponse.activities.map((data) => activityId.push(data.id));
+
       queryClient.invalidateQueries("exercise");
     },
   });
-  console.log(activityId);
 
   const setsMutation = useMutation({
     mutationFn: (setData) => postApi("set", setData),
     onSuccess: () => {
-    
-      
+      setAlertVisible(true);
+      setTimeout(() => setAlertVisible(false), 3000); // Hide alert after 3 seconds
     },
   });
 
-  console.log( activityId.map(data=>data));
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     await Promise.all(
       exerciseData.map(async (exercise) => {
         await Promise.all(
@@ -105,15 +95,19 @@ const Displaytemplate = ({ motivation, setPopup }) => {
       })
     );
   };
+
   const handleClose = () => {
     setPopup("");
   };
-  const makeExercise = async () => {
+
+  const makeExercise = async (e) => {
+    e.preventDefault();
+
     document.getElementById("my_modal_5").showModal();
-  
-    const exercises = []; 
+
+    const exercises = [];
     await mutation.mutateAsync({ name: workout });
-  
+
     await Promise.all(
       exerciseData.map(async (data) => {
         const exercise = {
@@ -122,50 +116,56 @@ const Displaytemplate = ({ motivation, setPopup }) => {
           muscle: data.muscle.label,
         };
         exercises.push(exercise);
-        console.log(exercise); 
       })
     );
-  
-    // After processing all exercises, perform the mutation with the array
+
     await exerciseMutation.mutateAsync({ exercise: exercises });
   };
 
   return (
-    <div className="md:w-[50vw] md:h-[20vh] text-[#262626] absolute text-xl md:top-[30vh] md:left-[6vw]  p-5 rounded-2xl bg-[#32d4dc] // w-[90vw] bottom-[0vh] left-[5vw] ">
+    <div className="md:w-[50vw] md:h-[20vh] text-[#262626] absolute text-xl md:top-[30vh] md:left-[6vw] p-5 rounded-2xl bg-[#32d4dc] w-[90vw] bottom-[0vh] left-[5vw]">
       <div className="flex justify-end">
-        <button className="md:text-[2rem] // text-2xl justify-self-end " onClick={handleClose}>
+        <button className="md:text-[2rem] text-2xl justify-self-end" onClick={handleClose}>
           x
         </button>
       </div>
       <h1 className="">{motivation}</h1>
-      <button
-        className="btn mt-2 mr-5"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-      >
+      <button className="btn mt-2 mr-5" onClick={() => document.getElementById("my_modal_3").showModal()}>
         Make Plan
       </button>
-      
-      <dialog
-        id="my_modal_3"
-        className="modal
-        +
-       mt-8
-        "
-      >
-        {/* <div className="w-full border-4 h-full sm:w-3/4 lg:w-1/2"> */}
 
-        <Workout
-          workout={workout}
-          setWorkout={setWorkout}
-          setExerciseData={setExerciseData}
-          exerciseData={exerciseData}
-          handleSubmit={handleSubmit}
-          makeExercise={makeExercise}
-        />
-        {/* </div> */}
+      <dialog id="my_modal_3" className="modal mt-8">
+        <form onSubmit={handleSubmit}>
+          <Workout
+            workout={workout}
+            setWorkout={setWorkout}
+            setExerciseData={setExerciseData}
+            exerciseData={exerciseData}
+            handleSubmit={handleSubmit}
+            makeExercise={(e)=>makeExercise(e)}
+          />
+          <button type="submit" className="btn mt-2">Submit</button>
+        </form>
       </dialog>
+      {alertVisible && (
+        <div role="alert" className="alert alert-success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>The set has been added</span>
+        </div>
+      )}
       <Link to="/history" className="hover:underline bold text-white text-xl">
-        {" "}
         History
       </Link>
     </div>
