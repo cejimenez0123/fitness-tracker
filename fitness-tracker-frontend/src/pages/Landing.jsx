@@ -7,7 +7,7 @@ import "../App.css"
 const Landing = () => {
   
     return (
-      <div className="bg-back w-screen pt-16 ml:pt-32 ">
+      <div className="bg-back w-screen mt-16 ml:mt-32 ">
         <div className="mx-auto w-fit">
             <h1 className="ml:text-6xl text-PrussianBlue mx-16 text-2xl mb-16 text-center "
             >Achieve Your Fitness Goals with Fitness Tracker!</h1>
