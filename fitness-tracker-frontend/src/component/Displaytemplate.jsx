@@ -43,6 +43,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
         console.error("Error creating log:", error);
       }
 
+
       // Invalidate the 'workout' query after mutation succeeds
       queryClient.invalidateQueries("workout");
     },

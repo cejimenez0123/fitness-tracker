@@ -14,17 +14,31 @@ const ExerciseTemplate = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (selectedOption, index, field) => {
+  const handleChange = (selectedOption, index, field) => {
     const newData = [...exerciseData];
     console.log(newData);
+    console.log(newData);
 
+    newData[index][field] = selectedOption;
+
+    setExerciseData(newData);
     newData[index][field] = selectedOption;
 
     setExerciseData(newData);
     console.log(exerciseData);
   };
   const handleDelete = (e, dataId, i) => {
+  const handleDelete = (e, dataId, i) => {
     console.log();
     e.preventDefault();
+    const updatedExercises = exerciseData.filter(
+      (exercise) => exercise.id !== dataId
+    );
+    console.log(updatedExercises);
+
+    setExerciseData(updatedExercises);
+  };
+  return (
     const updatedExercises = exerciseData.filter(
       (exercise) => exercise.id !== dataId
     );
@@ -56,7 +70,9 @@ const ExerciseTemplate = ({
             options={exerciseOptions}
             required
           />
-          <label  className="text-charcoal " htmlFor="">Muscles</label>
+          <label className="text-charcoal " htmlFor="">
+            Muscles
+          </label>
           <Select
             name="muscle"
             value={data.muscle}

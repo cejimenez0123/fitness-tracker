@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import React, { useState } from "react";
 import btn from "../../public/btn.json";
 import Lottie from "lottie-react";
+import { useApi } from "../component/fetch";
 import { useApi } from "../component/fetch";
 import Displaytemplate from "../component/Displaytemplate";
 import Pastworkouts from "../component/Pastworkouts";
@@ -8,8 +10,18 @@ import Pastworkouts from "../component/Pastworkouts";
 const Home = () => {
   const { isLoading, data, isError, isFetching } = useApi("user/user");
 
+
   const [popup, setPopup] = useState();
 
+  function modal() {
+    if (data.user.gender == "Female") {
+      return (
+        <div className="flex  justify-center ">
+          <img
+            className="w-[25%] relative left-[30%] "
+            src="/female.png"
+            alt=""
+          />
   function modal() {
     if (data.user.gender == "Female") {
       return (
@@ -25,7 +37,17 @@ const Home = () => {
             className="w-[3%] absolute  top-[44%] right-[26%]"
             animationData={btn}
           />
+          <Lottie
+            onClick={handleArmsClick}
+            className="w-[3%] absolute  top-[44%] right-[26%]"
+            animationData={btn}
+          />
 
+          <Lottie
+            onClick={handleLegsClick}
+            className="w-[3%] absolute top-[57%] right-[15%] "
+            animationData={btn}
+          />
           <Lottie
             onClick={handleLegsClick}
             className="w-[3%] absolute top-[57%] right-[15%] "
@@ -81,6 +103,14 @@ const Home = () => {
         setPopup={setPopup}
       />
     );
+    setPopup(
+      <Displaytemplate
+        motivation={
+          " Open. Sweat. Triumph. This Chest Holds Your Power. Embrace the Challenge, Push Limits, Find Your Strength Within"
+        }
+        setPopup={setPopup}
+      />
+    );
   };
   const handleArmsClick = () => {
     setPopup(
@@ -89,9 +119,20 @@ const Home = () => {
         setPopup={setPopup}
       />
     );
+      <Displaytemplate
+        motivation="Gains are sweeter when shared with friends. Arm day is the perfect time to celebrate our collective progress. "
+        setPopup={setPopup}
+      />
+    );
   };
+
   const handleLegsClick = () => {
     setPopup(
+      <Displaytemplate
+        motivation=" life is too short to skip Leg day! What are your plans for your legs"
+        setPopup={setPopup}
+      />
+    );
       <Displaytemplate
         motivation=" life is too short to skip Leg day! What are your plans for your legs"
         setPopup={setPopup}
@@ -100,10 +141,15 @@ const Home = () => {
   };
   if (isLoading) {
     return <div>Loading... </div>;
+  if (isLoading) {
+    return <div>Loading... </div>;
   }
   if (isError) {
     return <div>an error has occured {isError}</div>;
+  if (isError) {
+    return <div>an error has occured {isError}</div>;
   }
+
   return (
     <div className="h-[97vh] text-[#EEF280]   flex flex-col bg-[#262626]">
       <h1 className="font-merriweather-sans font-bold mt-2 ml-10 md:text-[3rem] / text-[2rem] mb-7">
@@ -118,6 +164,7 @@ const Home = () => {
         <Pastworkouts />
       </div>
       {modal()}
+
 
       <div>{popup}</div>
     </div>
