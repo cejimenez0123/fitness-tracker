@@ -6,37 +6,40 @@ import gym from "../../public/gym.jpg";
 import { Link } from "react-router-dom";
 const UserSignup = () => {
   const [gender, setGender] = useState("male");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const handlePassword = (e) => {
-    console.log(e.target.value);
-    setPassword(e.target.value);
-  };
-  const handleName = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
-  };
-  const handleEmail = (e) => {
-    console.log(e.target.value);
-    setEmail(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email, password, name);
+  const [email,setEmail]=useState("")
+  const [name,setName]=useState("")
+  const [password,setPassword]=useState("")
+  const handlePassword = (e)=>{
+    console.log(e.target.value)
+    setPassword(e.target.value)
+  }
+  const handleName = (e)=>{
+    console.log(e.target.value)
+    setName(e.target.value)
+  }
+  const handleEmail = (e)=>{ 
+    console.log(e.target.value)
+    setEmail(e.target.value)
+  }
+  const handleSubmit= (e)=>{
+    e.preventDefault()
+    console.log(email ,password, name,gender);
     axios({
-      method: "post",
-      url: "http://localhost:3000/user/register",
-      data: { email: email, password: password, name: name, gender: gender },
-    }).then((res) => {
-      console.log(res.data);
-    });
-  };
+      method: 'post',
+      url: Enviroment.BASE_URL+"/user/register", 
+      data: {email:email,password:password,name:name,gender:gender}
+    }).then(res=>{
+      if(res.data.token!==undefined){
+        
+      }
+      console.log(res.data)
+    })
+  }
   // const handleSubmit = (e)=>{
   //   e.preventDefault()
   //   axios({
   //     method: 'post',
-  //     url: "http://localhost:3000/login",
+  //     url: "http://localhost:3000/login", 
   //     data: {email:email,password:password}
   //   }).then(res=>{
   //     localStorage.setItem("token",res.data.token)
@@ -50,6 +53,7 @@ const UserSignup = () => {
     return inputValue.trim() !== "";
   };
   return (
+    <div>
     <div className="flex md:flex-col justify-center h-screen w-screen  ">
       <span className="flex  text-center items-center justify-center md:flex-row md:static / flex-col-reverse w-screen relative ">
         <form
@@ -141,7 +145,6 @@ const UserSignup = () => {
                 value="Female"
                 checked={gender === "Female"}
                 onChange={handleOptionChange}
-                
                 className="radio"
               />
               Female
@@ -163,13 +166,17 @@ const UserSignup = () => {
         <img
           className="md:w-[43%]  md:h-[100.8%]  rounded-r-3xl md:static /   h-screen absolute w-screen  / 2xl:w-[28%] 2xl:h-[80%] xl:object-cover"
           src={gym}
-          alt="welcome to this bitch "
+          alt="welcome to this gym "
         />
       </span>
 
         
     </div>
-  );
-};
+    <div className='flex-1 w-[44%]'>
+    <img className=" hidden ml:block" src={gym} alt="image of a dumbell" />
+      </div>
+      </div>
+  )
+}
 
 export default UserSignup;
