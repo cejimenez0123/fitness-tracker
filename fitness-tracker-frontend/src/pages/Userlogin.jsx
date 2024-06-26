@@ -21,7 +21,7 @@ const Userlogin = () => {
     e.preventDefault();
     await axios({
       method: "post",
-      url: "http://localhost:3000/user/login",
+      url: Enviroment.BASE_URL+"/user/login",
       data: { email, password },
     }).then((res) => {
       localStorage.setItem("token", res.data.token);
