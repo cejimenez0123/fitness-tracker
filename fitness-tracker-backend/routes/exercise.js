@@ -19,26 +19,40 @@ module.exports = function(authMiddleware){
         })
         res.json({exercises:exercises})
     })
-    router.post("/",authMiddleware, async (req,res)=>{
-            const {name,type,muscle}=req.body
-            console.log(name,type,muscle)
-            const user = req.user
-            const exerciseType = validateExerciseType(type)
-            const muscleType = validateMuscleType(muscle)
-            const exercise = await prisma.exercise.create({
-                data: {
-                    name: name,
-                    user:{
-                        connect:{
-                            id: user.id
-                        }
-                    },
-                    muscle: muscleType,
-                    type:exerciseType
-                }})
-                res.status(201).json({exercise:exercise})
-                console.log(res);
-        })
+    router.post("/", authMiddleware, async (req, res) => {
+        const { exercise } = req.body; // Assuming exercises is an array of exercise objects
+        console.log(exercise);
+        const user = req.user;
+    
+        try {
+            const createdExercises = await Promise.all(exercise.map(async (exerciseData) => {
+                const { name, type, muscle } = exerciseData;
+    
+                const exerciseType = validateExerciseType(type);
+                const muscleType = validateMuscleType(muscle);
+    
+                const createdExercise = await prisma.exercise.create({
+                    data: {
+                        name: name,
+                        user: {
+                            connect: {
+                                id: user.id
+                            }
+                        },
+                        muscle: muscleType,
+                        type: exerciseType
+                    }
+                });
+    
+                return createdExercise;
+            }));
+    
+            res.status(201).json({ exercise: createdExercises });
+        } catch (error) {
+            console.error("Error creating exercises:", error);
+            res.status(500).json({ error: "Failed to create exercises" });
+        }
+    });
     router.post("/admin",authMiddleware, async (req,res)=>{
             const {name,type,muscle}=req.body
             const muscleType = validateMuscleType(muscle)
@@ -63,6 +77,11 @@ module.exports = function(authMiddleware){
                     id: req.params.id
                 },
             })
+            // await prisma.set.delete({
+            //     where:{
+            //         id: req.params.id
+            //     }
+            // })
         res.status(200).json({message:"Deleted Successfully"})
     })
 

@@ -2,16 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useApi } from "./fetch";
 import ExerciseTemplate from "./ExerciseTemplate";
-import Select from "react-select";
+import SetTemplate from "./SetTemplate"
 import { v4 as uuidv4 } from "uuid";
-
-
 const Execersize = ({
   setExerciseData,
   workout,
-  
   makeExercise,
-  
   exerciseData,
   handleSubmit,
 }) => {
@@ -46,57 +42,65 @@ const Execersize = ({
     console.log("ready ");
     const data = [
       ...exerciseData,
-      {id: uuidv4(),
-      exerciseName: "",
-      muscle: "",
-      type: "",
-      sets: [
-        {
-          id: uuidv4(),
-          reps: 0,
-          weight: 0
-        }
-      ]}
+      {
+        id: uuidv4(),
+        exerciseName: "",
+        muscle: "",
+        type: "",
+        sets: [
+          {
+            id: uuidv4(),
+            reps: 0,
+            weight: 0,
+          },
+        ],
+      },
     ];
     setExerciseData(data);
   };
 
   return (
-    <div>
-      <div className="modal-box w-[30vw] h-[40vh] ">
+    <>
+      <div className="modal-box md:w-[30vw] md:h-[40vh] // w-screen h-[100vh] absolute bottom-0 ">
         <form onSubmit={handleSubmit} method="dialog">
-          {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
-          </button>
-          <button onClick={add} className="btn relative left-[70%] top-4  ">
-            Add exercise
-          </button>
-
-          <ExerciseTemplate
-            exerciseData={exerciseData}
-            exerciseOptions={exerciseOptions}
-            muscleOptions={muscleOptions}
-            typeOptions={typeOptions}
-            setExerciseData={setExerciseData}
-            //  handleChange={handleChange}
-          />
+          <div className="flex flex-row justify-between">
+            <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
+              ✕
+            </button>
+            <button
+              onClick={add}
+              className="btn mr-8 text-white w-48 relative  top-4  "
+            >
+              Add exercise
+            </button>
+          </div>
+          <div className="mx-4 my-8">
+            <ExerciseTemplate
+              exerciseData={exerciseData}
+              exerciseOptions={exerciseOptions}
+              muscleOptions={muscleOptions}
+              typeOptions={typeOptions}
+              setExerciseData={setExerciseData}
+              //  handleChange={handleChange}
+            />
+          </div>
         </form>
-        <button onClick={makeExercise} className="btn">
-          
+        <button
+          onClick={makeExercise}
+          className="btn text-white bg-PrussianBlue ml-8"
+        >
           Create excersice
         </button>
         <dialog id="my_modal_5" className="modal">
           <SetTemplate
             workout={workout}
-            
             handleSubmit={handleSubmit}
             exerciseData={exerciseData}
             setExerciseData={setExerciseData}
           />
         </dialog>
       </div>
-    </div>
+    </>
   );
 };
 

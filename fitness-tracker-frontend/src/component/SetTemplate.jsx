@@ -1,7 +1,7 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const setTemplate = ({
+const SetTemplate = ({
   workout,
   exerciseData,
 
@@ -14,7 +14,6 @@ const setTemplate = ({
     setExerciseData(updatedExerciseData);
     
   };
-console.log(exerciseData);
 
   const addSet = (e, exerciseIndex) => {
     e.preventDefault();
@@ -38,7 +37,7 @@ console.log(exerciseData);
       <div className="modal-box w-11/12 max-w-5xl">
         <h4> {workout}</h4>
         <div className="modal-action">
-          <form method="dialog">
+          <form onSubmit={handleSubmit}>
             {exerciseData.map((exercise, exerciseIndex) => (
               <div key={exercise.id}>
                 <p>{exercise.exerciseName.label}</p>
@@ -57,7 +56,7 @@ console.log(exerciseData);
                         <td>
                           <input
                             type="number"
-                            value={setIndex}
+                            value={setIndex +1}
                             disabled
                             placeholder="Reps"
                             className="input input-bordered w-full max-w-xs"
@@ -117,4 +116,4 @@ console.log(exerciseData);
   );
 };
 
-export default setTemplate;
+export default SetTemplate;
