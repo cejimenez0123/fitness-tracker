@@ -77,6 +77,11 @@ module.exports = function(authMiddleware){
                     id: req.params.id
                 },
             })
+            // await prisma.set.delete({
+            //     where:{
+            //         id: req.params.id
+            //     }
+            // })
         res.status(200).json({message:"Deleted Successfully"})
     })
 

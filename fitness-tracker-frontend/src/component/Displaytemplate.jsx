@@ -9,7 +9,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   const queryClient = useQueryClient();
   const [workout, setWorkout] = useState();
   const [logid, setLogid] = useState();
-  const [activityId, setActivityid] = useState();
+  // const [activityId, setActivityid] = useState([]);
   const [exerciseId, setExerciseId] = useState([]);
 
   const [exerciseData, setExerciseData] = useState([
@@ -47,6 +47,7 @@ const Displaytemplate = ({ motivation, setPopup }) => {
       queryClient.invalidateQueries("workout");
     },
   });
+  const activityId =[]
   const exerciseMutation = useMutation({
     mutationFn: (exerciseData) => postApi("exercise", exerciseData),
     onSuccess: async (data) => {
@@ -63,7 +64,11 @@ const Displaytemplate = ({ motivation, setPopup }) => {
           logId: logid,
           });
           console.log(activityResponse);
-          setActivityid(activityResponse.activity.id);
+          activityResponse.activities.map((data)=>
+          activityId.push(data.id)
+          )
+          console.log(activityId);
+          // setActivityid(activityResponse.activity.id);
           
       // After creating activities for all exercises, invalidate the 'exercise' query
       queryClient.invalidateQueries("exercise");
@@ -74,25 +79,31 @@ const Displaytemplate = ({ motivation, setPopup }) => {
   const setsMutation = useMutation({
     mutationFn: (setData) => postApi("set", setData),
     onSuccess: () => {
-      // Invalidate the 'workout' query after mutation succeeds
-
+    
       
     },
   });
 
+  console.log( activityId.map(data=>data));
   const handleSubmit = async () => {
     await Promise.all(
-      exerciseData.map(async (data) => {
-        await setsMutation.mutateAsync({
-          activityId: activityId,
-          reps: Number(data.sets.map((repsData) => repsData.reps)),
-          weight: Number(data.sets.map((weightData) => weightData.weight)),
-        });
-        console.log(data.sets.map((repsData) => repsData.reps));
+      exerciseData.map(async (exercise) => {
+        await Promise.all(
+          exercise.sets.map(async (set) => {
+            await Promise.all(
+              activityId.map(async (id) => {
+                await setsMutation.mutateAsync({
+                  activityId: id,
+                  reps: Number(set.reps),
+                  weight: Number(set.weight),
+                });
+              })
+            );
+          })
+        );
       })
     );
   };
-
   const handleClose = () => {
     setPopup("");
   };

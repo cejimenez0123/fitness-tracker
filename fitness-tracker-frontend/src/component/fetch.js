@@ -38,3 +38,20 @@ export  async function postApi(Endpoint,data) {
     throw new Error('Error posting data');
   }
 }
+export const deleteApi = async (Endpoint) => {
+  const url = `${Base_Url}/${Endpoint}`;
+  console.log(url);
+
+  try {
+    const response = await axios.delete(url, data,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,}
+      }
+    );
+    
+    return response.data;
+  } catch (error) {
+    throw new Error('Error posting data');
+  }
+};

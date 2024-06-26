@@ -40,6 +40,7 @@ module.exports = function(authMiddleware){
                 include: {
                     workout: true,
                     activities: {
+                      
                         include: {
                             exercise: true
                         }
@@ -53,27 +54,52 @@ module.exports = function(authMiddleware){
             res.status(500).json({ error: 'Internal server error' });
         }
     });
-    router.delete("/:id",authMiddleware,async (req,res)=>{
-       let activities= await prisma.activity.findMany({where:{
-            log:{
-                id:req.params.id
-            }
-        }})
-        let ids = activities.map((activity)=>activity.id )
-        let promises = ids.map(id=>{
-            return prisma.set.deleteMany({where:{
-                activity:{
-                    id:id
+   router.delete("/:id", authMiddleware, async (req, res) => {
+    try {
+        const logId = req.params.id;
+        const log = await prisma.log.findUnique({
+            where: {
+                id: logId
+            },
+            include: {
+                activities: {
+                    include: {
+                        sets: true
+                    }
                 }
-            }})
-        })
-        await Promise.all(promises)
+            }
+        });
+
+      
+
+        const deleteSetPromises = log.activities.map(activity =>
+            prisma.set.deleteMany({
+                where: {
+                    activityId: activity.id
+                }
+            })
+        );
+
+        await Promise.all(deleteSetPromises);
+
+        await prisma.activity.deleteMany({
+            where: {
+                logId: logId
+            }
+        });
+
         await prisma.log.delete({
             where: {
-                id: req.params.id
-            },
-        })
-        res.status(200).json({message:"Deleted Successfully"})
-    })
+                id: logId
+            }
+        });
+
+        res.status(200).json({ message: "deleted" });
+    } catch (error) {
+        console.error("Error deleting full data because: ", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
     return router
 }
