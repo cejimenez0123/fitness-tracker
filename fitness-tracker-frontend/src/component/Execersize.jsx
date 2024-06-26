@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useApi } from "./fetch";
 import ExerciseTemplate from "./ExerciseTemplate";
-
+import SetTemplate from "./SetTemplate"
 import { v4 as uuidv4 } from "uuid";
 const Execersize = ({
   setExerciseData,
@@ -60,8 +60,8 @@ const Execersize = ({
   };
 
   return (
-    <div>
-      <div className="modal-box md:w-[30vw] md:h-[40vh] // w-[95vw] ">
+    <>
+      <div className="modal-box md:w-[30vw] md:h-[40vh] // w-screen h-[100vh] absolute bottom-0 ">
         <form onSubmit={handleSubmit} method="dialog">
           <div className="flex flex-row justify-between">
             <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
@@ -100,7 +100,7 @@ const Execersize = ({
           />
         </dialog>
       </div>
-    </div>
+    </>
   );
 };
 

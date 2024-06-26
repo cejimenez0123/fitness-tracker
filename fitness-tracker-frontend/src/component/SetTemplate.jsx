@@ -14,7 +14,6 @@ const SetTemplate = ({
     setExerciseData(updatedExerciseData);
     
   };
-console.log(exerciseData);
 
   const addSet = (e, exerciseIndex) => {
     e.preventDefault();

@@ -62,6 +62,10 @@ function App() {
                 <Link to="/"> Landing</Link>
               </li>
               <li>
+                {" "}
+                <Link to="/userProfile"> User Profile</Link>
+              </li>
+              <li>
                 <Link to="/about"> About Me</Link>
               </li>
             </ul>
