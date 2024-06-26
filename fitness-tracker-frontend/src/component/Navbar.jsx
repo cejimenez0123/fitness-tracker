@@ -5,9 +5,10 @@ const Navbar = () => {
 
   return (
     <div>
-      <Link to="/signin"> signup</Link>
-      <Link to="/home"> home</Link>
-      <Link to="/login"> login</Link>
+      <Link to="/signin"> Signup</Link>
+      <Link to="/home"> Home</Link>
+      <Link to="/login"> Login</Link>
+      <Link to="/about"> About</Link>
       <Link to="/"> Landing</Link>
 
       <Outlet/>

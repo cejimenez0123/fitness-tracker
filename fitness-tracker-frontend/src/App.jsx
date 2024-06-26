@@ -8,8 +8,8 @@ function App() {
     <>
       <div className="h-screen">
         <Navbar />
-
-     
+          
+       
       </div>
     </>
   );

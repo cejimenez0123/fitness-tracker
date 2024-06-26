@@ -1,7 +1,6 @@
 import React from "react";
 import Select from "react-select";
 import { useState } from "react";
-import setTemplate from "./SetTemplate";
 import CreatableSelect from "react-select/creatable";
 const ExerciseTemplate = ({
   exerciseData,
@@ -57,7 +56,7 @@ const ExerciseTemplate = ({
             options={exerciseOptions}
             required
           />
-          <label htmlFor="">Muscles</label>
+          <label  className="text-charcoal " htmlFor="">Muscles</label>
           <Select
             name="muscle"
             value={data.muscle}
@@ -67,7 +66,7 @@ const ExerciseTemplate = ({
             options={muscleOptions}
             required
           />
-          <div className=" ">
+          <div className="text-charcoal ">
             <span>
               <label htmlFor=""> Type of exercise</label>
               <Select
