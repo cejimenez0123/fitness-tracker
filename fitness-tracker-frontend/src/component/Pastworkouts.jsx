@@ -16,7 +16,7 @@ const Pastworkouts = () => {
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
-        const logRes = await axios.get(`http://localhost:3000/log`, {
+        const logRes = await axios.get(`${Enviroment.PROD_URL}+log`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

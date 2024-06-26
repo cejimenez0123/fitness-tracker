@@ -21,7 +21,7 @@ const Userlogin = () => {
     e.preventDefault();
     await axios({
       method: "post",
-      url: Enviroment.BASE_URL+"/user/login",
+      url: Enviroment.PROD_URL+"/user/login",
       data: { email, password },
     }).then((res) => {
       localStorage.setItem("token", res.data.token);

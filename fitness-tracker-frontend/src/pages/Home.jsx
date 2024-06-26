@@ -13,15 +13,7 @@ const Home = () => {
 
   const [popup, setPopup] = useState();
 
-  function modal() {
-    if (data.user.gender == "Female") {
-      return (
-        <div className="flex  justify-center ">
-          <img
-            className="w-[25%] relative left-[30%] "
-            src="/female.png"
-            alt=""
-          />
+  
   function modal() {
     if (data.user.gender == "Female") {
       return (
@@ -103,14 +95,7 @@ const Home = () => {
         setPopup={setPopup}
       />
     );
-    setPopup(
-      <Displaytemplate
-        motivation={
-          " Open. Sweat. Triumph. This Chest Holds Your Power. Embrace the Challenge, Push Limits, Find Your Strength Within"
-        }
-        setPopup={setPopup}
-      />
-    );
+   
   };
   const handleArmsClick = () => {
     setPopup(
@@ -119,11 +104,7 @@ const Home = () => {
         setPopup={setPopup}
       />
     );
-      <Displaytemplate
-        motivation="Gains are sweeter when shared with friends. Arm day is the perfect time to celebrate our collective progress. "
-        setPopup={setPopup}
-      />
-    );
+  
   };
 
   const handleLegsClick = () => {
@@ -133,21 +114,15 @@ const Home = () => {
         setPopup={setPopup}
       />
     );
-      <Displaytemplate
-        motivation=" life is too short to skip Leg day! What are your plans for your legs"
-        setPopup={setPopup}
-      />
-    );
+     
   };
   if (isLoading) {
     return <div>Loading... </div>;
-  if (isLoading) {
-    return <div>Loading... </div>;
+;
   }
   if (isError) {
     return <div>an error has occured {isError}</div>;
-  if (isError) {
-    return <div>an error has occured {isError}</div>;
+
   }
 
   return (
