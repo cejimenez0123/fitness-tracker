@@ -27,21 +27,16 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Landing />,
-        path: "/",
-        element: <Landing />,
       },
       {
         path: "/login",
         element: <Userlogin />,
-        path: "/login",
-        element: <Userlogin />,
       },
+    
       {
         path: "/signin",
         element: <UserSignup />,
       },
-      { path: "/about", element: <About /> },
-
       { path: "/about", element: <About /> },
     ],
   },
@@ -56,11 +51,6 @@ const router = createBrowserRouter([
       {
         path: "/userProfile",
         element: <UserProfile />,
-      },
-
-      {
-        path: "/History",
-        element: <History />,
       },
     ],
   },

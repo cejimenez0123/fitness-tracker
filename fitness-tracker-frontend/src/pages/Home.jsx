@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 import btn from "../../public/btn.json";
 import Lottie from "lottie-react";
 import { useApi } from "../component/fetch";
-import { useApi } from "../component/fetch";
 import Displaytemplate from "../component/Displaytemplate";
+import Enviroment from "../core";
+
 import Pastworkouts from "../component/Pastworkouts";
 
 const Home = () => {

@@ -14,20 +14,14 @@ const ExerciseTemplate = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (selectedOption, index, field) => {
-  const handleChange = (selectedOption, index, field) => {
     const newData = [...exerciseData];
     console.log(newData);
-    console.log(newData);
 
     newData[index][field] = selectedOption;
 
     setExerciseData(newData);
-    newData[index][field] = selectedOption;
-
-    setExerciseData(newData);
-    console.log(exerciseData);
+    
   };
-  const handleDelete = (e, dataId, i) => {
   const handleDelete = (e, dataId, i) => {
     console.log();
     e.preventDefault();
@@ -38,18 +32,11 @@ const ExerciseTemplate = ({
 
     setExerciseData(updatedExercises);
   };
-  return (
-    const updatedExercises = exerciseData.filter(
-      (exercise) => exercise.id !== dataId
-    );
-    console.log(updatedExercises);
-
-    setExerciseData(updatedExercises);
-  };
+ 
   return (
     <>
       {exerciseData.map((data, i) => (
-        <div key={i} className="border-4 p-4 mt-10  rounded-lg ">
+        <div key={i} className="border-4 p-4  mt-10  rounded-lg ">
           {exerciseData.length > 1 && (
             <button
               onClick={(e) => handleDelete(e, data.id, i)}
@@ -60,7 +47,7 @@ const ExerciseTemplate = ({
           )}
           <div></div>
 
-          <label htmlFor=""> Exercise</label>
+          <label className="text-white" htmlFor=""> Exercise</label>
           <CreatableSelect
             name="exerciseName"
             value={data.exerciseName}
@@ -70,7 +57,7 @@ const ExerciseTemplate = ({
             options={exerciseOptions}
             required
           />
-          <label className="text-charcoal " htmlFor="">
+          <label  className="text-white " htmlFor="">
             Muscles
           </label>
           <Select
@@ -84,7 +71,7 @@ const ExerciseTemplate = ({
           />
           <div className="text-charcoal ">
             <span>
-              <label htmlFor=""> Type of exercise</label>
+              <label className="text-white" htmlFor=""> Type of exercise</label>
               <Select
                 name="type"
                 value={data.type}

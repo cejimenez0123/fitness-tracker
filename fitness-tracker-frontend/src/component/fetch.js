@@ -39,7 +39,7 @@ export const deleteApi = async (Endpoint) => {
   console.log(url);
 
   try {
-    const response = await axios.delete(url, data,
+    const response = await axios.delete(url,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,}
@@ -49,5 +49,21 @@ export const deleteApi = async (Endpoint) => {
     return response.data;
   } catch (error) {
     throw new Error('Error posting data');
+  }
+};
+export const putApi = async (Endpoint, data) => {
+  const url = `${Base_Url}/${Endpoint}`;
+  console.log(url);
+
+  try {
+    const response = await axios.put(url, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error('Error updating data');
   }
 };
