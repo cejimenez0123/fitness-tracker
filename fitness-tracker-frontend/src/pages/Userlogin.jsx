@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Enviroment from "../core";
 import axios from "axios";
 
 const Userlogin = () => {
@@ -21,7 +22,7 @@ const Userlogin = () => {
     e.preventDefault();
     await axios({
       method: "post",
-      url: "http://localhost:3000/user/login",
+      url: Enviroment.PROD_URL+"/user/login",
       data: { email, password },
     }).then((res) => {
       localStorage.setItem("token", res.data.token);

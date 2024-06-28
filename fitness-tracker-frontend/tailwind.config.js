@@ -5,6 +5,9 @@ export default {
 ],
   theme: {
     extend: {
+      fontFamily: {
+        'merriweather-sans': ['Merriweather Sans', 'sans-serif'],
+      },
       screens:{
         ml:"950px"
       },
@@ -22,6 +25,14 @@ export default {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui')
+  
+  ],
+  
+  daisyui: {
+themes: ["cupcake",   "dracula", "dark", "cmyk"],
+   
+  },
+  
 }
 

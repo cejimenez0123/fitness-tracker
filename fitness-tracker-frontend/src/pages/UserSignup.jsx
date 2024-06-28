@@ -25,7 +25,7 @@ const UserSignup = () => {
     console.log(email, password, name, gender);
     axios({
       method: "post",
-      url: Enviroment.BASE_URL + "/user/register",
+      url:Enviroment.PROD_URL + "/user/register",
       data: { email: email, password: password, name: name, gender: gender },
     }).then((res) => {
       if (res.data.token !== undefined) {

@@ -20,7 +20,7 @@ const ExerciseTemplate = ({
     newData[index][field] = selectedOption;
 
     setExerciseData(newData);
-    console.log(exerciseData);
+    
   };
   const handleDelete = (e, dataId, i) => {
     console.log();
@@ -32,10 +32,11 @@ const ExerciseTemplate = ({
 
     setExerciseData(updatedExercises);
   };
+ 
   return (
     <>
       {exerciseData.map((data, i) => (
-        <div key={i} className=" p-4 mt-10  ">
+        <div key={i} className="border-4 p-4  mt-10  rounded-lg ">
           {exerciseData.length > 1 && (
             <button
               onClick={(e) => handleDelete(e, data.id, i)}
@@ -46,10 +47,7 @@ const ExerciseTemplate = ({
           )}
           <div></div>
 
-          <label className="text-charcoal " htmlFor="">
-            {" "}
-            Exercise
-          </label>
+          <label className="text-white" htmlFor=""> Exercise</label>
           <CreatableSelect
             name="exerciseName"
             value={data.exerciseName}
@@ -57,8 +55,9 @@ const ExerciseTemplate = ({
               handleChange(selectedOption, i, "exerciseName")
             }
             options={exerciseOptions}
+            required
           />
-          <label className="text-charcoal " htmlFor="">
+          <label  className="text-white " htmlFor="">
             Muscles
           </label>
           <Select
@@ -68,10 +67,11 @@ const ExerciseTemplate = ({
               handleChange(selectedOption, i, "muscle")
             }
             options={muscleOptions}
+            required
           />
           <div className="text-charcoal ">
             <span>
-              <label htmlFor=""> Type of exercise</label>
+              <label className="text-white" htmlFor=""> Type of exercise</label>
               <Select
                 name="type"
                 value={data.type}
@@ -79,6 +79,7 @@ const ExerciseTemplate = ({
                   handleChange(selectedOption, i, "type")
                 }
                 options={typeOptions}
+                required
               />
             </span>
           </div>
