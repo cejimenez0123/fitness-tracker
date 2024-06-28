@@ -61,10 +61,7 @@ function App() {
                 {" "}
                 <Link to="/"> Landing</Link>
               </li>
-              <li>
-                {" "}
-                <Link to="/Userprofile"> User Profile</Link>
-              </li>
+
               <li>
                 <Link to="/about"> About Me</Link>
               </li>
@@ -109,6 +106,10 @@ const Requiredauth = () => {
                 <Link to="/"> Landing</Link>
               </li>
               <li>
+               
+                <Link to="/Userprofile"> Profile</Link>
+              </li>
+              <li>
                 <Link to="/about">About Me</Link>
               </li>
             </ul>
@@ -123,6 +124,9 @@ const Requiredauth = () => {
             <li>
               <Link to="/"> Landing</Link>
             </li>
+            <li>
+                <Link to="/Userprofile">Profile</Link>
+              </li>
           </ul>
         </div>
       </div>
