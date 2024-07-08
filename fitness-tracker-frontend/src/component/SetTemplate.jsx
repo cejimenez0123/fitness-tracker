@@ -34,14 +34,14 @@ const SetTemplate = ({
 
   return (
     <div className="text-white">
-      <div className="modal-box w-11/12 max-w-5xl">
+      <div className="modal-box w-11/12 h-[30rem] max-w-5xl">
         <h4> {workout}</h4>
-        <div className="modal-action">
+        <div className="modal-action  ">
           <form onSubmit={handleSubmit}>
             {exerciseData.map((exercise, exerciseIndex) => (
               <div key={exercise.id}>
                 <p>{exercise.exerciseName.label}</p>
-                <table>
+                <table >
                   <thead>
                     <tr>
 

@@ -32,7 +32,7 @@ const Workout = ({
  
 const handleChange=(selectedOption)=>{
   console.log(selectedOption.label);
-  workout!== ""? setErr(""): setErr(" name cant be empty")
+  workout!== " "? setErr(""): setErr(" name cant be empty")
 setWorkout(selectedOption.label)
 }
   const Next = () => {
@@ -44,10 +44,10 @@ setWorkout(selectedOption.label)
   
   return (
     <div className="">
-      <div className="modal-box md:w-[30vw] md:h-[20vh] // w-[95vw] ">
+      <div className="modal-box md:w-[50vw] md:h-[40vh] // w-[95vw] ">
         <form method="dialog ">
           {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-sm btn-circle mt-3 mr-4 btn-ghost absolute right-2 top-2">
+          <button className="btn btn-sm text-white btn-circle mt-3 mr-4 btn-ghost absolute right-2 top-2">
             ✕
           </button>
           <div className="mt-14">

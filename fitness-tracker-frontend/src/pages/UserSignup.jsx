@@ -28,8 +28,8 @@ const UserSignup = () => {
       url:Enviroment.PROD_URL + "/user/register",
       data: { email: email, password: password, name: name, gender: gender },
     }).then((res) => {
-      if (res.data.token !== undefined) {
-      }
+      localStorage.setItem("token", res.data.token);
+      navigate("/home");
       console.log(res.data);
     });
   };
