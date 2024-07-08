@@ -52,7 +52,7 @@ const Userlogin = () => {
             <input
               type="text"
               value={email}
-              className="grow"
+              className="grow py-4"
               placeholder="Enter your Email"
               onChange={handleEmail}
             />
@@ -73,7 +73,7 @@ const Userlogin = () => {
             </svg>
             <input
               type="password"
-              className="grow"
+              className="grow py-4"
               value={password}
               onChange={handlePassword}
             />
