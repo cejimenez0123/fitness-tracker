@@ -61,10 +61,10 @@ const Execersize = ({
 
   return (
     <>
-      <div className="modal-box md:w-[30vw] md:h-[40vh] // w-screen h-[100vh] absolute bottom-0 ">
+      <div className="modal-box md:relative md:w-[80vw] md:h-[40vh] // w-screen h-[100vh] absolute bottom-0 ">
         <form onSubmit={handleSubmit} method="dialog">
           <div className="flex flex-row justify-between">
-            <button className="btn text-xl text-charcoal btn-sm btn-circle btn-ghost ">
+            <button className="btn text-xl text-white btn-sm btn-circle btn-ghost ">
               ✕
             </button>
             <button
