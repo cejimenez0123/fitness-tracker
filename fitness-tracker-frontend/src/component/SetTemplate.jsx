@@ -33,7 +33,7 @@ const SetTemplate = ({
   };
 
   return (
-    <div>
+    <div className="text-white">
       <div className="modal-box w-11/12 max-w-5xl">
         <h4> {workout}</h4>
         <div className="modal-action">
